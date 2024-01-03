@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref, watch } from 'vue'
+import { Streamlit } from '~/stcomponentlib'
 import { DsfrCheckbox } from '@gouvminint/vue-dsfr'
 
 import { useStreamlit } from '../streamlit'
@@ -21,6 +22,7 @@ const props = defineProps<
 	}>
 >()
 
+const checked = ref(false)
 const style = reactive<{ [key: string]: string }>({})
 
 if (props.theme)
@@ -32,10 +34,19 @@ if (props.theme)
 	style['--text-color'] = props.theme.textColor
 	style['--font'] = props.theme.font
 }
+
+watch(
+	() => checked,
+	(value) =>
+		{
+			Streamlit.setComponentValue(value)
+		},
+	{ immediate: true },
+)
 </script>
 
 <template>
 	<div class="component" :style="style">
-		<DsfrCheckbox v-bind="props.args" />
+		<DsfrCheckbox v-bind="props.args" v-model="checked" />
 	</div>
 </template>
