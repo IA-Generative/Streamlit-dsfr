@@ -46,6 +46,8 @@ else:
             )
 
 
+# Components wrapper functions for users
+
 def dsfr_button(label, key = None):
 	component_value = _dsfr_button_func(label = label, key = key, default = False)
 	return component_value
