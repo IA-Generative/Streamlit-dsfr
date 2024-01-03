@@ -18,30 +18,33 @@ _RELEASE = (os.environ.get('APP_ENV') or 'prod') == 'prod'
 # your component frontend. Everything else we do in this file is simply a
 # best practice.
 
+supported_components = [
+    'my_component',
+    'dsfr_button',
+]
+
 if not _RELEASE:
+    # When components are in development, we use `url` to tell Streamlit
+    # that the component will be served by a local dev server.
     components_url = 'http://localhost:8000'
-    _my_component_func = components.declare_component(
-        # We give the component a simple, descriptive name ("my_component"
-        # does not fit this bill, so please choose something better for your
-        # own component :)
-        'my_component',
-        # Pass `url` here to tell Streamlit that the component will be served
-        # by the local dev server that you run via `npm run start`.
-        # (This is useful while your component is in development.)
-        url = components_url + '/my_component'
-    )
-    _dsfr_button_func = components.declare_component(
-        'dsfr_button',
-        url = components_url + '/dsfr_button'
-    )
+    for component in supported_components:
+        globals()[f'_{component}_func'] = \
+            components.declare_component(
+                component,
+                url = f'{components_url}/{component}',
+            )
 else:
-    # When we're distributing a production version of the component, we'll
-    # replace the `url` param with `path`, and point it to the component's
-    # build directory:
+    # When we are distributing a production version of the component, we
+    # use `path` instead of `url`. This tells Streamlit to load the component
+    # from the component build directory directly.
     parent_dir = os.path.dirname(os.path.abspath(__file__))
     build_dir = os.path.join(parent_dir, 'frontend')
-    _my_component_func = components.declare_component('my_component', path = os.path.join(build_dir, 'my_component'))
-    _dsfr_button_func = components.declare_component('dsfr_button', path = os.path.join(build_dir, 'dsfr_button'))
+    for component in supported_components:
+        globals()[f'_{component}_func'] = \
+            components.declare_component(
+                component,
+                path = os.path.join(build_dir, component),
+            )
 
 
 # Create a wrapper function for the component. This is an optional
