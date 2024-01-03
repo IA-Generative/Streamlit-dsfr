@@ -19,6 +19,7 @@ _RELEASE = (os.environ.get('APP_ENV') or 'prod') == 'prod'
 # best practice.
 
 supported_components = {
+    'dsfr_alert': 'st_dsfr_alert',
     'dsfr_badge': 'st_dsfr_badge',
     'dsfr_button': 'st_dsfr_button',
 }
@@ -48,6 +49,10 @@ else:
 
 
 # Components wrapper functions for users
+
+def dsfr_alert(label, key = None):
+	component_value = _dsfr_alert_func(label = label, key = key, default = False)
+	return component_value
 
 def dsfr_badge(label, key = None):
 	component_value = _dsfr_badge_func(label = label, key = key, default = False)
