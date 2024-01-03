@@ -19,12 +19,7 @@ _RELEASE = (os.environ.get('APP_ENV') or 'prod') == 'prod'
 # best practice.
 
 supported_components = {
-    'dsfr_button': {
-        'route': 'st_dsfr_button',
-        'wrapper': lambda component_func: \
-            lambda label, key = None: \
-                component_func(label = label, key = key, default = False),
-    },
+    'dsfr_button': 'st_dsfr_button',
 }
 
 if not _RELEASE:
@@ -35,7 +30,7 @@ if not _RELEASE:
         globals()[f'_{component}_func'] = \
             components.declare_component(
                 component,
-                url = f"{components_url}/{supported_components[component]['route']}",
+                url = f'{components_url}/{supported_components[component]}',
             )
 else:
     # When we are distributing a production version of the component, we
@@ -47,7 +42,10 @@ else:
         globals()[f'_{component}_func'] = \
             components.declare_component(
                 component,
-                path = os.path.join(build_dir, supported_components[component]['route']),
+                path = os.path.join(build_dir, supported_components[component]),
             )
-        globals()[f'{component}_func'] = \
-            supported_components[component]['wrapper'](globals()[f'_{component}_func'])
+
+
+def dsfr_button(label, key = None):
+	component_value = _dsfr_button_func(label = label, key = key, default = False)
+	return component_value
