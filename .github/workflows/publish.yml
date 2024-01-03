@@ -73,6 +73,7 @@ jobs:
 
     - name: Set pre-release tag name
       id: prerelease-tag
+      if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
       # Use datetime and short commit hash as the pre-release tag name
       run: echo "tag=t$(date +%Y%m%d.%H%M%S).${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
       env:
