@@ -8,9 +8,6 @@ on:
     tags:
       - 'v*'
 
-  # Run on pull request events
-  pull_request:
-
   # Run on manual triggers
   workflow_dispatch:
 
