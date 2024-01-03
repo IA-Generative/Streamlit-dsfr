@@ -18,9 +18,9 @@ _RELEASE = (os.environ.get('APP_ENV') or 'prod') == 'prod'
 # your component frontend. Everything else we do in this file is simply a
 # best practice.
 
-supported_components = [
-    'dsfr_button',
-]
+supported_components = {
+    'dsfr_button': 'st_dsfr_button',
+}
 
 if not _RELEASE:
     # When components are in development, we use `url` to tell Streamlit
@@ -30,7 +30,7 @@ if not _RELEASE:
         globals()[f'_{component}_func'] = \
             components.declare_component(
                 component,
-                url = f'{components_url}/{component}',
+                url = f'{components_url}/{supported_components[component]}',
             )
 else:
     # When we are distributing a production version of the component, we
@@ -42,7 +42,7 @@ else:
         globals()[f'_{component}_func'] = \
             components.declare_component(
                 component,
-                path = os.path.join(build_dir, component),
+                path = os.path.join(build_dir, supported_components[component]),
             )
 
 
