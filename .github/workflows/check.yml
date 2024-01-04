@@ -7,7 +7,8 @@ on:
       - main
       - dev
     paths:
-      - 'streamlit_dsfr/**'
+      - 'app/**'
+      - 'frontend/**'
 
 # Set GITHUB_TOKEN permissions
 permissions:
