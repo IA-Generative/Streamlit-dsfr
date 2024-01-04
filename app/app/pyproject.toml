@@ -19,6 +19,9 @@ dependencies = [
 classifiers = []
 dynamic = [ "readme" ]
 
+[tool.setuptools]
+packages = [ "streamlit_dsfr" ]
+
 [tool.setuptools.dynamic]
 readme = { file = [ "README.md" ], content-type = "text/markdown" }
 
