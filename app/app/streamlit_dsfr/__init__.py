@@ -2,7 +2,7 @@ import os
 import streamlit.components.v1 as components
 
 # Release flag constant. Set to True when releasing the component.
-_RELEASE = (os.environ.get('APP_ENV') or 'prod') == 'prod'
+_RELEASE = False
 
 supported_components = {
     'dsfr_alert': 'st_dsfr_alert',

@@ -149,6 +149,9 @@ USER user
 # Copy source code
 COPY --link ./app/app .
 
+# Set release flag to true
+RUN sed -i 's/^_RELEASE = False/_RELEASE = True/g' ./app/app/__init__.py
+
 # Install package
 RUN pip install --no-cache-dir .
 
