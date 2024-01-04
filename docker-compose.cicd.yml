@@ -11,4 +11,4 @@ services:
       target: app_python_cicd
     # Deploy override
     volumes:
-      - ./streamlit_dsfr/dist:/tmp/dist
+      - ./app/dist:/tmp/dist

@@ -8,14 +8,14 @@ services:
     # Build
     image: ${IMAGES_PREFIX:-app}-frontend-dev:${DOCKER_TAG:-latest}
     build:
-      context: ./streamlit_dsfr
+      context: .
       dockerfile: ./Dockerfile
       target: app_node_dev
       args:
         PORT: ${FRONTEND_PORT:-8000}
     # Deploy
     volumes:
-      - ./streamlit_dsfr/frontend:/app
+      - ./frontend/app:/app
       - /app/node_modules # Remove from bind-mount for better performance
     network_mode: service:app
 
@@ -26,7 +26,7 @@ services:
       target: app_python_dev
     # Deploy override
     volumes:
-      - ./streamlit_dsfr/app:/app
+      - ./app/app:/app
     ports:
       # HTTP
       - target: ${FRONTEND_PORT:-8000}
