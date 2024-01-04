@@ -9,6 +9,8 @@ on:
     paths:
       - 'app/**'
       - 'frontend/**'
+      - 'docker-compose*.yml'
+      - 'Dockerfile'
 
 # Set GITHUB_TOKEN permissions
 permissions:
