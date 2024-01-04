@@ -166,13 +166,14 @@ RUN \
 	for component_path in $(find ./streamlit_dsfr/frontend/dist -mindepth 1 -type d -name 'st_*'); do \
 		# Copy each component in the frontend folder
 		component="${component_path##*/}"; \
+		component_name="${component#st_}"; \
 		mkdir -p "./streamlit_dsfr/frontend/${component}"; \
 		cp -r "${component_path}/"* "./streamlit_dsfr/frontend/${component}"; \
 		# Copy astro assets for each component
 		mkdir -p "./streamlit_dsfr/frontend/${component}/_astro"; \
 		cp -r "./streamlit_dsfr/frontend/dist/_astro/"* "./streamlit_dsfr/frontend/${component}/_astro"; \
 		# Remove leading slash in component code to load astro assets
-		sed -i 's#/_astro#/component/streamlit_dsfr.'"${component##*/}/_astro"'#g' "./streamlit_dsfr/frontend/${component}/index.html"; \
+		sed -i 's#/_astro#/component/streamlit_dsfr.'"${component_name}/_astro"'#g' "./streamlit_dsfr/frontend/${component}/index.html"; \
 	done && \
 	# Remove the dist folder
 	rm -rf ./streamlit_dsfr/frontend/dist
