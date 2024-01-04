@@ -150,7 +150,9 @@ USER user
 COPY --link ./app/app .
 
 # Set release flag to true
+USER root
 RUN sed -i 's/^_RELEASE = False/_RELEASE = True/g' ./streamlit_dsfr/__init__.py
+USER user
 
 # Install package
 RUN pip install --no-cache-dir .
