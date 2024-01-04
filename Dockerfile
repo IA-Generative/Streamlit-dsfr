@@ -172,7 +172,7 @@ RUN \
 		mkdir -p "./streamlit_dsfr/frontend/${component}/_astro"; \
 		cp -r "./streamlit_dsfr/frontend/dist/_astro/"* "./streamlit_dsfr/frontend/${component}/_astro"; \
 		# Remove leading slash in component code to load astro assets
-		sed -i 's#/_astro#/component/__init__.'"${component##*/}/_astro"'#g' "./streamlit_dsfr/frontend/${component}/index.html"; \
+		sed -i 's#/_astro#/component/streamlit_dsfr.'"${component##*/}/_astro"'#g' "./streamlit_dsfr/frontend/${component}/index.html"; \
 	done && \
 	# Remove the dist folder
 	rm -rf ./streamlit_dsfr/frontend/dist
