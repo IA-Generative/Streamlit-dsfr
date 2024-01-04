@@ -13,4 +13,4 @@ services:
       target: npm
     # Deploy
     volumes:
-      - .streamlit_dsfr/frontend:/app
+      - ./streamlit_dsfr/frontend:/app
