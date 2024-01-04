@@ -87,6 +87,7 @@ jobs:
         # Use the commit hash as the tag
         tag_name: ${{ steps.prerelease-tag.outputs.tag }}
         prerelease: true
+        target_commitish: ${{ github.sha }}
         files: ./dist/*
         fail_on_unmatched_files: true
         generate_release_notes: true
@@ -97,6 +98,7 @@ jobs:
       if: ${{ startsWith(github.ref, 'refs/tags/') }}
       with:
         prerelease: false
+        target_commitish: ${{ github.sha }}
         files: ./dist/*
         fail_on_unmatched_files: true
         generate_release_notes: true
