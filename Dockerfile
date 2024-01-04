@@ -153,24 +153,24 @@ COPY --link ./app/app .
 RUN pip install --no-cache-dir .
 
 # Copy built frontend files
-COPY --from=app_node_prod_build --link /app/dist ./frontend/dist
+COPY --from=app_node_prod_build --link /app/dist ./streamlit_dsfr/frontend/dist
 
 # Copy frontend components individually
 USER root
 RUN \
-	for component_path in $(find ./frontend/dist -mindepth 1 -type d -name 'st_*'); do \
+	for component_path in $(find ./streamlit_dsfr/frontend/dist -mindepth 1 -type d -name 'st_*'); do \
 		# Copy each component in the frontend folder
 		component="${component_path##*/}"; \
-		mkdir -p "./frontend/${component}"; \
-		cp -r "${component_path}/"* "./frontend/${component}"; \
+		mkdir -p "./streamlit_dsfr/frontend/${component}"; \
+		cp -r "${component_path}/"* "./streamlit_dsfr/frontend/${component}"; \
 		# Copy astro assets for each component
-		mkdir -p "./frontend/${component}/_astro"; \
-		cp -r "./frontend/dist/_astro/"* "./frontend/${component}/_astro"; \
+		mkdir -p "./streamlit_dsfr/frontend/${component}/_astro"; \
+		cp -r "./streamlit_dsfr/frontend/dist/_astro/"* "./streamlit_dsfr/frontend/${component}/_astro"; \
 		# Remove leading slash in component code to load astro assets
-		sed -i 's#/_astro#/component/__init__.'"${component##*/}/_astro"'#g' "./frontend/${component}/index.html"; \
+		sed -i 's#/_astro#/component/__init__.'"${component##*/}/_astro"'#g' "./streamlit_dsfr/frontend/${component}/index.html"; \
 	done && \
 	# Remove the dist folder
-	rm -rf ./frontend/dist
+	rm -rf ./streamlit_dsfr/frontend/dist
 USER user
 
 # Expose port
