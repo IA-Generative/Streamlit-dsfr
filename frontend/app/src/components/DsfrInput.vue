@@ -27,7 +27,7 @@ const props = defineProps<
 	}>
 >()
 
-const checked = ref(false)
+const checked = ref('')
 const style = reactive<{ [key: string]: string }>({})
 
 if (props.theme)
@@ -44,7 +44,7 @@ watch(
 	() => checked,
 	(value) =>
 		{
-			Streamlit.setComponentValue(value)
+			Streamlit.setComponentValue(value.value)
 		},
 	{ immediate: true },
 )

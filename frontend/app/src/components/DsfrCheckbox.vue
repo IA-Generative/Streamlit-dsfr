@@ -39,7 +39,7 @@ watch(
 	() => checked,
 	(value) =>
 		{
-			Streamlit.setComponentValue(value)
+			Streamlit.setComponentValue(value.value)
 		},
 	{ immediate: true },
 )
