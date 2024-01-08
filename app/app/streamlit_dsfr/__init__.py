@@ -161,8 +161,8 @@ def dsfr_checkbox(
 	small: bool | None = None,
 	required: bool | None = None,
 	name: str | None = None,
+	value: bool | None = None,
 	*,
-	movelValue: bool | None = None,
 	id: str | None = None,
 	inline: bool | None = None,
 	errorMessage: str | None = None,
@@ -178,8 +178,8 @@ def dsfr_checkbox(
 		kwargs['required'] = required
 	if name is not None:
 		kwargs['name'] = name
-	if movelValue is not None:
-		kwargs['movelValue'] = movelValue
+	if value is not None:
+		kwargs['modelValue'] = value
 	if id is not None:
 		kwargs['id'] = id
 	if inline is not None:

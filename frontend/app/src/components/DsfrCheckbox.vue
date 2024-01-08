@@ -10,7 +10,7 @@ useStreamlit()
 
 const props = defineProps<
 	ComponentProps<{
-		movelValue?: boolean
+		modelValue?: boolean
 		required?: boolean
 		small?: boolean
 		name?: string
