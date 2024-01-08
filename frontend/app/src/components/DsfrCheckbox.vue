@@ -23,7 +23,6 @@ const props = defineProps<
 >()
 
 const checked = ref(false)
-const isFocused = ref(false)
 const style = reactive<{ [key: string]: string }>({})
 
 if (props.theme)
@@ -36,40 +35,11 @@ if (props.theme)
 	style['--font'] = props.theme.font
 }
 
-const onRenderEvent = (_event: Event): void =>
-	{
-		if (!isFocused.value && checked.value)
-		{
-			checked.value = false
-			Streamlit.setComponentValue(checked.value)
-		}
-	}
-
-onMounted(() =>
-	{
-		Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
-
-onUnmounted(() =>
-	{
-		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
-
 const onInput = (event: InputEvent) =>
 	{
 		event.preventDefault()
 		checked.value = (event.target as HTMLInputElement).checked
 		Streamlit.setComponentValue(checked.value)
-	}
-
-const onFocus = () =>
-	{
-		isFocused.value = true
-	}
-
-const onBlur = () =>
-	{
-		isFocused.value = false
 	}
 </script>
 
@@ -79,8 +49,6 @@ const onBlur = () =>
 			v-bind="props.args"
 			v-model="checked"
 			@input="onInput"
-			@focus="onFocus"
-			@blur="onBlur"
 		/>
 	</div>
 </template>
