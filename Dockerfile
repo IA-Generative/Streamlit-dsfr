@@ -202,10 +202,10 @@ FROM app_python_base AS app_python_prod
 COPY --link ./app/demo .
 
 # Copy built package
-COPY --from=app_python_cicd --link /app/dist/*.whl /tmp/dist
+COPY --from=app_python_cicd --link /app/dist /tmp/dist
 
 # Install dependencies
-RUN pip install --no-cache-dir $(ls /tmp/dist/*.whl) && \
+RUN pip install --no-cache-dir /tmp/dist/*.whl && \
 	# Clean up
 	rm -rf /tmp/dist
 
