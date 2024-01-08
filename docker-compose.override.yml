@@ -27,6 +27,7 @@ services:
     # Deploy override
     volumes:
       - ./app/app:/app
+      - ./app/demo:/app/demo
     ports:
       # HTTP
       - target: ${FRONTEND_PORT:-8000}

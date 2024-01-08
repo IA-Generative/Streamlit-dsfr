@@ -118,6 +118,7 @@ ENV PORT=${PORT}
 FROM app_python_base AS app_python_dev
 
 ENV APP_ENV=dev
+ENV PYTHONPATH=.
 
 # Install as editable package
 COPY --link ./app/app .
@@ -125,12 +126,12 @@ RUN pip install --no-cache-dir -e .
 
 # Source code should be mounted here
 VOLUME /app
-VOLUME /app/node_modules
+VOLUME /app/demo
 
 # Expose port
 EXPOSE ${PORT}
 
-CMD [ "sh", "-c", "streamlit run app.py --server.port ${PORT}" ]
+CMD [ "sh", "-c", "streamlit run demo/app.py --server.port ${PORT}" ]
 
 
 # --
