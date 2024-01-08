@@ -103,13 +103,13 @@ def dsfr_breadcrumb(
 ):
 	if links is not None:
 		if isinstance(links, str):
-			kwargs['links'] = [{'to': links, 'link': links}]
+			kwargs['links'] = [{'to': links, 'text': links}]
 		elif isinstance(links, list):
 			def item_to_dict(item):
 				if isinstance(item, str):
-					return {'to': item, 'link': item}
+					return {'to': item, 'text': item}
 				elif isinstance(item, tuple):
-					return {'to': item[0], 'link': item[1]}
+					return {'to': item[0], 'text': item[1]}
 				elif isinstance(item, dict):
 					return item
 				else:

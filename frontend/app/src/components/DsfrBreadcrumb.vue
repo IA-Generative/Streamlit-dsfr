@@ -11,7 +11,7 @@ const props = defineProps<
 	ComponentProps<{
 		links?: {
 			to: string
-			link: string
+			text: string
 		}[]
 		breadcrumbId?: string
 	}>
