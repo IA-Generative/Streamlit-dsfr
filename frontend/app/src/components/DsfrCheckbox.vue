@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrCheckbox } from '@gouvminint/vue-dsfr'
 
@@ -23,6 +23,7 @@ const props = defineProps<
 >()
 
 const checked = ref(false)
+const isFocused = ref(false)
 const style = reactive<{ [key: string]: string }>({})
 
 if (props.theme)
@@ -35,18 +36,51 @@ if (props.theme)
 	style['--font'] = props.theme.font
 }
 
-watch(
-	() => checked,
-	(value) =>
+const onRenderEvent = (_event: Event): void =>
+	{
+		if (!isFocused.value && checked.value)
 		{
-			Streamlit.setComponentValue(value.value)
-		},
-	{ immediate: true },
-)
+			checked.value = false
+			Streamlit.setComponentValue(checked.value)
+		}
+	}
+
+onMounted(() =>
+	{
+		Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
+	})
+
+onUnmounted(() =>
+	{
+		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
+	})
+
+const onInput = (event: InputEvent) =>
+	{
+		event.preventDefault()
+		checked.value = (event.target as HTMLInputElement).checked
+		Streamlit.setComponentValue(checked.value)
+	}
+
+const onFocus = () =>
+	{
+		isFocused.value = true
+	}
+
+const onBlur = () =>
+	{
+		isFocused.value = false
+	}
 </script>
 
 <template>
 	<div class="component" :style="style">
-		<DsfrCheckbox v-bind="props.args" v-model="checked" />
+		<DsfrCheckbox
+			v-bind="props.args"
+			v-model="checked"
+			@input="onInput"
+			@focus="onFocus"
+			@blur="onBlur"
+		/>
 	</div>
 </template>
