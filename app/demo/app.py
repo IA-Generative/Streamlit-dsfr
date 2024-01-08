@@ -4,6 +4,7 @@ from streamlit_dsfr import \
 	dsfr_badge, \
 	dsfr_breadcrumb, \
 	dsfr_button, \
+	dsfr_checkbox, \
 	dsfr_input
 
 dsfr_alert('This is an alert')
@@ -14,6 +15,9 @@ dsfr_breadcrumb(['Home', 'Page', ('https://example.com', 'Example'), {'to': 'htt
 
 bval = dsfr_button('This is a button')
 st.write(bval)
+
+cval = dsfr_checkbox('This is a checkbox')
+st.write(cval)
 
 val = dsfr_input('This is an input')
 st.write(val)
