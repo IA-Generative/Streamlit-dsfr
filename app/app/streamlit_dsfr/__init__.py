@@ -39,31 +39,38 @@ else:
 # Components wrapper functions for users
 
 def dsfr_alert(
-	title_or_description,
-	description = None,
-	type = None,
+	title_or_description: str,
+	description: str | None = None,
+	type: str | None = None,
 	*,
-	small = None,
-	closed = None,
-	closeable = None,
-	titleTag = None,
-	key = None,
-	id = None,
+	small: bool | None = None,
+	closed: bool | None = None,
+	closeable: bool | None = None,
+	titleTag: str | None = None,
+	key: str | None = None,
+	id: str | None = None,
+	**kwargs,
 ):
-	args = {
-		'title': title_or_description if description is not None else None,
-		'description': description if description is not None else title_or_description,
-		'type': type,
-		'small': small,
-		'closed': closed,
-		'closeable': closeable,
-		'titleTag': titleTag,
-		'id': id if id is not None else key,
-		'key': key,
-		'default': False,
-	}
+	if description is not None:
+		kwargs['title'] = title_or_description
+		kwargs['description'] = description
+	else:
+		kwargs['description'] = title_or_description
 
-	return _dsfr_alert_func(**args)
+	if type is not None:
+		kwargs['type'] = type
+	if small is not None:
+		kwargs['small'] = small
+	if closed is not None:
+		kwargs['closed'] = closed
+	if closeable is not None:
+		kwargs['closeable'] = closeable
+	if titleTag is not None:
+		kwargs['titleTag'] = titleTag
+	if id is not None:
+		kwargs['id'] = id
+
+	return _dsfr_alert_func(**kwargs, key = key, default = None)
 
 def dsfr_badge(label, key = None):
 	component_value = _dsfr_badge_func(label = label, key = key, default = False)
