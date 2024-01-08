@@ -40,7 +40,7 @@ else:
 # Components wrapper functions for users
 
 def dsfr_alert(
-	title_or_description: str,
+	title: str,
 	description: str | None = None,
 	type: str | None = None,
 	small: bool | None = None,
@@ -53,11 +53,7 @@ def dsfr_alert(
 	**kwargs,
 ):
 	if description is not None:
-		kwargs['title'] = title_or_description
 		kwargs['description'] = description
-	else:
-		kwargs['description'] = title_or_description
-
 	if type is not None:
 		kwargs['type'] = type
 	if small is not None:
@@ -71,7 +67,7 @@ def dsfr_alert(
 	if id is not None:
 		kwargs['id'] = id
 
-	return _dsfr_alert_func(**kwargs, key = key, default = None)
+	return _dsfr_alert_func(title = title, **kwargs, key = key, default = None)
 
 def dsfr_badge(
 	label: str,
