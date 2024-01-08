@@ -9,6 +9,7 @@ supported_components = {
     'dsfr_badge': 'st_dsfr_badge',
     'dsfr_breadcrumb': 'st_dsfr_breadcrumb',
     'dsfr_button': 'st_dsfr_button',
+	'dsfr_checkbox': 'st_dsfr_checkbox',
     'dsfr_input': 'st_dsfr_input',
 }
 
