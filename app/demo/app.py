@@ -10,11 +10,13 @@ dsfr_alert('This is an alert')
 
 dsfr_badge('This is a badge')
 
-dsfr_breadcrumb(['Home', 'Page'])
+dsfr_breadcrumb(['Home', 'Page', ('https://example.com', 'Example'), {'to': 'https://google.com', 'link': 'Google'}])
 
-dsfr_button('This is a button')
+bval = dsfr_button('This is a button')
+st.write(bval)
 
-dsfr_input('This is an input')
+val = dsfr_input('This is an input')
+st.write(val)
 
 if dsfr_button('Click me'):
 	st.markdown('You clicked the button')
