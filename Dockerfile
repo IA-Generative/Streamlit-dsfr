@@ -175,7 +175,7 @@ RUN \
 		# Fix URLs to load assets
 		sed -i 's#/_astro#/component/streamlit_dsfr.'"${component_name}/_astro"'#g' \
 			"./streamlit_dsfr/frontend/${component}/index.html" \
-			"./streamlit_dsfr/frontend/${component}/_astro/style"*".css" \
+			"./streamlit_dsfr/frontend/${component}/_astro/"*".css" \
 			; \
 	done && \
 	# Remove the dist folder
