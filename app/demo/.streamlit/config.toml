@@ -65,7 +65,7 @@ port = 80
 
 # https://docs.streamlit.io/library/advanced-features/configuration#theme
 [theme]
-base = "dark"
+base = "light"
 # primaryColor =
 # backgroundColor =
 # secondaryBackgroundColor =
