@@ -182,8 +182,11 @@ FROM app_python_base AS app_python_cicd
 # Install build dependencies
 RUN pip install --no-cache-dir --upgrade build
 
-# Copy build package
-COPY --from=app_python_prod_build --link /app/dist ./dist
+# Copy package files
+COPY --from=app_python_prod_build --link /app .
+
+# Build package
+RUN python -m build
 
 COPY --link --chmod=755 ./app/docker-cicd-command.sh /usr/local/bin/docker-cicd-command
 
@@ -199,7 +202,7 @@ FROM app_python_base AS app_python_prod
 COPY --link ./app/demo .
 
 # Copy built package
-COPY --from=app_python_prod_build --link /app/dist/*.whl /tmp/dist
+COPY --from=app_python_cicd --link /app/dist/*.whl /tmp/dist
 
 # Install dependencies
 RUN pip install --no-cache-dir $(ls /tmp/dist/*.whl) && \
