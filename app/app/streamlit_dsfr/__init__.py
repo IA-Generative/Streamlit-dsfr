@@ -38,9 +38,32 @@ else:
 
 # Components wrapper functions for users
 
-def dsfr_alert(label, key = None):
-	component_value = _dsfr_alert_func(label = label, key = key, default = False)
-	return component_value
+def dsfr_alert(
+	title_or_description,
+	description = None,
+	type = None,
+	*,
+	small = None,
+	closed = None,
+	closeable = None,
+	titleTag = None,
+	key = None,
+	id = None,
+):
+	args = {
+		'title': title_or_description if description is not None else None,
+		'description': description if description is not None else title_or_description,
+		'type': type,
+		'small': small,
+		'closed': closed,
+		'closeable': closeable,
+		'titleTag': titleTag,
+		'id': id if id is not None else key,
+		'key': key,
+		'default': False,
+	}
+
+	return _dsfr_alert_func(**args)
 
 def dsfr_badge(label, key = None):
 	component_value = _dsfr_badge_func(label = label, key = key, default = False)
