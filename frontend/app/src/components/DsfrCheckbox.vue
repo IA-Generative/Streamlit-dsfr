@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrCheckbox } from '@gouvminint/vue-dsfr'
 
@@ -37,8 +37,8 @@ if (props.theme)
 
 const onInput = (event: InputEvent) =>
 	{
-		event.preventDefault()
-		checked.value = (event.target as HTMLInputElement).checked
+		event.stopPropagation() // Fix
+		checked.value = (event.currentTarget as HTMLInputElement).checked
 		Streamlit.setComponentValue(checked.value)
 	}
 </script>
