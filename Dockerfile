@@ -120,7 +120,7 @@ FROM app_python_base AS app_python_dev
 ENV APP_ENV=dev
 
 # Install as editable package
-COPY --link ./app/app/pyproject.toml ./app/app/README.md ./app/app/MANIFEST.in .
+COPY --link ./app/app .
 RUN pip install --no-cache-dir -e .
 
 # Source code should be mounted here
