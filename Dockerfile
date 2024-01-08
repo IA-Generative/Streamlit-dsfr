@@ -177,10 +177,13 @@ RUN \
 # --
 # Python CI/CD image
 
-FROM app_python_prod_build AS app_python_cicd
+FROM app_python_base AS app_python_cicd
 
 # Install build dependencies
 RUN pip install --no-cache-dir --upgrade build
+
+# Copy build package
+COPY --from=app_python_prod_build --link /app/dist ./dist
 
 COPY --link --chmod=755 ./app/docker-cicd-command.sh /usr/local/bin/docker-cicd-command
 
