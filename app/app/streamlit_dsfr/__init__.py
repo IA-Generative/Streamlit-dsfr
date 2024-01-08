@@ -104,16 +104,16 @@ def dsfr_breadcrumb(
 		if isinstance(links, str):
 			kwargs['links'] = [{'to': links, 'link': links}]
 		elif isinstance(links, list):
-			if len(links) <= 0:
-				kwargs['links'] = []
-			if isinstance(links[0], str):
-				kwargs['links'] = [{'to': link, 'link': link} for link in links]
-			elif isinstance(links[0], tuple):
-				kwargs['links'] = [{'to': link[0], 'link': link[1]} for link in links]
-			elif isinstance(links[0], dict):
-				kwargs['links'] = links
-			else:
-				raise ValueError('links must be a list of strings, tuples or dicts')
+			def item_to_dict(item):
+				if isinstance(item, str):
+					return {'to': item, 'link': item}
+				elif isinstance(item, tuple):
+					return {'to': item[0], 'link': item[1]}
+				elif isinstance(item, dict):
+					return item
+				else:
+					raise ValueError('links must be a list of strings, tuples or dicts')
+			kwargs['links'] = [item_to_dict(item) for item in links]
 		else:
 			raise ValueError('links must be a list of strings, tuples or dicts')
 
