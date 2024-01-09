@@ -89,3 +89,9 @@ const onKeydown = (event: KeyboardEvent) =>
 		</DsfrInput>
 	</div>
 </template>
+
+<style scoped>
+.component {
+	display: flex;
+}
+</style>
