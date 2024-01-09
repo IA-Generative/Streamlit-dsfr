@@ -59,18 +59,6 @@ onUnmounted(() =>
 		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
 	})
 
-const style = reactive<{ [key: string]: string }>({})
-
-if (props.theme)
-{
-	style['--base'] = props.theme.base
-	style['--primary-color'] = props.theme.primaryColor
-	style['--background-color'] = props.theme.backgroundColor
-	style['--secondary-background-color'] = props.theme.secondaryBackgroundColor
-	style['--text-color'] = props.theme.textColor
-	style['--font'] = props.theme.font
-}
-
 const onClick = () =>
 	{
 		if (!clicked.value)
