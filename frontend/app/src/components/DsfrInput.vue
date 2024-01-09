@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrInput } from '@gouvminint/vue-dsfr'
 
@@ -27,7 +27,8 @@ const props = defineProps<
 	}>
 >()
 
-const checked = ref('')
+const lastValue = ref('')
+const value = ref('')
 const style = reactive<{ [key: string]: string }>({})
 
 if (props.theme)
@@ -40,19 +41,45 @@ if (props.theme)
 	style['--font'] = props.theme.font
 }
 
-watch(
-	() => checked,
-	(value) =>
+// Bind the input value to `value`
+// Update the Steamlit value when:
+// - the input lose focus, if the value has changed
+// - the user press enter, if the input is focused and the value has changed
+
+const onInput = (event: Event) =>
+	{
+		const target = event.target as HTMLInputElement
+		value.value = target.value
+	}
+
+const onBlur = () =>
+	{
+		if (value.value !== lastValue.value)
 		{
+			lastValue.value = value.value
 			Streamlit.setComponentValue(value.value)
-		},
-	{ immediate: true },
-)
+		}
+	}
+
+const onKeydown = (event: KeyboardEvent) =>
+	{
+		if (event.key === 'Enter' && value.value !== lastValue.value)
+		{
+			lastValue.value = value.value
+			Streamlit.setComponentValue(value.value)
+		}
+	}
 </script>
 
 <template>
 	<div class="component" :style="style">
-		<DsfrInput v-bind="props.args" v-model="checked">
+		<DsfrInput
+			v-bind="props.args"
+			v-model="value"
+			@input="onInput"
+			@blur="onBlur"
+			@keydown="onKeydown"
+		>
 			<template #label v-if="props.args.label">
 				{{ props.args.label }}
 			</template>
