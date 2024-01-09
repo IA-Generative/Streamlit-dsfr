@@ -161,15 +161,18 @@ RUN \
 		component_name="${component#st_}"; \
 		mkdir -p "./streamlit_dsfr/frontend/${component}"; \
 		cp -r "${component_path}/"* "./streamlit_dsfr/frontend/${component}"; \
-		# Copy astro assets for each component
-		mkdir -p "./streamlit_dsfr/frontend/${component}/_astro"; \
-		cp -r "./streamlit_dsfr/frontend/dist/_astro/"* "./streamlit_dsfr/frontend/${component}/_astro"; \
 		# Fix URLs to load assets
-		sed -i 's#/_astro#/component/streamlit_dsfr.'"${component_name}/_astro"'#g' \
+		sed -i 's#/_astro#/component/streamlit_dsfr.dsfr_default/_astro#g' \
 			"./streamlit_dsfr/frontend/${component}/index.html" \
-			"./streamlit_dsfr/frontend/${component}/_astro/"*".css" \
 			; \
 	done && \
+	# Copy astro assets in the default component folder
+	mkdir -p "./streamlit_dsfr/frontend/st_dsfr_default/_astro"; \
+	cp -r "./streamlit_dsfr/frontend/dist/_astro/"* "./streamlit_dsfr/frontend/st_dsfr_default/_astro"; \
+	# Fix URLs in assets to load other assets
+	sed -i 's#/_astro#/component/streamlit_dsfr.dsfr_default/_astro#g' \
+		"./streamlit_dsfr/frontend/st_dsfr_default/_astro/"*".css" \
+		; \
 	# Remove the dist folder
 	rm -rf ./streamlit_dsfr/frontend/dist
 
