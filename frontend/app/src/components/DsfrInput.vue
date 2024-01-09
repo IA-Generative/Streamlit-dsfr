@@ -93,5 +93,6 @@ const onKeydown = (event: KeyboardEvent) =>
 <style scoped>
 .component {
 	display: flex;
+	flex-direction: column;
 }
 </style>
