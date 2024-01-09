@@ -211,6 +211,8 @@ def dsfr_input(
 		kwargs['modelValue'] = value
 	if labelVisible is not None:
 		kwargs['labelVisible'] = labelVisible
+	else:
+		kwargs['labelVisible'] = not not label
 	if id is not None:
 		kwargs['id'] = id
 	if descriptionId is not None:
