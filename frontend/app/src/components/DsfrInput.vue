@@ -94,5 +94,6 @@ const onKeydown = (event: KeyboardEvent) =>
 .component {
 	display: flex;
 	flex-direction: column;
+	margin: 4px; /* Margin for the input outline on focus */
 }
 </style>
