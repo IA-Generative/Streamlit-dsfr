@@ -5,6 +5,7 @@ import streamlit.components.v1 as components
 _RELEASE = False
 
 supported_components = {
+    'dsfr_default': '',
     'dsfr_alert': 'st_dsfr_alert',
     'dsfr_badge': 'st_dsfr_badge',
     'dsfr_breadcrumb': 'st_dsfr_breadcrumb',
