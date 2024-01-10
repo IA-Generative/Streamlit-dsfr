@@ -5,7 +5,6 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "streamlit-dsfr"
 description = "VueDsfr components for Streamlit"
-version = "0.0.1"
 authors = [
     { name = "John Smith", email = "john@example.com" },
 ]
@@ -17,12 +16,13 @@ dependencies = [
 	"streamlit >= 0.63",
 ]
 classifiers = []
-dynamic = [ "readme" ]
+dynamic = [ "version", "readme" ]
 
 [tool.setuptools]
 packages = [ "streamlit_dsfr" ]
 
 [tool.setuptools.dynamic]
+version = { file = "VERSION.txt" }
 readme = { file = [ "README.md" ], content-type = "text/markdown" }
 
 [project.optional-dependencies]
