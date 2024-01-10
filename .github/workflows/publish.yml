@@ -6,7 +6,7 @@ on:
     types:
       - released
 
-# Set GITHUB_TOKEN permissions
+# Set GITHUB_TOKEN permissions for the workflow
 permissions:
   contents: read
 
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-    # Set GITHUB_TOKEN permissions
+    # Set GITHUB_TOKEN permissions for this job
     permissions:
       id-token: write
 

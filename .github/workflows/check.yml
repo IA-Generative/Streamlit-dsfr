@@ -12,7 +12,7 @@ on:
       - 'docker-compose*.yml'
       - 'Dockerfile'
 
-# Set GITHUB_TOKEN permissions
+# Set GITHUB_TOKEN permissions for the workflow
 permissions:
   contents: read
 
@@ -30,6 +30,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
+
     - name: Checkout
       uses: actions/checkout@v4
 

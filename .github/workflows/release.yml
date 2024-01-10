@@ -11,7 +11,7 @@ on:
   # Run on manual triggers
   workflow_dispatch:
 
-# Set GITHUB_TOKEN permissions
+# Set GITHUB_TOKEN permissions for the workflow
 permissions:
   contents: read
 
@@ -82,7 +82,7 @@ jobs:
     needs:
       - build
 
-    # Set GITHUB_TOKEN permissions
+    # Set GITHUB_TOKEN permissions for this job
     permissions:
       contents: write
 
@@ -92,6 +92,7 @@ jobs:
       url: ${{ steps.release.outputs.url }}
 
     steps:
+
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
