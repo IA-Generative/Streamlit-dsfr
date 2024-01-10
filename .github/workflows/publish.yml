@@ -22,7 +22,7 @@ jobs:
   publish:
     name: Publish version
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
 
     # Set GITHUB_TOKEN permissions for this job
     permissions:
