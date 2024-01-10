@@ -62,7 +62,7 @@ jobs:
     # Set deployment environment
     environment:
       name: release
-      url: ${{ steps.release-url.outputs.url }}
+      url: ${{ steps.release.outputs.url }}
 
     steps:
     - name: Download artifact
@@ -71,45 +71,29 @@ jobs:
         name: dist
         path: ./dist
 
-    - name: Set pre-release tag name
-      id: prerelease-tag
+    - name: Set pre-release version tag
       if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
       # Use datetime and short commit hash as the pre-release tag name
-      run: echo "tag=t$(date +%Y%m%d.%H%M%S).${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+      run: echo "VERSION=t$(date +%Y%m%d.%H%M%S).${GITHUB_SHA::8}" >> $GITHUB_ENV
       env:
         GITHUB_SHA: ${{ github.sha }}
 
-    - name: Create pre-release
-      id: prerelease
-      uses: softprops/action-gh-release@v1
-      if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
-      with:
-        # Use the commit hash as the tag
-        tag_name: ${{ steps.prerelease-tag.outputs.tag }}
-        prerelease: true
-        target_commitish: ${{ github.sha }}
-        files: ./dist/*
-        fail_on_unmatched_files: true
-        generate_release_notes: true
+    - name: Set release version tag
+      if: ${{ startsWith(github.ref, 'refs/tags/') }}
+      # Use the tag name as the release tag name, without the git ref prefix
+      run: echo "VERSION=${GITHUB_REF##refs/tags/}" >> $GITHUB_ENV
+      env:
+        GITHUB_REF: ${{ github.ref }}
 
     - name: Create release
       id: release
       uses: softprops/action-gh-release@v1
-      if: ${{ startsWith(github.ref, 'refs/tags/') }}
       with:
-        prerelease: false
+        # Use the version tag
+        tag_name: ${{ env.VERSION }}
+        # Set the release as non-prerelease if not triggered on a tag
+        prerelease: ${{ ! startsWith(github.ref, 'refs/tags/') }}
         target_commitish: ${{ github.sha }}
         files: ./dist/*
         fail_on_unmatched_files: true
         generate_release_notes: true
-
-    - name: Get release URL
-      id: release-url
-      run: |
-        if [ -n "${{ steps.prerelease.outputs.url }}" ]; then
-          echo "url=${{ steps.prerelease.outputs.url }}" >> $GITHUB_OUTPUT
-        elif [ -n "${{ steps.release.outputs.url }}" ]; then
-          echo "url=${{ steps.release.outputs.url }}" >> $GITHUB_OUTPUT
-        else
-          echo "url=" >> $GITHUB_OUTPUT
-        fi
