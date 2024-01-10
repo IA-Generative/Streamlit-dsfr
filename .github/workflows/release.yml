@@ -117,13 +117,17 @@ jobs:
     - name: Infer if the version is a pre-release
       # PEP 440 specifies that pre-releases have suffixes, such as:
       # `1.0.0.a1`, `1.0.0b2`, `1.0.0rc1`, `1.0.0.dev1`, `1.0.0.post1`
-      # Consider a version is a pre-release if it has any non-numeric characters
-      # Ignore the first character
+      # PEP 440 also mentions local versions, such as:
+      # `1.0.0+foo`, `1.0.0+foo.bar`
+      # For completeness, we also consider these as pre-releases:
+      # `1.0.0-foo`, `1.0.0-foo.bar`
+      # Consider a version is a pre-release if it has '+', '-', or any ASCII letters
+      # Ignore the first character, which is probably 'v'
       env:
         VERSION: ${{ needs.build.outputs.version }}
       run: |
         VERSION=${VERSION:1}
-        if ( echo $VERSION | grep -q '[^0-9]' ); then
+        if ( echo $VERSION | grep -q '[a-zA-Z+-]' ); then
           echo "PRE_RELEASE=true" >> $GITHUB_ENV
         else
           echo "PRE_RELEASE=false" >> $GITHUB_ENV
