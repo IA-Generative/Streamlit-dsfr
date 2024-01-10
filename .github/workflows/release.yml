@@ -37,12 +37,26 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Get latest released version tag
+      id: latest-release
+      if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+      uses: pozetroninc/github-action-get-latest-release@master
+      with:
+        repository: ${{ github.repository }}
+        excludes: prerelease, draft
+
     - name: Set version tag for pre-release
       if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
-      # Use datetime and short commit hash as the pre-release tag name
+      # Use the latest tag with the short commit hash as suffix
+      # Increase the patch version before the commit hash suffix
       env:
         GITHUB_SHA: ${{ github.sha }}
-      run: echo "VERSION=t$(date +%Y%m%d.%H%M%S).${GITHUB_SHA::4}" >> $GITHUB_ENV
+        LATEST_RELEASE_TAG: ${{ steps.latest-release.outputs.release }}
+      run: |
+        LATEST_RELEASE_TAG=${LATEST_RELEASE_TAG:-v0.0.0}
+        LATEST_RELEASE_TAG=${LATEST_RELEASE_TAG##v}
+        LATEST_RELEASE_TAG=$(awk -F. '{$NF = $NF + 1;} 1' OFS=. <<< "$LATEST_RELEASE_TAG")
+        echo "VERSION=v${LATEST_RELEASE_TAG}+${GITHUB_SHA::7}" >> $GITHUB_ENV
 
     - name: Set version tag for release
       if: ${{ startsWith(github.ref, 'refs/tags/') }}
