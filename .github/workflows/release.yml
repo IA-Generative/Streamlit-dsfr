@@ -104,9 +104,11 @@ jobs:
       # PEP 440 specifies that pre-releases have suffixes, such as:
       # `1.0.0.a1`, `1.0.0b2`, `1.0.0rc1`, `1.0.0.dev1`, `1.0.0.post1`
       # Consider a version is a pre-release if it has any non-numeric characters
+      # Ignore the first character
       env:
         VERSION: ${{ needs.build.outputs.version }}
       run: |
+        VERSION=${VERSION:1}
         if ( echo $VERSION | grep -q '[^0-9]' ); then
           echo "PRE_RELEASE=true" >> $GITHUB_ENV
         else
