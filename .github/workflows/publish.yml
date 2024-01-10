@@ -31,7 +31,6 @@ jobs:
     # Set deployment environment
     environment:
       name: publish
-      url: ${{ steps.publish.outputs.url }}
 
     steps:
 
