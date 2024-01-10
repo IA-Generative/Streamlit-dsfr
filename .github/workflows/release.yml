@@ -90,6 +90,19 @@ jobs:
         name: dist
         path: ./dist
 
+    - name: Infer if the version is a pre-release
+      # PEP 440 specifies that pre-releases have suffixes, such as:
+      # `1.0.0.a1`, `1.0.0b2`, `1.0.0rc1`, `1.0.0.dev1`, `1.0.0.post1`
+      # Consider a version is a pre-release if it has any non-numeric characters
+      env:
+        VERSION: ${{ needs.build.outputs.version }}
+      run: |
+        if ( echo $VERSION | grep -q '[^0-9]' ); then
+          echo "PRE_RELEASE=true" >> $GITHUB_ENV
+        else
+          echo "PRE_RELEASE=false" >> $GITHUB_ENV
+        fi
+
     - name: Create release
       id: release
       uses: softprops/action-gh-release@v1
@@ -97,7 +110,7 @@ jobs:
         # Use the version tag
         tag_name: ${{ needs.build.outputs.version }}
         # Set the release as non-prerelease if not triggered on a tag
-        prerelease: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+        prerelease: ${{ env.PRE_RELEASE == 'true' }}
         target_commitish: ${{ github.sha }}
         files: ./dist/*
         fail_on_unmatched_files: true
