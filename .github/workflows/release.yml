@@ -3,8 +3,10 @@ name: Publish
 on:
   # Run on push events on primary branches
   push:
+    branches:
+      - main
     tags:
-      - '*'
+      - 'v*'
 
   # Run on manual triggers
   workflow_dispatch:
@@ -35,20 +37,27 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set version tag
-      # Use the tag name as the release tag name, without the git ref prefix
-      # Ensure the tag name starts with 'v'
+    - name: Set version tag for pre-release
+      if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+      # Use datetime and short commit hash as the pre-release tag name
+      run: echo "VERSION=t$(date +%Y%m%d.%H%M%S).${GITHUB_SHA::8}" >> $GITHUB_ENV
       env:
-        GITHUB_REF: ${{ github.ref }}
+        GITHUB_SHA: ${{ github.sha }}
+
+    - name: Set version tag for release
+      if: ${{ startsWith(github.ref, 'refs/tags/') }}
+      # Use the tag name as the release tag name, without the git ref prefix
       run: |
         VERSION=${GITHUB_REF##refs/tags/}
         VERSION=${VERSION##v}
         echo "VERSION=v$VERSION" >> $GITHUB_ENV
+      env:
+        GITHUB_REF: ${{ github.ref }}
 
     - name: Set VERSION file
+      run: echo $VERSION > ./app/app/VERSION.txt
       env:
         VERSION: ${{ env.VERSION }}
-      run: echo $VERSION > ./app/app/VERSION.txt
 
     - name: Build for production
       run: docker compose -f docker-compose.yml -f docker-compose.cicd.yml build
