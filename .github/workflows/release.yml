@@ -1,4 +1,4 @@
-name: Publish
+name: Release
 
 on:
   # Run on push events on primary branches
