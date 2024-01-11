@@ -165,13 +165,13 @@ jobs:
         VERSION=${VERSION:1}
         if ( echo $VERSION | grep -q '[+]' ); then
           # Dev local version
-          echo "result=dev" >> $GITHUB_ENV
+          echo "result=dev" >> $GITHUB_OUTPUT
         elif ( echo $VERSION | grep -q '[a-zA-Z_-]' ); then
           # Pre-release
-          echo "result=prerelease" >> $GITHUB_ENV
+          echo "result=prerelease" >> $GITHUB_OUTPUT
         else
           # Release
-          echo "result=release" >> $GITHUB_ENV
+          echo "result=release" >> $GITHUB_OUTPUT
         fi
 
     - name: Create release
