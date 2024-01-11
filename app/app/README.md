@@ -18,6 +18,5 @@ import streamlit as st
 from streamlit_dsfr import st_dsfr_button
 
 value = st_dsfr_button()
-
 st.write(value)
 ```
