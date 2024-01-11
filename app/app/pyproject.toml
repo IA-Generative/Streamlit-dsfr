@@ -22,7 +22,7 @@ dynamic = [ "version", "readme" ]
 packages = [ "streamlit_dsfr" ]
 
 [tool.setuptools.dynamic]
-version = { file = "VERSION.txt" }
+version = { file = "VERSION" }
 readme = { file = [ "README.md" ], content-type = "text/markdown" }
 
 [project.optional-dependencies]
