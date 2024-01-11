@@ -109,7 +109,7 @@ jobs:
     - name: Copy application files
       run: docker compose -f docker-compose.yml -f docker-compose.cicd.yml run --rm app
 
-    - name: Upload dist folder
+    - name: Upload package artifact
       uses: actions/upload-artifact@v4
       with:
         name: dist
@@ -139,9 +139,13 @@ jobs:
     env:
       VERSION: ${{ needs.build.outputs.version }}
 
+    # Set outputs
+    outputs:
+      release: ${{ steps.release.outputs.url != '' }}
+
     steps:
 
-    - name: Download artifact
+    - name: Download package artifact
       uses: actions/download-artifact@v4
       with:
         name: dist
@@ -190,3 +194,37 @@ jobs:
         files: ./dist/*
         fail_on_unmatched_files: true
         generate_release_notes: true
+
+  # Publish job
+  publish:
+    name: Publish version
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    # Dependencies
+    needs:
+      - release
+
+    # Run this job only if a release was created
+    if: needs.release.outputs.release == 'true'
+
+    # Set GITHUB_TOKEN permissions for this job
+    permissions:
+      id-token: write
+
+    # Set deployment environment
+    environment:
+      name: publish
+
+    steps:
+
+    - name: Download package artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: dist
+        path: ./dist
+
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        packages-dir: ./dist
