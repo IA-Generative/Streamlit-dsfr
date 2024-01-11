@@ -46,13 +46,15 @@ jobs:
     - name: Check if version tag exists
       id: release-exists
       uses: actions/github-script@v7
+      env:
+        VERSION: ${{ env.VERSION }}
       with:
         script: |
           try {
             const { data: releases } = await github.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag: context.ref,
+              tag: process.env.VERSION,
             });
             return 'true';
           } catch (error) {
