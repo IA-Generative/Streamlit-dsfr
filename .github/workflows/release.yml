@@ -76,7 +76,7 @@ jobs:
       env:
         VERSION: ${{ env.VERSION }}
         GITHUB_SHA: ${{ github.sha }}
-        LATEST_RELEASE_TAG: ${{ steps.latest-release.outputs.release }}
+        LATEST_RELEASE_TAG: ${{ steps.latest-release.outputs.result }}
       run: |
         LATEST_RELEASE_TAG=${VERSION:-v0.0.0}
         LATEST_RELEASE_TAG=${LATEST_RELEASE_TAG##v}
