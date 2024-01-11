@@ -70,13 +70,13 @@ jobs:
     - name: Add dev pre-release suffix to version tag
       # Run this step only if the version tag already exists
       if: steps.release-exists.outputs.result == 'true'
+      # Use the current version tag
+      # Increase the patch version (to give the new version a higher precedence)
+      # Append the short commit hash as local version suffix
       env:
         VERSION: ${{ env.VERSION }}
         GITHUB_SHA: ${{ github.sha }}
         LATEST_RELEASE_TAG: ${{ steps.latest-release.outputs.release }}
-      # Use the current version tag
-      # Increase the patch version (to give the new version a higher precedence)
-      # Append the short commit hash as local version suffix
       run: |
         LATEST_RELEASE_TAG=${VERSION:-v0.0.0}
         LATEST_RELEASE_TAG=${LATEST_RELEASE_TAG##v}
@@ -122,6 +122,10 @@ jobs:
       name: release
       url: ${{ steps.release.outputs.url }}
 
+    # Set environment variables
+    env:
+      VERSION: ${{ needs.build.outputs.version }}
+
     steps:
 
     - name: Download artifact
@@ -130,33 +134,45 @@ jobs:
         name: dist
         path: ./dist
 
-    - name: Infer if the version is a pre-release
-      # PEP 440 specifies that pre-releases have suffixes, such as:
-      # `1.0.0.a1`, `1.0.0b2`, `1.0.0rc1`, `1.0.0.dev1`, `1.0.0.post1`
-      # PEP 440 also mentions local versions, such as:
-      # `1.0.0+foo`, `1.0.0+foo.bar`
-      # For completeness, we also consider these as pre-releases:
-      # `1.0.0-foo`, `1.0.0-foo.bar`
-      # Consider a version is a pre-release if it has '+', '-', or any ASCII letters
-      # Ignore the first character, which is probably 'v'
+    - name: Infer if a release should be created
+      id: infer-release
+      # PEP 440 specifies that:
+      # - releases have suffixes such as: `1.0.0`
+      # - pre-releases have suffixes such as: `1.0.0a1`, `1.0.0b2`, `1.0.0rc1`, `1.0.0.dev1`, `1.0.0.post1`
+      # - pre-releases may also use `.`, `-`, or `_` as separator before the pre-release suffix
+      # - dev local versions have suffixes such as: `1.0.0+foo`, `1.0.0+foo.bar`
+      # Consider:
+      # - Create a release if the version is a release
+      # - Create a pre-release if the version is a pre-release
+      # - Do not create a release if the version is a dev local version
+      # Ignore the leading character in the version tag, which is `v`
       env:
-        VERSION: ${{ needs.build.outputs.version }}
+        VERSION: ${{ env.VERSION }}
       run: |
         VERSION=${VERSION:1}
-        if ( echo $VERSION | grep -q '[a-zA-Z+-]' ); then
-          echo "PRE_RELEASE=true" >> $GITHUB_ENV
+        if ( echo $VERSION | grep -q '[+]' ); then
+          # Dev local version
+          echo "result=dev" >> $GITHUB_ENV
+        elif ( echo $VERSION | grep -q '[a-zA-Z]' ); then
+          # Pre-release
+          echo "result=prerelease" >> $GITHUB_ENV
         else
-          echo "PRE_RELEASE=false" >> $GITHUB_ENV
+          # Release
+          echo "result=release" >> $GITHUB_ENV
         fi
 
     - name: Create release
       id: release
+      # Run this step only if a release should be created
+      if: |
+        steps.infer-release.outputs.result == 'release' ||
+        steps.infer-release.outputs.result == 'prerelease'
       uses: softprops/action-gh-release@v1
       with:
         # Use the version tag
-        tag_name: ${{ needs.build.outputs.version }}
-        # Set the release as non-prerelease if not triggered on a tag
-        prerelease: ${{ env.PRE_RELEASE == 'true' }}
+        tag_name: ${{ env.VERSION }}
+        # Set if the release is a pre-release
+        prerelease: ${{ steps.infer-release.outputs.result == 'prerelease' }}
         target_commitish: ${{ github.sha }}
         files: ./dist/*
         fail_on_unmatched_files: true
