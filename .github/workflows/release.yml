@@ -37,15 +37,19 @@ jobs:
 
     - name: Get version tag from VERSION file
       # Read the VERSION file
-      # Fallback to `0.0.0` if the file does not exist
-      # Ensure the tag name starts with 'v'
+      # If the file exists, set the version tag and ensure the tag name starts with 'v'
+      # Else, do not set the version tag (empty string)
       run: |
-        VERSION=$(cat ./app/app/VERSION 2>/dev/null || echo '0.0.0')
-        VERSION=${VERSION##v}
-        echo "VERSION=v$VERSION" >> $GITHUB_ENV
+        VERSION=$(cat ./app/app/VERSION 2>/dev/null || echo '')
+        if [ -n "$VERSION" ]; then
+          VERSION="v${VERSION##v}"
+        fi
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
 
     - name: Check if version tag exists
       id: release-exists
+      # Run this step only if the version tag is set
+      if: env.VERSION != ''
       uses: actions/github-script@v7
       env:
         VERSION: ${{ env.VERSION }}
@@ -67,33 +71,37 @@ jobs:
           }
         resu lt-encoding: string
 
-    # If the version tag already exists, build a dev pre-release
-    # Otherwise, build a release or production pre-release
+    # If the version tag already exists, build a dev version
+    # Otherwise, build a release or pre-release
 
-    - name: Add dev pre-release suffix to version tag
-      # Run this step only if the version tag already exists
-      if: steps.release-exists.outputs.result == 'true'
+    - name: Add dev version suffix to version tag
+      id: dev-version
+      # Run this step only if the version tag is not set or already exists
+      if: |
+        env.VERSION == '' ||
+        steps.release-exists.outputs.result == 'true'
       # Use the current version tag
-      # Increase the patch version (to give the new version a higher precedence)
+      # If set, increase the patch version (to give the new version a higher precedence)
+      # If not set, use the default version tag
       # Append the short commit hash as local version suffix
       env:
         VERSION: ${{ env.VERSION }}
         GITHUB_SHA: ${{ github.sha }}
       run: |
-        LATEST_RELEASE_TAG=${VERSION:-v0.0.0}
-        LATEST_RELEASE_TAG=${LATEST_RELEASE_TAG##v}
-        LATEST_RELEASE_TAG=$(awk -F. '{$NF = $NF + 1;} 1' OFS=. <<< "$LATEST_RELEASE_TAG")
-        echo "VERSION=v${LATEST_RELEASE_TAG}+${GITHUB_SHA::7}" >> $GITHUB_ENV
+        if [ -n "$VERSION" ]; then
+          VERSION=$(awk -F. '{$NF = $NF + 1;} 1' OFS=. <<< "${VERSION##v}")
+        else
+          VERSION='0.0.0'
+        fi
+        echo "VERSION=v${VERSION}+${GITHUB_SHA::7}" >> $GITHUB_ENV
 
     - name: Update VERSION file
-      # Run this step only if the version tag already exists
-      if: steps.release-exists.outputs.result == 'true'
+      # Run this step only if the version tag was modified
+      if: steps.dev-version.conclusion == 'success'
       # Remove the leading character in the version tag, which is `v`
       env:
         VERSION: ${{ env.VERSION }}
-      run: |
-        VERSION=${VERSION:1}
-        echo $VERSION > ./app/app/VERSION
+      run: echo ${VERSION##v} > ./app/app/VERSION
 
     - name: Build for production
       run: docker compose -f docker-compose.yml -f docker-compose.cicd.yml build
