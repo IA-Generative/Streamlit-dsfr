@@ -4,7 +4,7 @@ on:
   # Run on release events on releases (not pre-releases)
   release:
     types:
-      - released
+      - published
 
 # Set GITHUB_TOKEN permissions for the workflow
 permissions:
