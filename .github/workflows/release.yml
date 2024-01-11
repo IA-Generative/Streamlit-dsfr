@@ -56,7 +56,7 @@ jobs:
       with:
         script: |
           try {
-            const { data: releases } = await github.repos.getReleaseByTag({
+            const { data: releases } = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag: process.env.VERSION,
