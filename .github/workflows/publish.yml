@@ -9,6 +9,7 @@ on:
 # Set GITHUB_TOKEN permissions for the workflow
 permissions:
   contents: read
+  id-token: write
 
 # Allow one concurrent deployment
 concurrency:
@@ -23,10 +24,6 @@ jobs:
     name: Publish version
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
-    # Set GITHUB_TOKEN permissions for this job
-    permissions:
-      id-token: write
 
     # Set deployment environment
     environment:
