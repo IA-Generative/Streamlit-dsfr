@@ -13,9 +13,9 @@ permissions:
   contents: read
   id-token: write
 
-# Allow one concurrent deployment
+# Allow one concurrent deployment per ref
 concurrency:
-  group: ${{ github.workflow }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   # Do not cancel in progress to avoid publishing issues
   cancel-in-progress: false
 
