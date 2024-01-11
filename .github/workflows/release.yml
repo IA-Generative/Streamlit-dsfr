@@ -86,9 +86,12 @@ jobs:
     - name: Update VERSION file
       # Run this step only if the version tag already exists
       if: steps.release-exists.outputs.result == 'true'
+      # Remove the leading character in the version tag, which is `v`
       env:
         VERSION: ${{ env.VERSION }}
-      run: echo $VERSION > ./app/app/VERSION
+      run: |
+        VERSION=${VERSION:1}
+        echo $VERSION > ./app/app/VERSION
 
     - name: Build for production
       run: docker compose -f docker-compose.yml -f docker-compose.cicd.yml build
