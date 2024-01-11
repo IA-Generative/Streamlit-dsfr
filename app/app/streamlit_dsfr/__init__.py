@@ -1,4 +1,6 @@
 import os
+from typing import Optional
+
 import streamlit.components.v1 as components
 
 # Release flag constant. Set to True when releasing the component.
@@ -42,15 +44,15 @@ else:
 
 def dsfr_alert(
 	title: str,
-	description: str | None = None,
-	type: str | None = None,
-	small: bool | None = None,
+	description: Optional[str] = None,
+	type: Optional[str] = None,
+	small: Optional[bool] = None,
 	*,
-	closed: bool | None = None,
-	closeable: bool | None = None,
-	titleTag: str | None = None,
-	id: str | None = None,
-	key: str | None = None,
+	closed: Optional[bool] = None,
+	closeable: Optional[bool] = None,
+	titleTag: Optional[str] = None,
+	id: Optional[str] = None,
+	key: Optional[str] = None,
 	**kwargs,
 ):
 	if description is not None:
@@ -72,12 +74,12 @@ def dsfr_alert(
 
 def dsfr_badge(
 	label: str,
-	type: str | None = None,
-	small: bool | None = None,
+	type: Optional[str] = None,
+	small: Optional[bool] = None,
 	*,
-	noIcon: bool | None = None,
-	ellipsis: bool | None = None,
-	key: str | None = None,
+	noIcon: Optional[bool] = None,
+	ellipsis: Optional[bool] = None,
+	key: Optional[str] = None,
 	**kwargs,
 ):
 	if type is not None:
@@ -94,8 +96,8 @@ def dsfr_badge(
 def dsfr_breadcrumb(
 	links: str | list[str] | list[(str, str)] | list[dict[str, str]] | None = None,
 	*,
-	id: str | None = None,
-	key: str | None = None,
+	id: Optional[str] = None,
+	key: Optional[str] = None,
 	**kwargs,
 ):
 	if links is not None:
@@ -122,16 +124,16 @@ def dsfr_breadcrumb(
 
 def dsfr_button(
 	label: str,
-	size: str | None = None,
-	disabled: bool | None = None,
+	size: Optional[str] = None,
+	disabled: Optional[bool] = None,
 	*,
-	secondary: bool | None = None,
-	tertiary: bool | None = None,
-	icon: str | None = None,
-	iconOnly: bool | None = None,
-	iconRight: bool | None = None,
-	noOutline: bool | None = None,
-	key: str | None = None,
+	secondary: Optional[bool] = None,
+	tertiary: Optional[bool] = None,
+	icon: Optional[str] = None,
+	iconOnly: Optional[bool] = None,
+	iconRight: Optional[bool] = None,
+	noOutline: Optional[bool] = None,
+	key: Optional[str] = None,
 	**kwargs,
 ):
 	if size is not None:
@@ -154,17 +156,17 @@ def dsfr_button(
 	return _dsfr_button_func(label = label, **kwargs, key = key, default = False)
 
 def dsfr_checkbox(
-	hint: str | None = None,
-	small: bool | None = None,
-	required: bool | None = None,
-	name: str | None = None,
-	value: bool | None = None,
+	hint: Optional[str] = None,
+	small: Optional[bool] = None,
+	required: Optional[bool] = None,
+	name: Optional[str] = None,
+	value: Optional[bool] = None,
 	*,
-	id: str | None = None,
-	inline: bool | None = None,
-	errorMessage: str | None = None,
-	validMessage: str | None = None,
-	key: str | None = None,
+	id: Optional[str] = None,
+	inline: Optional[bool] = None,
+	errorMessage: Optional[str] = None,
+	validMessage: Optional[str] = None,
+	key: Optional[str] = None,
 	**kwargs,
 ):
 	if hint is not None:
@@ -190,19 +192,19 @@ def dsfr_checkbox(
 
 def dsfr_input(
 	label: str,
-	hint: str | None = None,
-	value: str | None = None,
+	hint: Optional[str] = None,
+	value: Optional[str] = None,
 	*,
-	labelVisible: bool | None = None,
-	id: str | None = None,
-	descriptionId: str | None = None,
-	isInvalid: bool | None = None,
-	isValid: bool | None = None,
-	isWithWarning: bool | None = None,
-	labelClass: str | None = None,
-	wrapperClass: str | None = None,
-	requiredTip: str | None = None,
-	key: str | None = None,
+	labelVisible: Optional[bool] = None,
+	id: Optional[str] = None,
+	descriptionId: Optional[str] = None,
+	isInvalid: Optional[bool] = None,
+	isValid: Optional[bool] = None,
+	isWithWarning: Optional[bool] = None,
+	labelClass: Optional[str] = None,
+	wrapperClass: Optional[str] = None,
+	requiredTip: Optional[str] = None,
+	key: Optional[str] = None,
 	**kwargs,
 ):
 	if hint is not None:
