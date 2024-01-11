@@ -69,7 +69,7 @@ jobs:
               throw error;
             }
           }
-        resu lt-encoding: string
+        result-encoding: string
 
     # If the version tag already exists, build a dev version
     # Otherwise, build a release or pre-release
