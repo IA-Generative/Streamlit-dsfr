@@ -5,6 +5,8 @@ on:
   release:
     types:
       - published
+      - released
+      - prereleased
 
 # Set GITHUB_TOKEN permissions for the workflow
 permissions:
