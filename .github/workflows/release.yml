@@ -22,7 +22,7 @@ jobs:
 
   # Build job
   build:
-    name: Build Astro site artifact
+    name: Build package
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
