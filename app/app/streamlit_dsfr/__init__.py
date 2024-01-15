@@ -264,11 +264,11 @@ def dsfr_picture(
 	return _dsfr_picture_func(src = src, **kwargs, key = key, default = None)
 
 def dsfr_radio(
-	label: str,
 	options: Union[list[str], list[dict[str, str]]],
 	index: Optional[int] = None,
 	*,
 	disabled: Optional[Union[bool, list[bool]]] = None,
+	label: Optional[str] = None,
 	small: Optional[bool] = None,
 	id: Optional[str] = None,
 	name: Optional[str] = None,
@@ -281,6 +281,8 @@ def dsfr_radio(
 	key: Optional[str] = None,
 	**kwargs,
 ):
+	if label is not None:
+		kwargs['label'] = label
 	if small is not None:
 		kwargs['small'] = small
 	if id is not None:
@@ -343,4 +345,4 @@ def dsfr_radio(
 	else:
 		default = None
 
-	return _dsfr_radio_func(label = label, **kwargs, key = key, default = default)
+	return _dsfr_radio_func(**kwargs, key = key, default = default)
