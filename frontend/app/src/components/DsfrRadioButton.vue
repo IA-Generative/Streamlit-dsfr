@@ -83,7 +83,7 @@ function onUpdateModelValue()
 </template>
 
 <style scoped>
-.component {
-	margin: 4px; /* Margin for the input outline on focus */
+.component > :global(*) {
+	margin-bottom: 0;
 }
 </style>
