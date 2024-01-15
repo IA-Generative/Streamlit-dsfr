@@ -65,8 +65,8 @@ function parseOptions(options: Option[] | undefined): Option[]
 
 function onUpdateModelValue()
 {
-	console.log('onUpdateModelValue', value.value)
-	Streamlit.setComponentValue(value.value)
+	const intValue = value.value !== undefined ? parseInt(value.value) : NaN
+	Streamlit.setComponentValue(Number.isNaN(intValue) ? value.value : intValue)
 }
 </script>
 
