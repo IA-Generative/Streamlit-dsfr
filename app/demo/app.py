@@ -4,6 +4,8 @@ from streamlit_dsfr import \
 	dsfr_badge, \
 	dsfr_button, \
 	dsfr_checkbox, \
+	dsfr_picture, \
+	dsfr_radio, \
 	dsfr_input
 
 # ---
@@ -65,6 +67,27 @@ st.write(cval)
 st.subheader('Inputs')
 
 val = dsfr_input('This is an input')
+st.write(val)
+
+# ---
+
+st.subheader('Pictures')
+
+dsfr_picture(
+	'https://placekitten.com/300/200',
+	legend = 'This is a picture legend',
+	alt = 'This is a picture alt',
+	ratio = '32x9',
+)
+
+# ---
+
+st.subheader('Radios')
+
+val = dsfr_radio(['Option 1', 'Option 2', 'Option 3'])
+st.write(val)
+
+val = dsfr_radio(['Small option 1', 'Small option 2', 'Small option 3'], small = True)
 st.write(val)
 
 # ---
