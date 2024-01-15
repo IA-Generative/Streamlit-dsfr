@@ -6,7 +6,7 @@ services:
 
   frontend:
     # Build
-    image: ${IMAGES_PREFIX:-app}-frontend-dev:${DOCKER_TAG:-latest}
+    image: ${IMAGES_PREFIX:-app}-dev-frontend:${DOCKER_TAG:-latest}
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -21,7 +21,7 @@ services:
 
   app:
     # Build override
-    image: ${IMAGES_PREFIX:-app}-app-dev:${DOCKER_TAG:-latest}
+    image: ${IMAGES_PREFIX:-app}-dev-app:${DOCKER_TAG:-latest}
     build:
       target: app_python_dev
     # Deploy override
