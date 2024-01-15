@@ -63,6 +63,9 @@ def dsfr_alert(
 		kwargs['type'] = type
 	if small is not None:
 		kwargs['small'] = small
+		if small and description is None:
+			kwargs['description'] = title
+			title = None
 	if closed is not None:
 		kwargs['closed'] = closed
 	if closeable is not None:
