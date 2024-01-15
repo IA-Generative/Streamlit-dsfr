@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrRadioButton } from '@gouvminint/vue-dsfr'
 
