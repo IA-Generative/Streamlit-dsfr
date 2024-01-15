@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUpdated, onUnmounted, onErrorCaptured } from 'vue'
-import { Streamlit, type RenderData } from '~/stcomponentlib'
+import { Streamlit } from '~/stcomponentlib'
+import type { RenderData } from '~/stcomponentlib'
 
 const renderData = ref<RenderData | undefined>(undefined)
 const componentError = ref<string | undefined>(undefined)
@@ -51,6 +52,13 @@ onErrorCaptured(err =>
 			:args="renderData.args"
 			:disabled="renderData.disabled"
 			:theme="renderData.theme"
+		></slot>
+		<slot
+			v-else
+			:width="innerWidth"
+			:args="{}"
+			:disabled="false"
+			:theme="{}"
 		></slot>
 	</div>
 </template>

@@ -4,7 +4,7 @@ import { Streamlit } from '~/stcomponentlib'
 import { DsfrCheckbox } from '@gouvminint/vue-dsfr'
 
 import { useStreamlit } from '../streamlit'
-import type { ComponentProps } from '../types/ComponentProps'
+import type { ComponentProps } from '../types/ComponentProps.d.ts'
 
 useStreamlit()
 

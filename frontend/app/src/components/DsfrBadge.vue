@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import { DsfrBadge } from '@gouvminint/vue-dsfr'
 
 import { useStreamlit } from '../streamlit'
-import type { ComponentProps } from '../types/ComponentProps'
+import type { ComponentProps } from '../types/ComponentProps.d.ts'
 
 useStreamlit()
 
