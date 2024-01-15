@@ -10,6 +10,8 @@ useStreamlit()
 
 const props = defineProps<
 	ComponentProps<{
+		disabled?: boolean
+		// Props
 		modelValue?: boolean
 		required?: boolean
 		small?: boolean
@@ -47,6 +49,7 @@ const onInput = (event: InputEvent) =>
 	<div class="component" :style="style">
 		<DsfrCheckbox
 			v-bind="props.args"
+			:disabled="props.disabled || props.args.disabled"
 			v-model="checked"
 			@input="onInput"
 		/>
