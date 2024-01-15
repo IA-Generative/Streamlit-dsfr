@@ -74,12 +74,6 @@ function onUpdateModelValue(event: Event)
 			:options="parseOptions(props.args.options)"
 			@update:modelValue="onUpdateModelValue"
 		>
-			<template #label v-if="props.args.label">
-				{{ props.args.label }}
-			</template>
-			<template #required-tip v-if="props.args.requiredTip">
-				{{ props.args.requiredTip }}
-			</template>
 		</DsfrRadioButton>
 	</div>
 </template>
