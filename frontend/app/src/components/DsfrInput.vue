@@ -10,6 +10,7 @@ useStreamlit()
 
 const props = defineProps<
 	ComponentProps<{
+		disabled?: boolean
 		// Props
 		labelVisible?: boolean
 		hint?: string
@@ -64,6 +65,7 @@ const onKeydown = (event: KeyboardEvent) =>
 	<div class="component">
 		<DsfrInput
 			v-bind="props.args"
+			:disabled="props.disabled || props.args.disabled"
 			v-model="value"
 			@input="onInput"
 			@blur="onBlur"
