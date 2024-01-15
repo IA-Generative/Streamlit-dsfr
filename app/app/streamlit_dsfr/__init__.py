@@ -14,6 +14,7 @@ supported_components = {
     'dsfr_button': 'st_dsfr_button',
 	'dsfr_checkbox': 'st_dsfr_checkbox',
     'dsfr_input': 'st_dsfr_input',
+	'dsfr_picture': 'st_dsfr_picture',
     'dsfr_radio': 'st_dsfr_radio_button',
 }
 
@@ -234,6 +235,30 @@ def dsfr_input(
 		kwargs['requiredTip'] = requiredTip
 
 	return _dsfr_input_func(label = label, **kwargs, key = key, default = value)
+
+def dsfr_picture(
+	src: str,
+	size: Optional[str] = None,
+	*,
+	alt: Optional[str] = None,
+	title: Optional[str] = None,
+	legend: Optional[str] = None,
+	ratio: Optional[str] = None,
+	key: Optional[str] = None,
+	**kwargs,
+):
+	if size is not None:
+		kwargs['size'] = size
+	if alt is not None:
+		kwargs['alt'] = alt
+	if title is not None:
+		kwargs['title'] = title
+	if legend is not None:
+		kwargs['legend'] = legend
+	if ratio is not None:
+		kwargs['ratio'] = ratio
+
+	return _dsfr_picture_func(src = src, **kwargs, key = key, default = None)
 
 def dsfr_radio(
 	label: str,
