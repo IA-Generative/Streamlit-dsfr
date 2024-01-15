@@ -267,38 +267,41 @@ def dsfr_radio(
 	options: Union[list[str], list[dict[str, str]]],
 	index: Optional[int] = None,
 	*,
-	disabled: Optional[Union[bool, list[bool]]] = None,
-	label: Optional[str] = None,
-	small: Optional[bool] = None,
-	id: Optional[str] = None,
-	name: Optional[str] = None,
 	inline: Optional[bool] = None,
-	value: Optional[str] = None,
-	hint: Optional[str] = None,
-	img: Optional[str] = None,
+	small: Optional[bool] = None,
+	titleId: Optional[str] = None,
+	disabled: Optional[Union[bool, list[bool]]] = None,
+	required: Optional[bool] = None,
+	name: Optional[str] = None,
+	errorMessage: Optional[str] = None,
+	validMessage: Optional[str] = None,
+	legend: Optional[str] = None,
 	requiredTip: Optional[str] = None,
+	default: Optional[int] = None,
 	hints: Optional[list[str]] = None,
 	key: Optional[str] = None,
 	**kwargs,
 ):
-	if label is not None:
-		kwargs['label'] = label
-	if small is not None:
-		kwargs['small'] = small
-	if id is not None:
-		kwargs['id'] = id
-	if name is not None:
-		kwargs['name'] = name
 	if inline is not None:
 		kwargs['inline'] = inline
-	if value is not None:
-		kwargs['value'] = value
-	if hint is not None:
-		kwargs['hint'] = hint
-	if img is not None:
-		kwargs['img'] = img
+	if small is not None:
+		kwargs['small'] = small
+	if titleId is not None:
+		kwargs['titleId'] = titleId
+	if required is not None:
+		kwargs['required'] = required
+	if name is not None:
+		kwargs['name'] = name
+	if errorMessage is not None:
+		kwargs['errorMessage'] = errorMessage
+	if validMessage is not None:
+		kwargs['validMessage'] = validMessage
+	if legend is not None:
+		kwargs['legend'] = legend
 	if requiredTip is not None:
 		kwargs['requiredTip'] = requiredTip
+	if default is not None:
+		kwargs['value'] = default
 
 	if not isinstance(options, list):
 		options = [options]
