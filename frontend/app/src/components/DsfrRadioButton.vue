@@ -83,7 +83,7 @@ function onUpdateModelValue()
 </template>
 
 <style scoped>
-.component > :global(*) {
+.component::v-deep > * {
 	margin-bottom: 0;
 }
 </style>
