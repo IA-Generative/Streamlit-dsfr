@@ -15,7 +15,7 @@ supported_components = {
 	'dsfr_checkbox': 'st_dsfr_checkbox',
     'dsfr_input': 'st_dsfr_input',
 	'dsfr_picture': 'st_dsfr_picture',
-    'dsfr_radio': 'st_dsfr_radio_button',
+    'dsfr_radio': 'st_dsfr_radio',
 }
 
 if not _RELEASE:
