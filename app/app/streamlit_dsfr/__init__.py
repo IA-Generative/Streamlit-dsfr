@@ -262,7 +262,7 @@ def dsfr_picture(
 
 def dsfr_radio(
 	label: str,
-	options: list[str],
+	options: Union[list[str], list[dict[str, str]]],
 	index: Optional[int] = None,
 	*,
 	disabled: Optional[Union[bool, list[bool]]] = None,
