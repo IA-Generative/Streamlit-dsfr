@@ -78,6 +78,9 @@ function onUpdateModelValue()
 			:modelValue="value"
 			@update:modelValue="onUpdateModelValue"
 		>
+			<template #required-tip v-if="props.args.requiredTip">
+				{{ props.args.requiredTip }}
+			</template>
 		</DsfrRadioButtonSet>
 	</div>
 </template>
