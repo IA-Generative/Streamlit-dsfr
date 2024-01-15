@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
-import { DsfrRadioButton } from '@gouvminint/vue-dsfr'
+import { DsfrRadioButtonSet } from '@gouvminint/vue-dsfr'
 
 import { useStreamlit } from '../streamlit'
 import type { ComponentProps } from '../types/ComponentProps'
@@ -14,25 +14,25 @@ interface Option
 	value?: string
 	disabled?: boolean
 	hint?: string
-	name?: string
 }
 
 const props = defineProps<
 	ComponentProps<{
-		options?: Option[]
-		disabled?: boolean
 		// Props
+		inline?: boolean
 		modelValue?: string
 		small?: boolean
-		id?: string
+		options?: Option[]
+		titleId?: string
+		disabled?: boolean
+		required?: boolean
 		name?: string
-		inline?: boolean
-		vakue?: string
-		hint?: string
-		img?: string
+		errorMessage?: string
+		validMessage?: string
 		// Slots
-		label?: string
+		legend?: string
 		requiredTip?: string
+		default?: string
 	}>
 >()
 
@@ -55,13 +55,10 @@ function parseOptions(options: Option[] | undefined): Option[]
 
 	// Global disabled state is true
 	return options.map(option =>
-		({
-			label: option.label,
-			value: option.value,
-			disabled: true, // Overriden
-			hint: option.hint,
-			name: option.name,
-		}),
+		{
+			option.disabled = true
+			return option
+		},
 	)
 }
 
@@ -75,13 +72,13 @@ function onUpdateModelValue()
 
 <template>
 	<div class="component">
-		<DsfrRadioButton
+		<DsfrRadioButtonSet
 			v-bind="props.args"
 			:options="parseOptions(props.args.options)"
 			:modelValue="value"
 			@update:modelValue="onUpdateModelValue"
 		>
-		</DsfrRadioButton>
+		</DsfrRadioButtonSet>
 	</div>
 </template>
 
