@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrRadioButton } from '@gouvminint/vue-dsfr'
 
@@ -35,6 +36,8 @@ const props = defineProps<
 	}>
 >()
 
+const value = ref(props.args.modelValue)
+
 function parseOptions(options: Option[] | undefined): Option[]
 {
 	if (!options)
@@ -60,10 +63,10 @@ function parseOptions(options: Option[] | undefined): Option[]
 	)
 }
 
-function onUpdateModelValue(event: Event)
+function onUpdateModelValue()
 {
-	const target = event.target as HTMLInputElement
-	Streamlit.setComponentValue(target.value)
+	console.log('onUpdateModelValue', value.value)
+	Streamlit.setComponentValue(value.value)
 }
 </script>
 
@@ -72,6 +75,7 @@ function onUpdateModelValue(event: Event)
 		<DsfrRadioButton
 			v-bind="props.args"
 			:options="parseOptions(props.args.options)"
+			:modelValue="value"
 			@update:modelValue="onUpdateModelValue"
 		>
 		</DsfrRadioButton>
