@@ -1,5 +1,5 @@
 import os
-from typing import Optional
+from typing import Optional, Union
 
 import streamlit.components.v1 as components
 
@@ -14,6 +14,7 @@ supported_components = {
     'dsfr_button': 'st_dsfr_button',
 	'dsfr_checkbox': 'st_dsfr_checkbox',
     'dsfr_input': 'st_dsfr_input',
+    'dsfr_radio': 'st_dsfr_radio_button',
 }
 
 if not _RELEASE:
@@ -233,3 +234,85 @@ def dsfr_input(
 		kwargs['requiredTip'] = requiredTip
 
 	return _dsfr_input_func(label = label, **kwargs, key = key, default = value)
+
+def dsfr_radio(
+	label: str,
+	options: list[str],
+	index: Optional[int] = None,
+	*,
+	disabled: Optional[Union[bool, list[bool]]] = None,
+	small: Optional[bool] = None,
+	id: Optional[str] = None,
+	name: Optional[str] = None,
+	inline: Optional[bool] = None,
+	value: Optional[str] = None,
+	hint: Optional[str] = None,
+	img: Optional[str] = None,
+	requiredTip: Optional[str] = None,
+	hints: Optional[list[str]] = None,
+	key: Optional[str] = None,
+	**kwargs,
+):
+	if small is not None:
+		kwargs['small'] = small
+	if id is not None:
+		kwargs['id'] = id
+	if name is not None:
+		kwargs['name'] = name
+	if inline is not None:
+		kwargs['inline'] = inline
+	if value is not None:
+		kwargs['value'] = value
+	if hint is not None:
+		kwargs['hint'] = hint
+	if img is not None:
+		kwargs['img'] = img
+	if requiredTip is not None:
+		kwargs['requiredTip'] = requiredTip
+
+	if not isinstance(options, list):
+		options = [options]
+
+	lenoptions = len(options)
+	if lenoptions <= 0:
+		kwargs['options'] = []
+	elif isinstance(options[0], dict):
+		kwargs['options'] = options
+	elif isinstance(options[0], str):
+		kwargs['options'] = [
+			{
+				'label': option,
+				'value': str(index),
+			}
+			for index, option in enumerate(options)
+		]
+	else:
+		raise ValueError('options must be a list of strings or dicts')
+
+	if disabled is not None:
+		if isinstance(disabled, bool):
+			kwargs['disabled'] = disabled
+		elif isinstance(disabled, list):
+			if len(disabled) > len(kwargs['options']):
+				raise ValueError('disabled as a list cannot be longer than options')
+			for index, value in enumerate(disabled):
+				kwargs['options'][index]['disabled'] = value
+		else:
+			raise ValueError('disabled must be a bool or a list of bools')
+
+	if hints is not None:
+		if len(hints) > len(kwargs['options']):
+			raise ValueError('hints cannot be longer than options')
+		for index, value in enumerate(hints):
+			kwargs['options'][index]['hint'] = value
+
+	if index is not None:
+		kwargs['modelValue'] = str(index)
+		default = index
+	elif lenoptions > 0:
+		kwargs['modelValue'] = '0'
+		default = 0
+	else:
+		default = None
+
+	return _dsfr_radio_func(label = label, **kwargs, key = key, default = default)
