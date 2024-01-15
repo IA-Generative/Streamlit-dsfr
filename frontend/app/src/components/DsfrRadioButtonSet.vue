@@ -36,9 +36,7 @@ const props = defineProps<
 	}>
 >()
 
-const value = ref(props.args.modelValue)
-
-console.log('options', props.args.options)
+const value = ref<string | number>(0)
 
 function parseOptions(options: Option[] | undefined): Option[]
 {
@@ -64,7 +62,6 @@ function parseOptions(options: Option[] | undefined): Option[]
 
 function onUpdateModelValue()
 {
-	console.log('+options', props.args.options)
 	const intValue = value.value !== undefined ? parseInt(value.value) : NaN
 	Streamlit.setComponentValue(Number.isNaN(intValue) ? value.value : intValue)
 }
@@ -75,7 +72,7 @@ function onUpdateModelValue()
 		<DsfrRadioButtonSet
 			v-bind="props.args"
 			:options="parseOptions(props.args.options)"
-			:modelValue="value"
+			v-model="value"
 			@update:modelValue="onUpdateModelValue"
 		>
 			<template #required-tip v-if="props.args.requiredTip">
