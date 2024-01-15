@@ -14,6 +14,8 @@ services:
       args:
         PORT: ${PORT:-80}
     # Deploy
+    environment:
+      STREAMLIT_ARGS: ${STREAMLIT_ARGS:-}
     ports:
       # HTTP
       - target: ${PORT:-80}

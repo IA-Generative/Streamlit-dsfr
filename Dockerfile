@@ -131,7 +131,7 @@ VOLUME /app/demo
 # Expose port
 EXPOSE ${PORT}
 
-CMD [ "sh", "-c", "streamlit run demo/app.py --server.port ${PORT}" ]
+CMD [ "sh", "-c", "streamlit run demo/app.py --server.port \"${PORT}\" ${STREAMLIT_ARGS:-}" ]
 
 
 # --
@@ -221,4 +221,4 @@ USER user
 # Expose port
 EXPOSE ${PORT}
 
-CMD [ "sh", "-c", "streamlit run app.py --server.port ${PORT}" ]
+CMD [ "sh", "-c", "streamlit run app.py --server.port \"${PORT}\" ${STREAMLIT_ARGS:-}" ]
