@@ -83,7 +83,8 @@ function onUpdateModelValue()
 </template>
 
 <style scoped>
-.component::v-deep > * {
+.component::v-deep .fr-fieldset,
+.component::v-deep .fr-fieldset__element:last-child {
 	margin-bottom: 0;
 }
 </style>
