@@ -19,14 +19,6 @@ st.title('Static components')
 # Navigation menu
 nav_menu()
 
-col_left, col_right = st.columns(2)
-
-with col_left:
-	st.subheader('Vanilla components')
-
-with col_right:
-	st.subheader('DSFR components')
-
 # ---
 
 st.subheader('Alerts')
@@ -70,12 +62,16 @@ st.subheader('Pictures')
 col_left, col_right = st.columns(2)
 
 with col_left:
+	st.caption('Vanilla components:')
+
 	st.image(
 		'https://placekitten.com/300/200',
 		caption = 'This is a picture legend',
 	)
 
 with col_right:
+	st.caption('DSFR components:')
+
 	dsfr_picture(
 		'https://placekitten.com/300/200',
 		legend = 'This is a picture legend',

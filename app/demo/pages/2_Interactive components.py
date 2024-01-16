@@ -23,14 +23,6 @@ st.title('Interactive components')
 # Navigation menu
 nav_menu()
 
-col_left, col_right = st.columns(2)
-
-with col_left:
-	st.subheader('Vanilla components')
-
-with col_right:
-	st.subheader('DSFR components')
-
 # ---
 
 st.subheader('Buttons')
@@ -38,6 +30,8 @@ st.subheader('Buttons')
 col_left, col_right = st.columns(2)
 
 with col_left:
+	st.caption('Vanilla components:')
+
 	val = st.button('This is a button')
 	st.write(val)
 
@@ -45,6 +39,8 @@ with col_left:
 	st.write(val)
 
 with col_right:
+	st.caption('DSFR components:')
+
 	val = dsfr_button('This is a button')
 	st.write(val)
 
@@ -58,10 +54,14 @@ st.subheader('Checkboxes')
 col_left, col_right = st.columns(2)
 
 with col_left:
+	st.caption('Vanilla components:')
+
 	val = st.checkbox('This is a checkbox')
 	st.write(val)
 
 with col_right:
+	st.caption('DSFR components:')
+
 	val = dsfr_checkbox('This is a checkbox')
 	st.write(val)
 
@@ -72,10 +72,14 @@ st.subheader('Inputs')
 col_left, col_right = st.columns(2)
 
 with col_left:
+	st.caption('Vanilla components:')
+
 	val = st.text_input('This is an input')
 	st.write(val)
 
 with col_right:
+	st.caption('DSFR components:')
+
 	val = dsfr_input('This is an input')
 	st.write(val)
 
@@ -86,10 +90,14 @@ st.subheader('Radios')
 col_left, col_right = st.columns(2)
 
 with col_left:
+	st.caption('Vanilla components:')
+
 	val = st.radio('This is a radio', ['Option 1', 'Option 2', 'Option 3'])
 	st.write(val)
 
 with col_right:
+	st.caption('DSFR components:')
+
 	val = dsfr_radio(['Option 1', 'Option 2', 'Option 3'])
 	st.write(val)
 
