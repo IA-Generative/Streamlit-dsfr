@@ -30,30 +30,30 @@ nav_menu()
 # ---
 st.divider()
 
-st.header('Buttons')
+st.header('Boutons')
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Vanilla components')
+	st.markdown('#### Composants vanilla')
 
-	st_val = st.button('This is a button')
+	st_val = st.button('Ceci est un bouton')
 	st.write(st_val)
 
 	st_val = st.button(
-		f'This is a random number: {math.floor(random.random() * 100)}',
+		f'Ceci est un nombre aléatoire: {math.floor(random.random() * 100)}',
 		key = 'st_random_button',
 	)
 	st.write(st_val)
 
 with col_right:
-	st.markdown('#### DSFR components')
+	st.markdown('#### Composants DSFR')
 
-	dsfr_val = dsfr_button('This is a button')
+	dsfr_val = dsfr_button('Ceci est un bouton')
 	st.write(dsfr_val)
 
 	dsfr_val = dsfr_button(
-		f'This is a random number: {math.floor(random.random() * 100)}',
+		f'Ceci est un nombre aléatoire: {math.floor(random.random() * 100)}',
 		key = 'dsfr_random_button',
 	)
 	st.write(dsfr_val)
@@ -61,56 +61,56 @@ with col_right:
 # ---
 st.divider()
 
-st.header('Checkboxes')
+st.header('Cases à cocher')
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Vanilla components')
+	st.markdown('#### Composants vanilla')
 
-	st_val = st.checkbox('This is a checkbox')
+	st_val = st.checkbox('Ceci est une case à cocher')
 	st.write(st_val)
 
 with col_right:
-	st.markdown('#### DSFR components')
+	st.markdown('#### Composants DSFR')
 
-	dsfr_val = dsfr_checkbox('This is a checkbox')
+	dsfr_val = dsfr_checkbox('Ceci est une case à cocher')
 	st.write(dsfr_val)
 
 # ---
 st.divider()
 
-st.header('Inputs')
+st.header('Champs de saisie')
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Vanilla components')
+	st.markdown('#### Composants vanilla')
 
-	st_val = st.text_input('This is an input')
+	st_val = st.text_input('Ceci est un champ de saisie')
 	st.write(st_val)
 
 with col_right:
-	st.markdown('#### DSFR components')
+	st.markdown('#### Composants DSFR')
 
-	dsfr_val = dsfr_input('This is an input')
+	dsfr_val = dsfr_input('Ceci est un champ de saisie')
 	st.write(dsfr_val)
 
 # ---
 st.divider()
 
-st.header('Radios')
+st.header('Boutons radio')
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Vanilla components')
+	st.markdown('#### Composants vanilla')
 
-	st_val = st.radio('This is a radio', ['Option 1', 'Option 2', 'Option 3'])
+	st_val = st.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2', 'Option 3'])
 	st.write(st_val)
 
 with col_right:
-	st.markdown('#### DSFR components')
+	st.markdown('#### Composants DSFR')
 
 	dsfr_val = dsfr_radio(['Option 1', 'Option 2', 'Option 3'])
 	st.write(dsfr_val)
@@ -121,13 +121,13 @@ with col_right:
 # ---
 st.divider()
 
-if dsfr_button('Click me'):
-	st.markdown('You clicked the button')
+if dsfr_button('Cliquez moi'):
+	st.markdown('Vous avez cliqué sur le bouton')
 
 st.markdown('---')
-st.header('Component with variable args')
+st.header('Composant avec des arguments variables')
 
-name_input = st.text_input('Enter a name', value = 'Streamlit')
+name_input = st.text_input('Entrez un nom', value = 'Streamlit')
 
 if dsfr_button(name_input):
-	st.markdown('You clicked the button')
+	st.markdown('Vous avez cliqué sur le bouton')
