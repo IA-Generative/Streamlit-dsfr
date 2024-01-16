@@ -6,7 +6,7 @@ st.title('DSFR components demo')
 
 st.markdown(
 	"""
-- [Static components](<Static_components>)
-- [Interactive components](<Interactive_components>)
+- <a href="Static_components">Static components</a>
+- <a href="Interactive_components">Interactive components</a>
 	""",
 )
