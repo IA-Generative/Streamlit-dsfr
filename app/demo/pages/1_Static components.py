@@ -66,7 +66,7 @@ st.header('Pictures')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Vanilla components:')
+	st.markdown('#### Vanilla components')
 
 	st.image(
 		'https://placekitten.com/300/200',
@@ -74,7 +74,7 @@ with col_left:
 	)
 
 with col_right:
-	st.markdown('#### DSFR components:')
+	st.markdown('#### DSFR components')
 
 	dsfr_picture(
 		'https://placekitten.com/300/200',
