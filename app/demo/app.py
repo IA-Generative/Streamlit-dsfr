@@ -23,12 +23,14 @@ nav_menu()
 st.divider()
 
 st.markdown("""
-This app demonstrates the use of DSFR components in Streamlit.
+Cette application présente l'utilisation des composants DSFR dans Streamlit.
 
-The app uses the [`streamlit_dsfr`](https://pypi.org/project/streamlit-dsfr/) Python package.
+L'application utilise le package Python
+[`streamlit_dsfr`](https://pypi.org/project/streamlit-dsfr/).
 
-The packages uses [`vue-dsfr`](https://github.com/dnum-mi/vue-dsfr) components
-(with the [`@gouvminint/vue-dsfr`](https://www.npmjs.com/package/@gouvminint/vue-dsfr) package).
+Le package utilise les composants [`vue-dsfr`](https://github.com/dnum-mi/vue-dsfr)
+(avec le package [`@gouvminint/vue-dsfr`](https://www.npmjs.com/package/@gouvminint/vue-dsfr)).
 
-Learn more about the DSFR design system on the [official website](https://www.systeme-de-design.gouv.fr/).
+Plus d'informations sur le design system DSFR sur le
+[site officiel](https://www.systeme-de-design.gouv.fr/).
 """)
