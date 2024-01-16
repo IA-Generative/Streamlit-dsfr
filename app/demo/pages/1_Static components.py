@@ -29,13 +29,12 @@ st.divider()
 st.header('Alertes')
 
 dsfr_alert('Ceci est une alerte')
-dsfr_alert('Alerte', 'Ceci est une alerte avec un titre')
 dsfr_alert('Alerte', 'Ceci est une alerte avec un titre h3', titleTag = 'h3')
-dsfr_alert('Ceci est une erreur', type = 'error')
-dsfr_alert('Ceci est un succès', type = 'success')
-dsfr_alert('Ceci est un avertissement', type = 'warning')
-dsfr_alert('Ceci est une info', type = 'info')
-dsfr_alert('Ceci est une petite alerte', small = True)
+dsfr_alert('Erreur : titre du message', 'Description', type = 'error')
+dsfr_alert('Succès de l\'envoi', 'Description', type = 'success')
+dsfr_alert('Attention : titre du message', 'Description détaillée du message', type = 'warning')
+dsfr_alert('Information : titre du message', 'Description détaillée du message', type = 'info')
+dsfr_alert('Information : titre de l\'information', small = True)
 
 # ---
 st.divider()
