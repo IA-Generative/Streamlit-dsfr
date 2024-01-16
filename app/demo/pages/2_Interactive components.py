@@ -36,7 +36,10 @@ with col_left:
 	val = st.button('This is a button')
 	st.write(val)
 
-	val = st.button(f'This is a random number: {math.floor(random.random() * 100)}')
+	val = st.button(
+		f'This is a random number: {math.floor(random.random() * 100)}',
+		key = 'random_button',
+	)
 	st.write(val)
 
 with col_right:
@@ -45,7 +48,10 @@ with col_right:
 	val = dsfr_button('This is a button')
 	st.write(val)
 
-	val = dsfr_button(f'This is a random number: {math.floor(random.random() * 100)}')
+	val = dsfr_button(
+		f'This is a random number: {math.floor(random.random() * 100)}',
+		key = 'random_button',
+	)
 	st.write(val)
 
 # ---
