@@ -20,6 +20,7 @@ st.title('Static components')
 nav_menu()
 
 # ---
+st.divider()
 
 st.header('Alerts')
 
@@ -33,6 +34,7 @@ dsfr_alert('This is an info', type = 'info')
 dsfr_alert('This is a small alert', small = True)
 
 # ---
+st.divider()
 
 st.header('Badges')
 
@@ -45,6 +47,7 @@ dsfr_badge('This is a new', type = 'new')
 dsfr_badge('This is a small badge', small = True)
 
 # ---
+st.divider()
 
 st.header('Breadcrumbs')
 
@@ -56,6 +59,7 @@ st.write('Breadcrumbs are not supported yet.')
 # dsfr_breadcrumb(['Home', 'Page', ('https://example.com', 'Example'), {'to': 'https://google.com', 'text': 'Google'}])
 
 # ---
+st.divider()
 
 st.header('Pictures')
 

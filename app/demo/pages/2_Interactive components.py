@@ -24,6 +24,7 @@ st.title('Interactive components')
 nav_menu()
 
 # ---
+st.divider()
 
 st.header('Buttons')
 
@@ -48,6 +49,7 @@ with col_right:
 	st.write(val)
 
 # ---
+st.divider()
 
 st.header('Checkboxes')
 
@@ -66,6 +68,7 @@ with col_right:
 	st.write(val)
 
 # ---
+st.divider()
 
 st.header('Inputs')
 
@@ -84,6 +87,7 @@ with col_right:
 	st.write(val)
 
 # ---
+st.divider()
 
 st.header('Radios')
 
@@ -105,6 +109,7 @@ with col_right:
 	st.write(val)
 
 # ---
+st.divider()
 
 if dsfr_button('Click me'):
 	st.markdown('You clicked the button')
