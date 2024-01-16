@@ -60,7 +60,7 @@ st.write('Breadcrumbs are not supported yet.')
 st.subheader('Pictures')
 
 dsfr_picture(
-	'https://placekitten.com/300/200',
+	'https://placekitten.com/640/180', # 32x9 ratio
 	legend = 'This is a picture legend',
 	alt = 'This is a picture alt',
 	ratio = '32x9',
