@@ -11,7 +11,7 @@ disable_sidebar()
 
 # ---
 
-st.title('DSFR components demo')
+st.title('Demo composants DSFR')
 
 # CSS font family override
 css_font_family()

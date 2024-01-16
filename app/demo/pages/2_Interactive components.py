@@ -19,7 +19,7 @@ disable_sidebar()
 
 # ---
 
-st.title('Interactive components')
+st.title('Composants interactifs')
 
 # CSS font family override
 css_font_family()

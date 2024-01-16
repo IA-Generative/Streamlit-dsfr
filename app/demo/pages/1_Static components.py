@@ -15,7 +15,7 @@ disable_sidebar()
 
 # ---
 
-st.title('Static components')
+st.title('Composants statiques')
 
 # CSS font family override
 css_font_family()
