@@ -30,7 +30,7 @@ st.header('Buttons')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.caption('Vanilla components:')
+	st.markdown('#### Vanilla components:')
 
 	val = st.button('This is a button')
 	st.write(val)
@@ -39,7 +39,7 @@ with col_left:
 	st.write(val)
 
 with col_right:
-	st.caption('DSFR components:')
+	st.markdown('#### DSFR components:')
 
 	val = dsfr_button('This is a button')
 	st.write(val)
@@ -54,13 +54,13 @@ st.header('Checkboxes')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.caption('Vanilla components:')
+	st.markdown('#### Vanilla components:')
 
 	val = st.checkbox('This is a checkbox')
 	st.write(val)
 
 with col_right:
-	st.caption('DSFR components:')
+	st.markdown('#### DSFR components:')
 
 	val = dsfr_checkbox('This is a checkbox')
 	st.write(val)
@@ -72,13 +72,13 @@ st.header('Inputs')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.caption('Vanilla components:')
+	st.markdown('#### Vanilla components:')
 
 	val = st.text_input('This is an input')
 	st.write(val)
 
 with col_right:
-	st.caption('DSFR components:')
+	st.markdown('#### DSFR components:')
 
 	val = dsfr_input('This is an input')
 	st.write(val)
@@ -90,13 +90,13 @@ st.header('Radios')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.caption('Vanilla components:')
+	st.markdown('#### Vanilla components:')
 
 	val = st.radio('This is a radio', ['Option 1', 'Option 2', 'Option 3'])
 	st.write(val)
 
 with col_right:
-	st.caption('DSFR components:')
+	st.markdown('#### DSFR components:')
 
 	val = dsfr_radio(['Option 1', 'Option 2', 'Option 3'])
 	st.write(val)
