@@ -33,26 +33,26 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Vanilla components')
 
-	val = st.button('This is a button')
-	st.write(val)
+	st_val = st.button('This is a button')
+	st.write(st_val)
 
-	val = st.button(
+	st_val = st.button(
 		f'This is a random number: {math.floor(random.random() * 100)}',
-		key = 'random_button',
+		key = 'st_random_button',
 	)
-	st.write(val)
+	st.write(st_val)
 
 with col_right:
 	st.markdown('#### DSFR components')
 
-	val = dsfr_button('This is a button')
-	st.write(val)
+	dsfr_val = dsfr_button('This is a button')
+	st.write(dsfr_val)
 
-	val = dsfr_button(
+	dsfr_val = dsfr_button(
 		f'This is a random number: {math.floor(random.random() * 100)}',
-		key = 'random_button',
+		key = 'dsfr_random_button',
 	)
-	st.write(val)
+	st.write(dsfr_val)
 
 # ---
 st.divider()
@@ -64,14 +64,14 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Vanilla components')
 
-	val = st.checkbox('This is a checkbox')
-	st.write(val)
+	st_val = st.checkbox('This is a checkbox')
+	st.write(st_val)
 
 with col_right:
 	st.markdown('#### DSFR components')
 
-	val = dsfr_checkbox('This is a checkbox')
-	st.write(val)
+	dsfr_val = dsfr_checkbox('This is a checkbox')
+	st.write(dsfr_val)
 
 # ---
 st.divider()
@@ -83,14 +83,14 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Vanilla components')
 
-	val = st.text_input('This is an input')
-	st.write(val)
+	st_val = st.text_input('This is an input')
+	st.write(st_val)
 
 with col_right:
 	st.markdown('#### DSFR components')
 
-	val = dsfr_input('This is an input')
-	st.write(val)
+	dsfr_val = dsfr_input('This is an input')
+	st.write(dsfr_val)
 
 # ---
 st.divider()
@@ -102,17 +102,17 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Vanilla components')
 
-	val = st.radio('This is a radio', ['Option 1', 'Option 2', 'Option 3'])
-	st.write(val)
+	st_val = st.radio('This is a radio', ['Option 1', 'Option 2', 'Option 3'])
+	st.write(st_val)
 
 with col_right:
 	st.markdown('#### DSFR components')
 
-	val = dsfr_radio(['Option 1', 'Option 2', 'Option 3'])
-	st.write(val)
+	dsfr_val = dsfr_radio(['Option 1', 'Option 2', 'Option 3'])
+	st.write(dsfr_val)
 
-	val = dsfr_radio(['Small option 1', 'Small option 2', 'Small option 3'], small = True)
-	st.write(val)
+	dsfr_val = dsfr_radio(['Small option 1', 'Small option 2', 'Small option 3'], small = True)
+	st.write(dsfr_val)
 
 # ---
 st.divider()
