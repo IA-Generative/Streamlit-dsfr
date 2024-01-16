@@ -18,3 +18,17 @@ css_font_family()
 
 # Navigation menu
 nav_menu()
+
+# ---
+st.divider()
+
+st.markdown("""
+This app demonstrates the use of DSFR components in Streamlit.
+
+The app uses the [`streamlit_dsfr`](https://pypi.org/project/streamlit-dsfr/) Python package.
+
+The packages uses [`vue-dsfr`](https://github.com/dnum-mi/vue-dsfr) components
+(with the [`@gouvminint/vue-dsfr`](https://www.npmjs.com/package/@gouvminint/vue-dsfr) package).
+
+Learn more about the DSFR design system on the [official website](https://www.systeme-de-design.gouv.fr/).
+""")
