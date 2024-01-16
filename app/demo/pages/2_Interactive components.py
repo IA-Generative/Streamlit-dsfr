@@ -6,6 +6,7 @@ from streamlit_dsfr import \
 	dsfr_input
 
 from disable_sidebar import disable_sidebar
+from nav_menu import nav_menu
 
 # ---
 
@@ -15,6 +16,9 @@ disable_sidebar()
 # ---
 
 st.title('Interactive components')
+
+# Navigation menu
+nav_menu()
 
 # ---
 

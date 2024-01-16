@@ -5,6 +5,7 @@ from streamlit_dsfr import \
 	dsfr_picture
 
 from disable_sidebar import disable_sidebar
+from nav_menu import nav_menu
 
 # ---
 
@@ -14,6 +15,9 @@ disable_sidebar()
 # ---
 
 st.title('Static components')
+
+# Navigation menu
+nav_menu()
 
 # ---
 
