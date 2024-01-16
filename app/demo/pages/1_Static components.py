@@ -21,7 +21,7 @@ nav_menu()
 
 # ---
 
-st.subheader('Alerts')
+st.header('Alerts')
 
 dsfr_alert('This is an alert')
 dsfr_alert('Alert', 'This is an alert with a title')
@@ -34,7 +34,7 @@ dsfr_alert('This is a small alert', small = True)
 
 # ---
 
-st.subheader('Badges')
+st.header('Badges')
 
 dsfr_badge('This is a badge')
 dsfr_badge('This is an error', type = 'error')
@@ -46,7 +46,7 @@ dsfr_badge('This is a small badge', small = True)
 
 # ---
 
-st.subheader('Breadcrumbs')
+st.header('Breadcrumbs')
 
 st.write('Breadcrumbs are not supported yet.')
 
@@ -57,7 +57,7 @@ st.write('Breadcrumbs are not supported yet.')
 
 # ---
 
-st.subheader('Pictures')
+st.header('Pictures')
 
 col_left, col_right = st.columns(2)
 

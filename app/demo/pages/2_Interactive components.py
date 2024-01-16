@@ -25,7 +25,7 @@ nav_menu()
 
 # ---
 
-st.subheader('Buttons')
+st.header('Buttons')
 
 col_left, col_right = st.columns(2)
 
@@ -49,7 +49,7 @@ with col_right:
 
 # ---
 
-st.subheader('Checkboxes')
+st.header('Checkboxes')
 
 col_left, col_right = st.columns(2)
 
@@ -67,7 +67,7 @@ with col_right:
 
 # ---
 
-st.subheader('Inputs')
+st.header('Inputs')
 
 col_left, col_right = st.columns(2)
 
@@ -85,7 +85,7 @@ with col_right:
 
 # ---
 
-st.subheader('Radios')
+st.header('Radios')
 
 col_left, col_right = st.columns(2)
 
@@ -110,7 +110,7 @@ if dsfr_button('Click me'):
 	st.markdown('You clicked the button')
 
 st.markdown('---')
-st.subheader('Component with variable args')
+st.header('Component with variable args')
 
 name_input = st.text_input('Enter a name', value = 'Streamlit')
 
