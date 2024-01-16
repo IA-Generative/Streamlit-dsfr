@@ -53,13 +53,6 @@ onErrorCaptured(err =>
 			:disabled="renderData.disabled"
 			:theme="renderData.theme"
 		></slot>
-		<slot
-			v-else
-			:width="innerWidth"
-			:args="{}"
-			:disabled="false"
-			:theme="{}"
-		></slot>
 	</div>
 </template>
 
