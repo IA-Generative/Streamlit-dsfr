@@ -19,6 +19,14 @@ st.title('Static components')
 # Navigation menu
 nav_menu()
 
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st.subheader('Vanilla components')
+
+with col_right:
+	st.subheader('DSFR components')
+
 # ---
 
 st.subheader('Alerts')
@@ -59,9 +67,23 @@ st.write('Breadcrumbs are not supported yet.')
 
 st.subheader('Pictures')
 
-dsfr_picture(
-	'https://placekitten.com/640/180', # 32x9 ratio
-	legend = 'This is a picture legend',
-	alt = 'This is a picture alt',
-	ratio = '32x9',
-)
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st.image(
+		'https://placekitten.com/300/200',
+		caption = 'This is a picture legend',
+	)
+
+with col_right:
+	dsfr_picture(
+		'https://placekitten.com/300/200',
+		legend = 'This is a picture legend',
+	)
+
+	dsfr_picture(
+		'https://placekitten.com/400/200',
+		legend = 'This is a picture legend',
+		alt = 'This is a picture alt',
+		ratio = '32x9',
+	)
