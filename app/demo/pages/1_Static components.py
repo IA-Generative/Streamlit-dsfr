@@ -4,6 +4,13 @@ from streamlit_dsfr import \
 	dsfr_badge, \
 	dsfr_picture
 
+from disable_sidebar import disable_sidebar
+
+# ---
+
+# Disable sidebar
+disable_sidebar()
+
 # ---
 
 st.title('Static components')

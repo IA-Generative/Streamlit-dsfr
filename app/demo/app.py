@@ -1,5 +1,12 @@
 import streamlit as st
 
+from disable_sidebar import disable_sidebar
+
+# ---
+
+# Disable sidebar
+disable_sidebar()
+
 # ---
 
 st.title('DSFR components demo')

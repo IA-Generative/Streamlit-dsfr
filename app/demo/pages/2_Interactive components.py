@@ -5,6 +5,13 @@ from streamlit_dsfr import \
 	dsfr_radio, \
 	dsfr_input
 
+from disable_sidebar import disable_sidebar
+
+# ---
+
+# Disable sidebar
+disable_sidebar()
+
 # ---
 
 st.title('Interactive components')
