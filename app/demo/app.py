@@ -9,4 +9,5 @@ st.markdown(
 - <a href="Static_components">Static components</a>
 - <a href="Interactive_components">Interactive components</a>
 	""",
+	unsafe_allow_html = True,
 )
