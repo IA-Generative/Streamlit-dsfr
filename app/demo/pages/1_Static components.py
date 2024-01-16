@@ -43,20 +43,20 @@ st.divider()
 
 st.header('Badges')
 
-dsfr_badge('This is a badge')
-dsfr_badge('This is an error', type = 'error')
-dsfr_badge('This is a success', type = 'success')
-dsfr_badge('This is a warning', type = 'warning')
-dsfr_badge('This is an info', type = 'info')
-dsfr_badge('This is a new', type = 'new')
-dsfr_badge('This is a small badge', small = True)
+dsfr_badge('Ceci est un badge')
+dsfr_badge('Ceci est une erreur', type = 'error')
+dsfr_badge('Ceci est un succès', type = 'success')
+dsfr_badge('Ceci est un avertissement', type = 'warning')
+dsfr_badge('Ceci est une info', type = 'info')
+dsfr_badge('Ceci est une nouvelle', type = 'new')
+dsfr_badge('Ceci est un petit badge', small = True)
 
 # ---
 st.divider()
 
-st.header('Breadcrumbs')
+st.header('Fil d\'Ariane')
 
-st.write('Breadcrumbs are not supported yet.')
+st.write('Le fil d\'Ariane n\'est pas supporté pour le moment.')
 
 # dsfr_breadcrumb('Home')
 # dsfr_breadcrumb(['Home', 'Page'])
@@ -66,29 +66,29 @@ st.write('Breadcrumbs are not supported yet.')
 # ---
 st.divider()
 
-st.header('Pictures')
+st.header('Images')
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Vanilla components')
+	st.markdown('#### Composants Streamlit')
 
 	st.image(
 		'https://placekitten.com/300/200',
-		caption = 'This is a picture legend',
+		caption = 'Ceci est une légende',
 	)
 
 with col_right:
-	st.markdown('#### DSFR components')
+	st.markdown('#### Composants DSFR')
 
 	dsfr_picture(
 		'https://placekitten.com/300/200',
-		legend = 'This is a picture legend',
+		legend = 'Ceci est une légende',
 	)
 
 	dsfr_picture(
 		'https://placekitten.com/400/200',
-		legend = 'This is a picture legend',
-		alt = 'This is a picture alt',
+		legend = 'Ceci est une légende',
+		alt = 'Ceci est une description alternative',
 		ratio = '32x9',
 	)
