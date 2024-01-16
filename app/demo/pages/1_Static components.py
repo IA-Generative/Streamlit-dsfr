@@ -26,16 +26,16 @@ nav_menu()
 # ---
 st.divider()
 
-st.header('Alerts')
+st.header('Alertes')
 
-dsfr_alert('This is an alert')
-dsfr_alert('Alert', 'This is an alert with a title')
-dsfr_alert('Alert', 'This is an alert with an h3 title', titleTag = 'h3')
-dsfr_alert('This is an error', type = 'error')
-dsfr_alert('This is a success', type = 'success')
-dsfr_alert('This is a warning', type = 'warning')
-dsfr_alert('This is an info', type = 'info')
-dsfr_alert('This is a small alert', small = True)
+dsfr_alert('Ceci est une alerte')
+dsfr_alert('Alerte', 'Ceci est une alerte avec un titre')
+dsfr_alert('Alerte', 'Ceci est une alerte avec un titre h3', titleTag = 'h3')
+dsfr_alert('Ceci est une erreur', type = 'error')
+dsfr_alert('Ceci est un succès', type = 'success')
+dsfr_alert('Ceci est un avertissement', type = 'warning')
+dsfr_alert('Ceci est une info', type = 'info')
+dsfr_alert('Ceci est une petite alerte', small = True)
 
 # ---
 st.divider()
