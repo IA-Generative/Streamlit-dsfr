@@ -265,32 +265,32 @@ def dsfr_picture(
 
 def dsfr_radio(
 	# _ Standard parameters
-	# label: str,
+	label: str,
 	options: Iterable[str],
 	index: Optional[int] = None,
 	format_func: Optional[Callable] = None,
 	key: Optional[Union[str, int]] = None,
-	# help: Optional[str] = None,
+	# help: Optional[str] = None, # Supported in DSFR but missing in VueDsfr?
 	# on_change: Optional[Callable] = None,
 	# args: Optional[tuple] = None,
 	# kwargs: Optional[dict] = None,
 	*,
 	disabled: Optional[Union[bool, list[bool]]] = None,
-	# horizontal: Optional[bool] = None,
-	# captions: Optional[list[str]] = None,
+	horizontal: Optional[bool] = None,
+	captions: Optional[list[str]] = None,
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse'
 	# _ Custom parameters
-	inline: Optional[bool] = None,
+	# legend: Optional[str] = None, # == label
+	inline: Optional[bool] = None, # == horizontal
+	hints: Optional[list[str]] = None, # == captions
 	small: Optional[bool] = None,
 	titleId: Optional[str] = None,
 	required: Optional[bool] = None,
 	name: Optional[str] = None,
 	errorMessage: Optional[str] = None,
 	validMessage: Optional[str] = None,
-	legend: Optional[str] = None,
 	requiredTip: Optional[str] = None,
 	default: Optional[int] = None,
-	hints: Optional[list[str]] = None,
 	**kwargs,
 ):
 	"""
@@ -303,26 +303,7 @@ def dsfr_radio(
 	options ✔️, index ✔️, format_func ✔️, key ✔️, help, on_change, args, kwargs, *,
 	disabled ✔️, horizontal, captions, label_visibility
 	"""
-	if inline is not None:
-		kwargs['inline'] = inline
-	if small is not None:
-		kwargs['small'] = small
-	if titleId is not None:
-		kwargs['titleId'] = titleId
-	if required is not None:
-		kwargs['required'] = required
-	if name is not None:
-		kwargs['name'] = name
-	if errorMessage is not None:
-		kwargs['errorMessage'] = errorMessage
-	if validMessage is not None:
-		kwargs['validMessage'] = validMessage
-	if legend is not None:
-		kwargs['legend'] = legend
-	if requiredTip is not None:
-		kwargs['requiredTip'] = requiredTip
-	if default is not None:
-		kwargs['value'] = default
+	kwargs['legend'] = label
 
 	kwargs['options'] = [
 		{
@@ -331,6 +312,11 @@ def dsfr_radio(
 		}
 		for option in options
 	]
+
+	if index is not None:
+		kwargs['modelValue'] = kwargs['options'][index]['value']
+	else:
+		kwargs['modelValue'] = kwargs.get('options', [{}])[0].get('value')
 
 	if format_func is not None:
 		for i in range(len(kwargs['options'])):
@@ -347,15 +333,34 @@ def dsfr_radio(
 		else:
 			raise ValueError('disabled must be a bool or a list of bools')
 
+	if horizontal is not None:
+		kwargs['inline'] = small
+	if inline is not None:
+		kwargs['inline'] = small
+
+	if captions is not None:
+		hints = captions
 	if hints is not None:
 		if len(hints) > len(kwargs['options']):
 			raise ValueError('hints cannot be longer than options')
 		for index, value in enumerate(hints):
 			kwargs['options'][index]['hint'] = value
 
-	if index is not None:
-		kwargs['modelValue'] = kwargs['options'][index]['value']
-	else:
-		kwargs['modelValue'] = kwargs.get('options', [{}])[0].get('value')
+	if small is not None:
+		kwargs['small'] = small
+	if titleId is not None:
+		kwargs['titleId'] = titleId
+	if required is not None:
+		kwargs['required'] = required
+	if name is not None:
+		kwargs['name'] = name
+	if errorMessage is not None:
+		kwargs['errorMessage'] = errorMessage
+	if validMessage is not None:
+		kwargs['validMessage'] = validMessage
+	if requiredTip is not None:
+		kwargs['requiredTip'] = requiredTip
+	if default is not None:
+		kwargs['value'] = default
 
 	return _dsfr_radio_func(**kwargs, key = key, default = kwargs['modelValue'])
