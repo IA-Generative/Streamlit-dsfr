@@ -335,8 +335,8 @@ def dsfr_radio(
 			kwargs['options'][index]['hint'] = value
 
 	if index is not None:
-		default = kwargs['modelValue'] = kwargs['options'][index]['value']
+		kwargs['modelValue'] = kwargs['options'][index]['value']
 	else:
-		default = kwargs['modelValue'] = kwargs.get('options', [{}])[0].get('value')
+		kwargs['modelValue'] = kwargs.get('options', [{}])[0].get('value')
 
-	return _dsfr_radio_func(**kwargs, key = key, default = default)
+	return _dsfr_radio_func(**kwargs, key = key, default = kwargs['modelValue'])
