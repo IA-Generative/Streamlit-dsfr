@@ -242,7 +242,6 @@ def dsfr_input(
 	key: Optional[Union[str, int]] = None, # Standard
 	# type: Optional[str] = None, # 'default' | 'password' # Standard
 	help: Optional[str] = None, # Standard
-	# hint: Optional[str] = None, # == help
 	# autocomplete: Optional[str] = None, # Standard
 	# on_change: Optional[Callable] = None, # Standard
 	# args: Optional[tuple] = None, # Standard
@@ -251,6 +250,7 @@ def dsfr_input(
 	# placeholder: Optional[str] = None, # Standard
 	disabled: Optional[bool] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
+	hint: Optional[str] = None, # Alias for 'help'
 	labelVisible: Optional[bool] = None,
 	id: Optional[str] = None,
 	descriptionId: Optional[str] = None,
@@ -277,6 +277,8 @@ def dsfr_input(
 
 	if help is not None:
 		kwargs['hint'] = help
+	elif hint is not None:
+		kwargs['hint'] = hint
 
 	if disabled is not None:
 		kwargs['disabled'] = disabled
@@ -317,8 +319,7 @@ def dsfr_picture(
 	# channels: Optional[str] = None, # 'RGB' | 'BGR' # Standard
 	# output_format: Optional[str] = None, # 'JPEG' | 'PNG' | 'auto' # Standard
 	*,
-	# src: str, # Alias for 'image'
-	# legend: Optional[str] = None, # Alias for 'caption'
+	legend: Optional[str] = None, # Alias for 'caption'
 	alt: Optional[str] = None,
 	title: Optional[str] = None,
 	ratio: Optional[str] = None, # '32x9' | '16x9' | '3x2' | '4x3' | '1x1' | '3x4' | '2x3'
@@ -335,6 +336,8 @@ def dsfr_picture(
 
 	if caption is not None:
 		kwargs['legend'] = caption
+	elif legend is not None:
+		kwargs['legend'] = legend
 
 	if size is not None:
 		kwargs['size'] = size
@@ -362,7 +365,6 @@ def dsfr_radio(
 	horizontal: Optional[bool] = None, # Standard
 	captions: Optional[list[str]] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
-	# legend: Optional[str] = None, # Alias for 'label'
 	inline: Optional[bool] = None, # Alias for 'horizontal'
 	hints: Optional[list[str]] = None, # Alias for 'captions'
 	small: Optional[bool] = None,
@@ -413,15 +415,15 @@ def dsfr_radio(
 
 	if horizontal is not None:
 		kwargs['inline'] = small
-	if inline is not None:
+	elif inline is not None:
 		kwargs['inline'] = small
 
+	if captions is None:
+		captions = hints
 	if captions is not None:
-		hints = captions
-	if hints is not None:
-		if len(hints) > len(kwargs['options']):
-			raise ValueError('hints cannot be longer than options')
-		for index, value in enumerate(hints):
+		if len(captions) > len(kwargs['options']):
+			raise ValueError('captions cannot be longer than options')
+		for index, value in enumerate(captions):
 			kwargs['options'][index]['hint'] = value
 
 	if small is not None:
