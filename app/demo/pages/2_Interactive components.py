@@ -106,16 +106,16 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Composants vanilla')
 
-	st_val = st.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2', 'Option 3'])
+	st_val = st.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 2)
 	st.write(st_val)
 
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_val = dsfr_radio(['Option 1', 'Option 2', 'Option 3'])
+	dsfr_val = dsfr_radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 2)
 	st.write(dsfr_val)
 
-	dsfr_val = dsfr_radio(['Small option 1', 'Small option 2', 'Small option 3'], small = True)
+	dsfr_val = dsfr_radio('Ceci sont des petits boutons radio', ['Small option 1', 'Small option 2', 'Small option 3'], small = True)
 	st.write(dsfr_val)
 
 # ---
