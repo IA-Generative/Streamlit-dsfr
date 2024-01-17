@@ -250,6 +250,15 @@ def dsfr_picture(
 	key: Optional[str] = None,
 	**kwargs,
 ):
+	"""
+	Streamlit DSFR Picture component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/media/st.image
+
+	Standard parameters (supported are marked with ✔️):
+	image, caption, width, use_column_width, clamp, channels, output_format
+	"""
 	if size is not None:
 		kwargs['size'] = size
 	if alt is not None:
