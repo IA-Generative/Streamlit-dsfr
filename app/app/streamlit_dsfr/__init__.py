@@ -315,7 +315,7 @@ def dsfr_radio(
 		kwargs['options'] = [
 			{
 				'label': option,
-				'value': str(index),
+				'value': option,
 			}
 			for index, option in enumerate(options)
 		]
