@@ -216,6 +216,8 @@ def dsfr_input(
 		kwargs['hint'] = hint
 	if value is not None:
 		kwargs['modelValue'] = value
+	else:
+		kwargs['modelValue'] = ''
 	if labelVisible is not None:
 		kwargs['labelVisible'] = labelVisible
 	else:
@@ -237,7 +239,7 @@ def dsfr_input(
 	if requiredTip is not None:
 		kwargs['requiredTip'] = requiredTip
 
-	return _dsfr_input_func(label = label, **kwargs, key = key, default = value)
+	return _dsfr_input_func(label = label, **kwargs, key = key, default = kwargs['modelValue'])
 
 def dsfr_picture(
 	src: str,
