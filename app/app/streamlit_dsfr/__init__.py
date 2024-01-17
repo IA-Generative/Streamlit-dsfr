@@ -288,6 +288,10 @@ def dsfr_radio(
 
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.radio
+
+	Standard parameters (supported are marked with ✔️):
+	options ✔️, index ✔️, format_func ✔️, key ✔️, help, on_change, args, kwargs, *,
+	disabled ✔️, horizontal, captions, label_visibility
 	"""
 	if inline is not None:
 		kwargs['inline'] = inline
