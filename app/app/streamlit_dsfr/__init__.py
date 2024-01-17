@@ -242,14 +242,25 @@ def dsfr_input(
 	return _dsfr_input_func(label = label, **kwargs, key = key, default = kwargs['modelValue'])
 
 def dsfr_picture(
-	src: str,
-	size: Optional[str] = None,
+	# _ Standard parameters
+	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]],
+	image: str,
+	# caption: Optional[Union[str, List[str]]] = None,
+	caption: Optional[str] = None,
+	size: Optional[str] = None, # 'small' | 'medium' | 'large'
+	# width: Optional[int] = None,
+	# use_column_width: Optional[Union[str, bool]] = None, # 'auto' | 'always' | 'never' | bool
+	# clamp: Optional[bool] = None,
+	# channels: Optional[str] = None, # 'RGB' | 'BGR'
+	# output_format: Optional[str] = None, # 'JPEG' | 'PNG' | 'auto'
 	*,
+	# _ Custom parameters
+	# src: str, # == image
+	# legend: Optional[str] = None, # == caption
 	alt: Optional[str] = None,
 	title: Optional[str] = None,
-	legend: Optional[str] = None,
-	ratio: Optional[str] = None,
-	key: Optional[str] = None,
+	ratio: Optional[str] = None, # '32x9' | '16x9' | '3x2' | '4x3' | '1x1' | '3x4' | '2x3'
+	key: Optional[Union[str, int]] = None,
 	**kwargs,
 ):
 	"""
@@ -261,18 +272,21 @@ def dsfr_picture(
 	Standard parameters (supported are marked with ✔️):
 	image, caption, width, use_column_width, clamp, channels, output_format
 	"""
+	kwargs['src'] = image
+
+	if caption is not None:
+		kwargs['legend'] = caption
+
 	if size is not None:
 		kwargs['size'] = size
 	if alt is not None:
 		kwargs['alt'] = alt
 	if title is not None:
 		kwargs['title'] = title
-	if legend is not None:
-		kwargs['legend'] = legend
 	if ratio is not None:
 		kwargs['ratio'] = ratio
 
-	return _dsfr_picture_func(src = src, **kwargs, key = key, default = None)
+	return _dsfr_picture_func(**kwargs, key = key, default = None)
 
 def dsfr_radio(
 	# _ Standard parameters
