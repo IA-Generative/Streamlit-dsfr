@@ -106,13 +106,13 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Composants Streamlit')
 
-	st_val = st.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 2)
+	st_val = st.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 1)
 	st.write(st_val)
 
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_val = dsfr_radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 2)
+	dsfr_val = dsfr_radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 1)
 	st.write(dsfr_val)
 
 	dsfr_val = dsfr_radio('Ceci sont des petits boutons radio', ['Small option 1', 'Small option 2', 'Small option 3'], small = True)
