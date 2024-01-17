@@ -21,6 +21,10 @@ const props = defineProps<
 		inline?: boolean
 		errorMessage?: string
 		validMessage?: string
+		// Slots
+		label?: string
+		requiredTip?: string
+
 	}>
 >()
 
@@ -52,6 +56,10 @@ const onInput = (event: InputEvent) =>
 			:disabled="props.disabled || props.args.disabled"
 			v-model="checked"
 			@input="onInput"
-		/>
+		>
+			<template #required-tip v-if="props.args.requiredTip">
+				{{ props.args.requiredTip }}
+			</template>
+		</DsfrRadioButtonSet>
 	</div>
 </template>
