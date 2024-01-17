@@ -161,12 +161,20 @@ def dsfr_button(
 	return _dsfr_button_func(label = label, **kwargs, key = key, default = False)
 
 def dsfr_checkbox(
-	hint: Optional[str] = None,
+	# label: str,
+	key: Optional[Union[str, int]] = None,
+	help: Optional[str] = None,
 	small: Optional[bool] = None,
 	required: Optional[bool] = None,
 	name: Optional[str] = None,
 	value: Optional[bool] = None,
+	# on_click: Optional[Callable] = None,
+	# args: Optional[tuple] = None,
+	# kwargs: Optional[dict] = None,
 	*,
+	# type : Optional[str] = None,
+	disabled: Optional[bool] = None,
+	# use_container_width: Optional[bool] = None,
 	id: Optional[str] = None,
 	inline: Optional[bool] = None,
 	errorMessage: Optional[str] = None,
@@ -174,8 +182,14 @@ def dsfr_checkbox(
 	key: Optional[str] = None,
 	**kwargs,
 ):
-	if hint is not None:
-		kwargs['hint'] = hint
+	"""
+	Streamlit DSFR Checkbox component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.checkbox
+	"""
+	if help is not None:
+		kwargs['hint'] = help
 	if small is not None:
 		kwargs['small'] = small
 	if required is not None:
@@ -184,6 +198,10 @@ def dsfr_checkbox(
 		kwargs['name'] = name
 	if value is not None:
 		kwargs['modelValue'] = value
+
+	if disabled is not None:
+		kwargs['disabled'] = disabled
+
 	if id is not None:
 		kwargs['id'] = id
 	if inline is not None:
