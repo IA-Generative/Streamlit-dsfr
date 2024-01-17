@@ -201,7 +201,6 @@ def dsfr_checkbox(
 	inline: Optional[bool] = None,
 	errorMessage: Optional[str] = None,
 	validMessage: Optional[str] = None,
-	key: Optional[str] = None,
 	**kwargs,
 ):
 	"""
@@ -210,16 +209,17 @@ def dsfr_checkbox(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.checkbox
 	"""
+	if value is not None:
+		kwargs['modelValue'] = value
 	if help is not None:
 		kwargs['hint'] = help
+
 	if small is not None:
 		kwargs['small'] = small
 	if required is not None:
 		kwargs['required'] = required
 	if name is not None:
 		kwargs['name'] = name
-	if value is not None:
-		kwargs['modelValue'] = value
 
 	if disabled is not None:
 		kwargs['disabled'] = disabled
