@@ -275,7 +275,7 @@ def dsfr_radio(
 	# args: Optional[tuple] = None,
 	# kwargs: Optional[dict] = None,
 	*,
-	# disabled: Optional[bool] = None,
+	disabled: Optional[Union[bool, list[bool]]] = None,
 	# horizontal: Optional[bool] = None,
 	# captions: Optional[list[str]] = None,
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse'
@@ -283,7 +283,6 @@ def dsfr_radio(
 	inline: Optional[bool] = None,
 	small: Optional[bool] = None,
 	titleId: Optional[str] = None,
-	disabled: Optional[Union[bool, list[bool]]] = None,
 	required: Optional[bool] = None,
 	name: Optional[str] = None,
 	errorMessage: Optional[str] = None,
