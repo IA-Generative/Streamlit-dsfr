@@ -184,7 +184,7 @@ def dsfr_button(
 	return _dsfr_button_func(**kwargs, key = key, default = False)
 
 def dsfr_checkbox(
-	# label: str, # Standard
+	label: str, # Standard
 	value: Optional[bool] = None, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
 	help: Optional[str] = None, # Standard
@@ -209,6 +209,8 @@ def dsfr_checkbox(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.checkbox
 	"""
+	kwargs['label'] = label
+
 	if value is not None:
 		kwargs['modelValue'] = value
 	if help is not None:
