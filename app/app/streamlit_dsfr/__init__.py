@@ -197,9 +197,20 @@ def dsfr_checkbox(
 
 def dsfr_input(
 	label: str,
-	hint: Optional[str] = None,
 	value: Optional[str] = None,
+	# max_chars: Optional[int] = None,
+	key: Optional[Union[str, int]] = None,
+	# type: Optional[str] = None, # 'default' | 'password'
+	help: Optional[str] = None,
+	# hint: Optional[str] = None, # == help
+	# autocomplete: Optional[str] = None,
+	# on_change: Optional[Callable] = None,
+	# args: Optional[tuple] = None,
+	# kwargs: Optional[dict] = None,
 	*,
+	# placeholder: Optional[str] = None,
+	disabled: Optional[bool] = None,
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse'
 	labelVisible: Optional[bool] = None,
 	id: Optional[str] = None,
 	descriptionId: Optional[str] = None,
@@ -209,19 +220,32 @@ def dsfr_input(
 	labelClass: Optional[str] = None,
 	wrapperClass: Optional[str] = None,
 	requiredTip: Optional[str] = None,
-	key: Optional[str] = None,
 	**kwargs,
 ):
-	if hint is not None:
-		kwargs['hint'] = hint
+	"""
+	Streamlit DSFR Input component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.text_input
+	"""
+	kwargs['label'] = label
+
 	if value is not None:
 		kwargs['modelValue'] = value
 	else:
 		kwargs['modelValue'] = ''
+
+	if help is not None:
+		kwargs['hint'] = help
+
+	if disabled is not None:
+		kwargs['disabled'] = disabled
+
 	if labelVisible is not None:
 		kwargs['labelVisible'] = labelVisible
 	else:
 		kwargs['labelVisible'] = not not label
+
 	if id is not None:
 		kwargs['id'] = id
 	if descriptionId is not None:
@@ -239,7 +263,7 @@ def dsfr_input(
 	if requiredTip is not None:
 		kwargs['requiredTip'] = requiredTip
 
-	return _dsfr_input_func(label = label, **kwargs, key = key, default = kwargs['modelValue'])
+	return _dsfr_input_func(**kwargs, key = key, default = kwargs['modelValue'])
 
 def dsfr_picture(
 	# _ Standard parameters
