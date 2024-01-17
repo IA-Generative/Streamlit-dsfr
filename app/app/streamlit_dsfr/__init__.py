@@ -269,7 +269,7 @@ def dsfr_radio(
 	options: Iterable[str],
 	index: Optional[int] = None,
 	format_func: Optional[Callable] = None,
-	# key: Optional[Union[str, int]] = None,
+	key: Optional[Union[str, int]] = None,
 	# help: Optional[str] = None,
 	# on_change: Optional[Callable] = None,
 	# args: Optional[tuple] = None,
@@ -292,7 +292,6 @@ def dsfr_radio(
 	requiredTip: Optional[str] = None,
 	default: Optional[int] = None,
 	hints: Optional[list[str]] = None,
-	key: Optional[str] = None,
 	**kwargs,
 ):
 	"""
