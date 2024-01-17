@@ -1,5 +1,5 @@
 import os
-from typing import Optional, Union, Iterable
+from typing import Optional, Union, Iterable, Callable
 
 import streamlit.components.v1 as components
 
@@ -266,6 +266,7 @@ def dsfr_picture(
 def dsfr_radio(
 	options: Iterable[str],
 	index: Optional[int] = None,
+	format_func: Optional[Callable] = None,
 	*,
 	inline: Optional[bool] = None,
 	small: Optional[bool] = None,
@@ -316,6 +317,10 @@ def dsfr_radio(
 		}
 		for option in options
 	]
+
+	if format_func is not None:
+		for i in range(len(kwargs['options'])):
+			kwargs['options'][i]['label'] = format_func(kwargs['options'][i]['value'])
 
 	if disabled is not None:
 		if isinstance(disabled, bool):
