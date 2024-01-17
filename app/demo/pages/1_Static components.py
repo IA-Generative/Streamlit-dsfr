@@ -83,12 +83,12 @@ with col_right:
 
 	dsfr_picture(
 		'https://placekitten.com/300/200',
-		legend = 'Ceci est une légende',
+		caption = 'Ceci est une légende',
 	)
 
 	dsfr_picture(
 		'https://placekitten.com/400/200',
-		legend = 'Ceci est une légende',
+		caption = 'Ceci est une légende',
 		alt = 'Ceci est une description alternative',
 		ratio = '32x9',
 	)
