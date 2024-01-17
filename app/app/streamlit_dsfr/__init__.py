@@ -1,5 +1,5 @@
 import os
-from typing import Optional, Union
+from typing import Optional, Union, Iterable
 
 import streamlit.components.v1 as components
 
@@ -264,7 +264,7 @@ def dsfr_picture(
 	return _dsfr_picture_func(src = src, **kwargs, key = key, default = None)
 
 def dsfr_radio(
-	options: Union[list[str], list[dict[str, str]]],
+	options: Iterable[str],
 	index: Optional[int] = None,
 	*,
 	inline: Optional[bool] = None,
@@ -282,6 +282,12 @@ def dsfr_radio(
 	key: Optional[str] = None,
 	**kwargs,
 ):
+	"""
+	Streamlit DSFR Radio component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.radio
+	"""
 	if inline is not None:
 		kwargs['inline'] = inline
 	if small is not None:
@@ -303,29 +309,18 @@ def dsfr_radio(
 	if default is not None:
 		kwargs['value'] = default
 
-	if not isinstance(options, list):
-		options = [options]
-
-	lenoptions = len(options)
-	if lenoptions <= 0:
-		kwargs['options'] = []
-	elif isinstance(options[0], dict):
-		kwargs['options'] = options
-	elif isinstance(options[0], str):
-		kwargs['options'] = [
-			{
-				'label': option,
-				'value': option,
-			}
-			for index, option in enumerate(options)
-		]
-	else:
-		raise ValueError('options must be a list of strings or dicts')
+	kwargs['options'] = [
+		{
+			'label': option,
+			'value': option,
+		}
+		for option in options
+	]
 
 	if disabled is not None:
 		if isinstance(disabled, bool):
 			kwargs['disabled'] = disabled
-		elif isinstance(disabled, list):
+		elif isinstance(disabled, Iterable):
 			if len(disabled) > len(kwargs['options']):
 				raise ValueError('disabled as a list cannot be longer than options')
 			for index, value in enumerate(disabled):
