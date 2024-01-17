@@ -29,7 +29,8 @@ const props = defineProps<
 </template>
 
 <style scoped>
-.component {
-	margin: 4px; /* Margin for the input outline on focus */
+.component :deep(.fr-content-media) {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 </style>

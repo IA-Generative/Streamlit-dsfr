@@ -1,5 +1,5 @@
 import os
-from typing import Optional, Union
+from typing import Optional, Union, Iterable, Callable
 
 import streamlit.components.v1 as components
 
@@ -216,6 +216,8 @@ def dsfr_input(
 		kwargs['hint'] = hint
 	if value is not None:
 		kwargs['modelValue'] = value
+	else:
+		kwargs['modelValue'] = ''
 	if labelVisible is not None:
 		kwargs['labelVisible'] = labelVisible
 	else:
@@ -237,7 +239,7 @@ def dsfr_input(
 	if requiredTip is not None:
 		kwargs['requiredTip'] = requiredTip
 
-	return _dsfr_input_func(label = label, **kwargs, key = key, default = value)
+	return _dsfr_input_func(label = label, **kwargs, key = key, default = kwargs['modelValue'])
 
 def dsfr_picture(
 	src: str,
@@ -273,26 +275,88 @@ def dsfr_picture(
 	return _dsfr_picture_func(src = src, **kwargs, key = key, default = None)
 
 def dsfr_radio(
-	options: Union[list[str], list[dict[str, str]]],
+	# _ Standard parameters
+	label: str,
+	options: Iterable[str],
 	index: Optional[int] = None,
+	format_func: Optional[Callable] = None,
+	key: Optional[Union[str, int]] = None,
+	# help: Optional[str] = None, # Supported in DSFR but missing in VueDsfr?
+	# on_change: Optional[Callable] = None,
+	# args: Optional[tuple] = None,
+	# kwargs: Optional[dict] = None,
 	*,
-	inline: Optional[bool] = None,
+	disabled: Optional[Union[bool, list[bool]]] = None,
+	horizontal: Optional[bool] = None,
+	captions: Optional[list[str]] = None,
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse'
+	# _ Custom parameters
+	# legend: Optional[str] = None, # == label
+	inline: Optional[bool] = None, # == horizontal
+	hints: Optional[list[str]] = None, # == captions
 	small: Optional[bool] = None,
 	titleId: Optional[str] = None,
-	disabled: Optional[Union[bool, list[bool]]] = None,
 	required: Optional[bool] = None,
 	name: Optional[str] = None,
 	errorMessage: Optional[str] = None,
 	validMessage: Optional[str] = None,
-	legend: Optional[str] = None,
 	requiredTip: Optional[str] = None,
 	default: Optional[int] = None,
-	hints: Optional[list[str]] = None,
-	key: Optional[str] = None,
 	**kwargs,
 ):
+	"""
+	Streamlit DSFR Radio component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.radio
+
+	Standard parameters (supported are marked with ✔️):
+	options ✔️, index ✔️, format_func ✔️, key ✔️, help, on_change, args, kwargs, *,
+	disabled ✔️, horizontal, captions, label_visibility
+	"""
+	kwargs['legend'] = label
+
+	kwargs['options'] = [
+		{
+			'label': option,
+			'value': option,
+		}
+		for option in options
+	]
+
+	if index is not None:
+		kwargs['modelValue'] = kwargs['options'][index]['value']
+	else:
+		kwargs['modelValue'] = kwargs.get('options', [{}])[0].get('value')
+
+	if format_func is not None:
+		for i in range(len(kwargs['options'])):
+			kwargs['options'][i]['label'] = format_func(kwargs['options'][i]['value'])
+
+	if disabled is not None:
+		if isinstance(disabled, bool):
+			kwargs['disabled'] = disabled
+		elif isinstance(disabled, Iterable):
+			if len(disabled) > len(kwargs['options']):
+				raise ValueError('disabled as a list cannot be longer than options')
+			for index, value in enumerate(disabled):
+				kwargs['options'][index]['disabled'] = value
+		else:
+			raise ValueError('disabled must be a bool or a list of bools')
+
+	if horizontal is not None:
+		kwargs['inline'] = small
 	if inline is not None:
-		kwargs['inline'] = inline
+		kwargs['inline'] = small
+
+	if captions is not None:
+		hints = captions
+	if hints is not None:
+		if len(hints) > len(kwargs['options']):
+			raise ValueError('hints cannot be longer than options')
+		for index, value in enumerate(hints):
+			kwargs['options'][index]['hint'] = value
+
 	if small is not None:
 		kwargs['small'] = small
 	if titleId is not None:
@@ -305,56 +369,9 @@ def dsfr_radio(
 		kwargs['errorMessage'] = errorMessage
 	if validMessage is not None:
 		kwargs['validMessage'] = validMessage
-	if legend is not None:
-		kwargs['legend'] = legend
 	if requiredTip is not None:
 		kwargs['requiredTip'] = requiredTip
 	if default is not None:
 		kwargs['value'] = default
 
-	if not isinstance(options, list):
-		options = [options]
-
-	lenoptions = len(options)
-	if lenoptions <= 0:
-		kwargs['options'] = []
-	elif isinstance(options[0], dict):
-		kwargs['options'] = options
-	elif isinstance(options[0], str):
-		kwargs['options'] = [
-			{
-				'label': option,
-				'value': str(index),
-			}
-			for index, option in enumerate(options)
-		]
-	else:
-		raise ValueError('options must be a list of strings or dicts')
-
-	if disabled is not None:
-		if isinstance(disabled, bool):
-			kwargs['disabled'] = disabled
-		elif isinstance(disabled, list):
-			if len(disabled) > len(kwargs['options']):
-				raise ValueError('disabled as a list cannot be longer than options')
-			for index, value in enumerate(disabled):
-				kwargs['options'][index]['disabled'] = value
-		else:
-			raise ValueError('disabled must be a bool or a list of bools')
-
-	if hints is not None:
-		if len(hints) > len(kwargs['options']):
-			raise ValueError('hints cannot be longer than options')
-		for index, value in enumerate(hints):
-			kwargs['options'][index]['hint'] = value
-
-	if index is not None:
-		kwargs['modelValue'] = str(index)
-		default = index
-	elif lenoptions > 0:
-		kwargs['modelValue'] = '0'
-		default = 0
-	else:
-		default = None
-
-	return _dsfr_radio_func(**kwargs, key = key, default = default)
+	return _dsfr_radio_func(**kwargs, key = key, default = kwargs['modelValue'])

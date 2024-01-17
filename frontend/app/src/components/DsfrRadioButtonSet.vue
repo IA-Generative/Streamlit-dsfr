@@ -36,7 +36,7 @@ const props = defineProps<
 	}>
 >()
 
-const value = ref<string | number>(0)
+const value = ref<string>(props.args.modelValue)
 
 function parseOptions(options: Option[] | undefined): Option[]
 {
@@ -62,8 +62,7 @@ function parseOptions(options: Option[] | undefined): Option[]
 
 function onUpdateModelValue()
 {
-	const intValue = value.value !== undefined ? parseInt(value.value) : NaN
-	Streamlit.setComponentValue(Number.isNaN(intValue) ? value.value : intValue)
+	Streamlit.setComponentValue(value.value)
 }
 </script>
 
