@@ -128,17 +128,17 @@ def dsfr_breadcrumb(
 	return _dsfr_breadcrumb_func(**kwargs, key = key, default = False)
 
 def dsfr_button(
-	label: str,
-	key: Optional[Union[str, int]] = None,
-	# help: Optional[str] = None,
+	label: str, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	# help: Optional[str] = None, # Standard
 	size: Optional[str] = None,
-	# on_click: Optional[Callable] = None,
-	# args: Optional[tuple] = None,
-	# kwargs: Optional[dict] = None,
+	# on_click: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
 	*,
-	type: Optional[str] = None,
-	disabled: Optional[bool] = None,
-	# use_container_width: Optional[bool] = None,
+	type: Optional[str] = None, # Standard
+	disabled: Optional[bool] = None, # Standard
+	# use_container_width: Optional[bool] = None, # Standard
 	secondary: Optional[bool] = None,
 	tertiary: Optional[bool] = None,
 	icon: Optional[str] = None,
@@ -184,19 +184,19 @@ def dsfr_button(
 	return _dsfr_button_func(**kwargs, key = key, default = False)
 
 def dsfr_checkbox(
-	# label: str,
-	value: Optional[bool] = None,
-	key: Optional[Union[str, int]] = None,
-	help: Optional[str] = None,
+	# label: str, # Standard
+	value: Optional[bool] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	help: Optional[str] = None, # Standard
 	small: Optional[bool] = None,
 	required: Optional[bool] = None,
 	name: Optional[str] = None,
-	# on_change: Optional[Callable] = None,
-	# args: Optional[tuple] = None,
-	# kwargs: Optional[dict] = None,
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
 	*,
-	disabled: Optional[bool] = None,
-	# label_visibility: Optional[str] = None,
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # Standard
 	id: Optional[str] = None,
 	inline: Optional[bool] = None,
 	errorMessage: Optional[str] = None,
@@ -236,21 +236,21 @@ def dsfr_checkbox(
 	return _dsfr_checkbox_func(**kwargs, key = key, default = False)
 
 def dsfr_input(
-	label: str,
-	value: Optional[str] = None,
-	# max_chars: Optional[int] = None,
-	key: Optional[Union[str, int]] = None,
-	# type: Optional[str] = None, # 'default' | 'password'
-	help: Optional[str] = None,
+	label: str, # Standard
+	value: Optional[str] = None, # Standard
+	# max_chars: Optional[int] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	# type: Optional[str] = None, # 'default' | 'password' # Standard
+	help: Optional[str] = None, # Standard
 	# hint: Optional[str] = None, # == help
-	# autocomplete: Optional[str] = None,
-	# on_change: Optional[Callable] = None,
-	# args: Optional[tuple] = None,
-	# kwargs: Optional[dict] = None,
+	# autocomplete: Optional[str] = None, # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
 	*,
-	# placeholder: Optional[str] = None,
-	disabled: Optional[bool] = None,
-	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse'
+	# placeholder: Optional[str] = None, # Standard
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
 	labelVisible: Optional[bool] = None,
 	id: Optional[str] = None,
 	descriptionId: Optional[str] = None,
@@ -306,21 +306,19 @@ def dsfr_input(
 	return _dsfr_input_func(**kwargs, key = key, default = kwargs['modelValue'])
 
 def dsfr_picture(
-	# _ Standard parameters
-	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]],
-	image: str,
-	# caption: Optional[Union[str, List[str]]] = None,
-	caption: Optional[str] = None,
+	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]], # Standard
+	image: str, # Semi-standard
+	# caption: Optional[Union[str, List[str]]] = None, # Standard
+	caption: Optional[str] = None, # Semi-standard
 	size: Optional[str] = None, # 'small' | 'medium' | 'large'
-	# width: Optional[int] = None,
-	# use_column_width: Optional[Union[str, bool]] = None, # 'auto' | 'always' | 'never' | bool
-	# clamp: Optional[bool] = None,
-	# channels: Optional[str] = None, # 'RGB' | 'BGR'
-	# output_format: Optional[str] = None, # 'JPEG' | 'PNG' | 'auto'
+	# width: Optional[int] = None, # Standard
+	# use_column_width: Optional[Union[str, bool]] = None, # 'auto' | 'always' | 'never' | bool # Standard
+	# clamp: Optional[bool] = None, # Standard
+	# channels: Optional[str] = None, # 'RGB' | 'BGR' # Standard
+	# output_format: Optional[str] = None, # 'JPEG' | 'PNG' | 'auto' # Standard
 	*,
-	# _ Custom parameters
-	# src: str, # == image
-	# legend: Optional[str] = None, # == caption
+	# src: str, # Alias for 'image'
+	# legend: Optional[str] = None, # Alias for 'caption'
 	alt: Optional[str] = None,
 	title: Optional[str] = None,
 	ratio: Optional[str] = None, # '32x9' | '16x9' | '3x2' | '4x3' | '1x1' | '3x4' | '2x3'
@@ -332,9 +330,6 @@ def dsfr_picture(
 
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/media/st.image
-
-	Standard parameters (supported are marked with ✔️):
-	image, caption, width, use_column_width, clamp, channels, output_format
 	"""
 	kwargs['src'] = image
 
@@ -353,25 +348,23 @@ def dsfr_picture(
 	return _dsfr_picture_func(**kwargs, key = key, default = None)
 
 def dsfr_radio(
-	# _ Standard parameters
-	label: str,
-	options: Iterable[str],
-	index: Optional[int] = None,
-	format_func: Optional[Callable] = None,
-	key: Optional[Union[str, int]] = None,
-	# help: Optional[str] = None, # Supported in DSFR but missing in VueDsfr?
-	# on_change: Optional[Callable] = None,
-	# args: Optional[tuple] = None,
-	# kwargs: Optional[dict] = None,
+	label: str, # Standard
+	options: Iterable[str], # Standard
+	index: Optional[int] = None, # Standard
+	format_func: Optional[Callable] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	# help: Optional[str] = None, # Supported in DSFR but missing in VueDsfr? # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
 	*,
-	disabled: Optional[Union[bool, list[bool]]] = None,
-	horizontal: Optional[bool] = None,
-	captions: Optional[list[str]] = None,
-	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse'
-	# _ Custom parameters
-	# legend: Optional[str] = None, # == label
-	inline: Optional[bool] = None, # == horizontal
-	hints: Optional[list[str]] = None, # == captions
+	disabled: Optional[Union[bool, list[bool]]] = None, # Standard
+	horizontal: Optional[bool] = None, # Standard
+	captions: Optional[list[str]] = None, # Standard
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
+	# legend: Optional[str] = None, # Alias for 'label'
+	inline: Optional[bool] = None, # Alias for 'horizontal'
+	hints: Optional[list[str]] = None, # Alias for 'captions'
 	small: Optional[bool] = None,
 	titleId: Optional[str] = None,
 	required: Optional[bool] = None,
@@ -387,10 +380,6 @@ def dsfr_radio(
 
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.radio
-
-	Standard parameters (supported are marked with ✔️):
-	options ✔️, index ✔️, format_func ✔️, key ✔️, help, on_change, args, kwargs, *,
-	disabled ✔️, horizontal, captions, label_visibility
 	"""
 	kwargs['legend'] = label
 
