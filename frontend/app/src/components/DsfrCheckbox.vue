@@ -60,6 +60,6 @@ const onInput = (event: InputEvent) =>
 			<template #required-tip v-if="props.args.requiredTip">
 				{{ props.args.requiredTip }}
 			</template>
-		</DsfrRadioButtonSet>
+		</DsfrCheckbox>
 	</div>
 </template>
