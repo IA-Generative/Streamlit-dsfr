@@ -264,10 +264,22 @@ def dsfr_picture(
 	return _dsfr_picture_func(src = src, **kwargs, key = key, default = None)
 
 def dsfr_radio(
+	# _ Standard parameters
+	# label: str,
 	options: Iterable[str],
 	index: Optional[int] = None,
 	format_func: Optional[Callable] = None,
+	# key: Optional[Union[str, int]] = None,
+	# help: Optional[str] = None,
+	# on_change: Optional[Callable] = None,
+	# args: Optional[tuple] = None,
+	# kwargs: Optional[dict] = None,
 	*,
+	# disabled: Optional[bool] = None,
+	# horizontal: Optional[bool] = None,
+	# captions: Optional[list[str]] = None,
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse'
+	# _ Custom parameters
 	inline: Optional[bool] = None,
 	small: Optional[bool] = None,
 	titleId: Optional[str] = None,
