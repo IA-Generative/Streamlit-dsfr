@@ -129,26 +129,49 @@ def dsfr_breadcrumb(
 
 def dsfr_button(
 	label: str,
+	key: Optional[Union[str, int]] = None,
+	# help: Optional[str] = None,
 	size: Optional[str] = None,
-	disabled: Optional[bool] = None,
+	# on_click: Optional[Callable] = None,
+	# args: Optional[tuple] = None,
+	# kwargs: Optional[dict] = None,
 	*,
+	type: Optional[str] = None,
+	disabled: Optional[bool] = None,
+	# use_container_width: Optional[bool] = None,
 	secondary: Optional[bool] = None,
 	tertiary: Optional[bool] = None,
 	icon: Optional[str] = None,
 	iconOnly: Optional[bool] = None,
 	iconRight: Optional[bool] = None,
 	noOutline: Optional[bool] = None,
-	key: Optional[str] = None,
 	**kwargs,
 ):
+	"""
+	Streamlit DSFR Button component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.button
+	"""
+	kwargs['label'] = label
+
 	if size is not None:
 		kwargs['size'] = size
+
 	if disabled is not None:
 		kwargs['disabled'] = disabled
-	if secondary is not None:
-		kwargs['secondary'] = secondary
-	if tertiary is not None:
-		kwargs['tertiary'] = tertiary
+
+	if type is not None:
+		if type == 'secondary':
+			kwargs['secondary'] = True
+		elif type == 'tertiary':
+			kwargs['secondary'] = True
+	else:
+		if secondary is not None:
+			kwargs['secondary'] = secondary
+		if tertiary is not None:
+			kwargs['tertiary'] = tertiary
+
 	if icon is not None:
 		kwargs['icon'] = icon
 	if iconOnly is not None:
@@ -158,7 +181,7 @@ def dsfr_button(
 	if noOutline is not None:
 		kwargs['noOutline'] = noOutline
 
-	return _dsfr_button_func(label = label, **kwargs, key = key, default = False)
+	return _dsfr_button_func(**kwargs, key = key, default = False)
 
 def dsfr_checkbox(
 	# label: str,
