@@ -83,6 +83,12 @@ function onUpdateModelValue()
 
 <style scoped>
 .component :deep(.fr-fieldset) {
-	margin-bottom: -1rem;
+	margin-bottom: -.5rem;
+}
+.component :deep(.fr-fieldset__legend) {
+	padding-bottom: .5rem;
+}
+.component :deep(.fr-fieldset__element) {
+	margin-bottom: .5rem;
 }
 </style>
