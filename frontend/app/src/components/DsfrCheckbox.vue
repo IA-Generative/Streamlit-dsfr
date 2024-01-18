@@ -63,3 +63,11 @@ const onInput = (event: InputEvent) =>
 		</DsfrCheckbox>
 	</div>
 </template>
+
+<style scoped>
+.component :deep(fr-fieldset__element) {
+	margin-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+</style>
