@@ -312,6 +312,53 @@ def dsfr_input(
 
 	return _dsfr_input_func(**kwargs, key = key, default = kwargs['modelValue'])
 
+def dsfr_text_input(
+	label: str, # Standard
+	value: Optional[str] = None, # Standard
+	# max_chars: Optional[int] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	# type: Optional[str] = None, # 'default' | 'password' # Standard
+	help: Optional[str] = None, # Standard
+	# autocomplete: Optional[str] = None, # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
+	*,
+	# placeholder: Optional[str] = None, # Standard
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
+	hint: Optional[str] = None, # Alias for 'help'
+	labelVisible: Optional[bool] = None,
+	id: Optional[str] = None,
+	descriptionId: Optional[str] = None,
+	isInvalid: Optional[bool] = None,
+	isValid: Optional[bool] = None,
+	isWithWarning: Optional[bool] = None,
+	labelClass: Optional[str] = None,
+	wrapperClass: Optional[str] = None,
+	requiredTip: Optional[str] = None,
+	**kwargs,
+):
+	return dsfr_input(
+		label = label,
+		value = value,
+		key = key,
+		help = help,
+		disabled = disabled,
+		hint = hint,
+		labelVisible = labelVisible,
+		id = id,
+		descriptionId = descriptionId,
+		isInvalid = isInvalid,
+		isValid = isValid,
+		isTextarea = False,
+		isWithWarning = isWithWarning,
+		labelClass = labelClass,
+		wrapperClass = wrapperClass,
+		requiredTip = requiredTip,
+		**kwargs,
+	)
+
 def dsfr_picture(
 	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]], # Standard
 	image: str, # Semi-standard
