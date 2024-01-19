@@ -141,7 +141,7 @@ with col_right:
 	dsfr_val = dsfr_range('Ceci est un curseur')
 	st.write(dsfr_val)
 
-	dsfr_val = dsfr_range('Ceci est un curseur', 0, 100, 50)
+	dsfr_val = dsfr_range('Ceci est un curseur', 0, 100, 50, small = True)
 	st.write(dsfr_val)
 
 # ---
