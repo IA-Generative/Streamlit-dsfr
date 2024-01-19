@@ -640,3 +640,5 @@ def dsfr_range(
 		kwargs['disabled'] = disabled
 
 	return _dsfr_range_func(**kwargs, key = key, default = kwargs['modelValue'])
+
+dsfr_slider = dsfr_range
