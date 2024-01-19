@@ -591,10 +591,12 @@ def dsfr_range(
 	if messages is not None:
 		kwargs['messages'] = messages
 
-	if min_value is not None:
-		kwargs['min'] = min_value
-		if value is None:
-			value = min_value
+	if min_value is None:
+		min_value = 0
+	kwargs['min'] = min_value
+	if value is None:
+		value = min_value
+
 	if max_value is not None:
 		kwargs['max'] = max_value
 
