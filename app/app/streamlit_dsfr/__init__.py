@@ -372,6 +372,68 @@ def dsfr_text_input(
 		**kwargs,
 	)
 
+def dsfr_number_input(
+	label: str, # Standard
+	min_value: Optional[Union[int, float]] = None, # Standard
+	max_value: Optional[Union[int, float]] = None, # Standard
+	value: Optional[Union[int, float]] = None, # Standard
+	step: Optional[Union[int, float]] = None, # Standard
+	# format: Optional[str] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	help: Optional[str] = None, # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
+	*,
+	# placeholder: Optional[str] = None, # Standard
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
+	hint: Optional[str] = None, # Alias for 'help'
+	labelVisible: Optional[bool] = None,
+	id: Optional[str] = None,
+	descriptionId: Optional[str] = None,
+	isInvalid: Optional[bool] = None,
+	isValid: Optional[bool] = None,
+	isWithWarning: Optional[bool] = None,
+	labelClass: Optional[str] = None,
+	wrapperClass: Optional[str] = None,
+	requiredTip: Optional[str] = None,
+	**kwargs,
+):
+	"""
+	Streamlit DSFR Number Input component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.number_input
+	"""
+	if min_value is not None:
+		if value is None:
+			value = min_value
+
+	return dsfr_input(
+		label = label,
+		value = value,
+		key = key,
+		type = 'number',
+		help = help,
+		disabled = disabled,
+		hint = hint,
+		labelVisible = labelVisible,
+		id = id,
+		descriptionId = descriptionId,
+		isInvalid = isInvalid,
+		isValid = isValid,
+		isTextarea = False,
+		isWithWarning = isWithWarning,
+		labelClass = labelClass,
+		wrapperClass = wrapperClass,
+		requiredTip = requiredTip,
+		min = min_value,
+		max = max_value,
+		step = step,
+		**kwargs,
+	)
+
 def dsfr_text_area(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
