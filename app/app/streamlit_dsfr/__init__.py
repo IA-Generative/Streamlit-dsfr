@@ -351,6 +351,9 @@ def dsfr_text_input(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.text_input
 	"""
+	if value is None:
+		value = ''
+
 	return dsfr_input(
 		label = label,
 		value = value,
@@ -411,6 +414,9 @@ def dsfr_number_input(
 		if value is None:
 			value = min_value
 
+	if value is None:
+		value = 0
+
 	return dsfr_input(
 		label = label,
 		value = value,
@@ -468,6 +474,9 @@ def dsfr_text_area(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.text_area
 	"""
+	if value is None:
+		value = ''
+
 	return dsfr_input(
 		label = label,
 		value = value,
@@ -524,6 +533,9 @@ def dsfr_date_input(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.date_input
 	"""
+	if value is None:
+		value = ''
+
 	return dsfr_input(
 		label = label,
 		value = value,
@@ -536,7 +548,7 @@ def dsfr_date_input(
 		descriptionId = descriptionId,
 		isInvalid = isInvalid,
 		isValid = isValid,
-		isTextarea = True,
+		isTextarea = False,
 		isWithWarning = isWithWarning,
 		labelClass = labelClass,
 		wrapperClass = wrapperClass,
@@ -578,6 +590,9 @@ def dsfr_time_input(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.time_input
 	"""
+	if value is None:
+		value = ''
+
 	return dsfr_input(
 		label = label,
 		value = value,
@@ -590,7 +605,7 @@ def dsfr_time_input(
 		descriptionId = descriptionId,
 		isInvalid = isInvalid,
 		isValid = isValid,
-		isTextarea = True,
+		isTextarea = False,
 		isWithWarning = isWithWarning,
 		labelClass = labelClass,
 		wrapperClass = wrapperClass,
