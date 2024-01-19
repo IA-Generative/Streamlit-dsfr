@@ -38,24 +38,16 @@ const value = ref('')
 // - the input lose focus, if the value has changed
 // - the user press enter, if the input is focused and the value has changed
 
-const onInput = (event: Event) =>
-	{
-		const target = event.target as HTMLInputElement
-		value.value = target.value
-	}
+function onUpdateModelValue()
+{
+	console.log('onUpdateModelValue', value.value)
+	Streamlit.setComponentValue(value.value)
+}
 
 const onBlur = () =>
 	{
+		console.log('onBlur', value.value, '!==', lastValue.value)
 		if (value.value !== lastValue.value)
-		{
-			lastValue.value = value.value
-			Streamlit.setComponentValue(value.value)
-		}
-	}
-
-const onKeydown = (event: KeyboardEvent) =>
-	{
-		if (event.key === 'Enter' && value.value !== lastValue.value)
 		{
 			lastValue.value = value.value
 			Streamlit.setComponentValue(value.value)
@@ -69,9 +61,8 @@ const onKeydown = (event: KeyboardEvent) =>
 			v-bind="props.args"
 			:disabled="props.disabled || props.args.disabled"
 			v-model="value"
-			@input="onInput"
+			@update:modelValue="onUpdateModelValue"
 			@blur="onBlur"
-			@keydown="onKeydown"
 		>
 			<template #label v-if="props.args.label">
 				{{ props.args.label }}
