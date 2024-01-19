@@ -16,6 +16,7 @@ supported_components = {
     'dsfr_input': 'st_dsfr_input',
 	'dsfr_picture': 'st_dsfr_picture',
     'dsfr_radio': 'st_dsfr_radio',
+	'dsfr_range': 'st_dsfr_range',
 }
 
 if not _RELEASE:
@@ -543,3 +544,80 @@ def dsfr_radio(
 		kwargs['value'] = default
 
 	return _dsfr_radio_func(**kwargs, key = key, default = kwargs['modelValue'])
+
+def dsfr_range(
+	label: str, # Standard
+	# min_value: Optional[Union[int, float, datetime, timedelta]] = None, # Standard
+	min_value: Optional[Union[int, float]] = None, # Semi-standard
+	# max_value: Optional[Union[int, float, datetime, timedelta]] = None, # Standard
+	max_value: Optional[Union[int, float]] = None, # Semi-standard
+	# value: Optional[Union[int, float, tuple[int, int], tuple[float, float], tuple[datetime, datetime], Tuple[timedelta, timedelta]]] = None, # Standard
+	value: Optional[Union[int, float, tuple[int, int], tuple[float, float]]] = None, # Semi-standard
+	# step: Optional[Union[int, float, datetime, timedelta]] = None, # Standard
+	step: Optional[Union[int, float]] = None, # Semi-standard
+	# format: Optional[str] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	help: Optional[str] = None, # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
+	*,
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
+	hint: Optional[str] = None, # Alias for 'help'
+	messages: Optional[list[str]] = None,
+	id: Optional[str] = None,
+	lowerValue: Optional[Union[int, float]] = None,
+	message: Optional[str] = None,
+	prefix: Optional[str] = None,
+	suffix: Optional[str] = None,
+	small: Optional[bool] = None,
+	hideIndicators: Optional[bool] = None,
+	**kwargs,
+):
+	"""
+	Streamlit DSFR Radio component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.slider
+	"""
+	kwargs['label'] = label
+
+	if help is not None:
+		kwargs['hint'] = help
+	elif hint is not None:
+		kwargs['hint'] = hint
+
+	if messages is not None:
+		kwargs['messages'] = messages
+
+	if min_value is not None:
+		kwargs['min'] = min_value
+	if max_value is not None:
+		kwargs['max'] = max_value
+
+	if value is not None:
+		kwargs['modelValue'] = value
+
+	if id is not None:
+		kwargs['id'] = id
+	if lowerValue is not None:
+		kwargs['lowerValue'] = lowerValue
+	if message is not None:
+		kwargs['message'] = message
+	if prefix is not None:
+		kwargs['prefix'] = prefix
+	if suffix is not None:
+		kwargs['suffix'] = suffix
+	if small is not None:
+		kwargs['small'] = small
+	if hideIndicators is not None:
+		kwargs['hideIndicators'] = hideIndicators
+
+	if step is not None:
+		kwargs['step'] = step
+
+	if disabled is not None:
+		kwargs['disabled'] = disabled
+
+	return _dsfr_range_func(**kwargs, key = key, default = kwargs['modelValue'])
