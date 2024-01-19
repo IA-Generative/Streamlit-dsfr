@@ -258,6 +258,7 @@ def dsfr_input(
 	descriptionId: Optional[str] = None,
 	isInvalid: Optional[bool] = None,
 	isValid: Optional[bool] = None,
+	isTextarea: Optional[bool] = None,
 	isWithWarning: Optional[bool] = None,
 	labelClass: Optional[str] = None,
 	wrapperClass: Optional[str] = None,
@@ -298,6 +299,8 @@ def dsfr_input(
 		kwargs['isInvalid'] = isInvalid
 	if isValid is not None:
 		kwargs['isValid'] = isValid
+	if isTextarea is not None:
+		kwargs['isTextarea'] = isTextarea
 	if isWithWarning is not None:
 		kwargs['isWithWarning'] = isWithWarning
 	if labelClass is not None:
