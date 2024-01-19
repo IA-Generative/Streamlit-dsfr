@@ -7,7 +7,10 @@ from streamlit_dsfr import \
 	dsfr_checkbox, \
 	dsfr_radio, \
 	dsfr_text_input, \
+	dsfr_number_input, \
 	dsfr_text_area, \
+	dsfr_date_input, \
+	dsfr_time_input, \
 	dsfr_range
 
 from disable_sidebar import disable_sidebar
