@@ -72,10 +72,28 @@ with col_left:
 	st_val = st.checkbox('Ceci est une case à cocher')
 	st.write(st_val)
 
+	st_val = st.checkbox(
+		'Ceci est une case à cocher',
+		help = 'Ceci est une aide',
+	)
+	st.write(st_val)
+
 with col_right:
 	st.markdown('#### Composants DSFR')
 
 	dsfr_val = dsfr_checkbox('Ceci est une case à cocher')
+	st.write(dsfr_val)
+
+	dsfr_val = dsfr_checkbox(
+		'Ceci est une case à cocher',
+		help = 'Ceci est une aide',
+	)
+	st.write(dsfr_val)
+
+	dsfr_val = dsfr_checkbox(
+		'Ceci est une petite case à cocher',
+		small = True,
+	)
 	st.write(dsfr_val)
 
 # ---
