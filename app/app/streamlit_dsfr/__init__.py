@@ -546,6 +546,59 @@ def dsfr_date_input(
 		**kwargs,
 	)
 
+def dsfr_time_input(
+	label: str, # Standard
+	# value: Optional[Union[datetime, str]] = None, # Standard
+	value: Optional[str] = None, # Semi-standard
+	key: Optional[Union[str, int]] = None, # Standard
+	help: Optional[str] = None, # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
+	*,
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
+	# step: Optional[Union[int, timedelta]] = None, # Standard
+	step: Optional[int] = None, # Semi-standard
+	hint: Optional[str] = None, # Alias for 'help'
+	labelVisible: Optional[bool] = None,
+	id: Optional[str] = None,
+	descriptionId: Optional[str] = None,
+	isInvalid: Optional[bool] = None,
+	isValid: Optional[bool] = None,
+	isWithWarning: Optional[bool] = None,
+	labelClass: Optional[str] = None,
+	wrapperClass: Optional[str] = None,
+	requiredTip: Optional[str] = None,
+	**kwargs,
+):
+	"""
+	Streamlit DSFR Text Area component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.time_input
+	"""
+	return dsfr_input(
+		label = label,
+		value = value,
+		key = key,
+		help = help,
+		disabled = disabled,
+		hint = hint,
+		labelVisible = labelVisible,
+		id = id,
+		descriptionId = descriptionId,
+		isInvalid = isInvalid,
+		isValid = isValid,
+		isTextarea = True,
+		isWithWarning = isWithWarning,
+		labelClass = labelClass,
+		wrapperClass = wrapperClass,
+		requiredTip = requiredTip,
+		step = step,
+		**kwargs,
+	)
+
 def dsfr_picture(
 	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]], # Standard
 	image: str, # Semi-standard
