@@ -110,7 +110,22 @@ with col_left:
 	st_val = st.text_input('Ceci est un champ de saisie')
 	st.write(st_val)
 
+	st_val = st.text_input(
+		'Ceci est un champ de saisie',
+		help = 'Ceci est une aide',
+	)
+	st.write(st_val)
+
+	st_val = st.number_input('Ceci est un champ de saisie numérique')
+	st.write(st_val)
+
 	st_val = st.text_area('Ceci est une zone de texte')
+	st.write(st_val)
+
+	st_val = st.date_input('Ceci est un champ de saisie de date')
+	st.write(st_val)
+
+	st_val = st.time_input('Ceci est un champ de saisie de temps')
 	st.write(st_val)
 
 with col_right:
@@ -119,7 +134,22 @@ with col_right:
 	dsfr_val = dsfr_text_input('Ceci est un champ de saisie')
 	st.write(dsfr_val)
 
+	dsfr_val = dsfr_text_input(
+		'Ceci est un champ de saisie',
+		help = 'Ceci est une aide',
+	)
+	st.write(dsfr_val)
+
+	dsfr_val = dsfr_number_input('Ceci est un champ de saisie numérique')
+	st.write(dsfr_val)
+
 	dsfr_val = dsfr_text_area('Ceci est une zone de texte')
+	st.write(dsfr_val)
+
+	dsfr_val = dsfr_date_input('Ceci est un champ de saisie de date')
+	st.write(dsfr_val)
+
+	dsfr_val = dsfr_time_input('Ceci est un champ de saisie de temps')
 	st.write(dsfr_val)
 
 # ---
