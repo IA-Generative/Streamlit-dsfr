@@ -67,8 +67,11 @@ const onBlur = () =>
 			<template #label v-if="props.args.label">
 				{{ props.args.label }}
 			</template>
-			<template #required-tip v-if="props.args.requiredTip">
-				{{ props.args.requiredTip }}
+			<template #hint v-if="props.args.hint">
+				{{ props.args.hint }}
+			</template>
+			<template #messages v-if="props.args.messages">
+				{{ props.args.messages }}
 			</template>
 		</DsfrRange>
 	</div>
