@@ -34,25 +34,28 @@ const lastValue = ref('')
 const value = ref('')
 
 // Bind the input value to `value`
-// Update the Steamlit value when:
-// - the input lose focus, if the value has changed
-// - the user press enter, if the input is focused and the value has changed
+
+let timeoutUpdate: NodeJS.Timeout | null = null
+
+function setComponentValue()
+{
+	if (value.value !== lastValue.value)
+	{
+		lastValue.value = value.value
+		Streamlit.setComponentValue(value.value)
+	}
+}
 
 function onUpdateModelValue()
 {
-	console.log('onUpdateModelValue', value.value)
-	Streamlit.setComponentValue(value.value)
-}
-
-const onBlur = () =>
+	if (timeoutUpdate)
 	{
-		console.log('onBlur', value.value, '!==', lastValue.value)
-		if (value.value !== lastValue.value)
-		{
-			lastValue.value = value.value
-			Streamlit.setComponentValue(value.value)
-		}
+		clearTimeout(timeoutUpdate)
+		timeoutUpdate = null
 	}
+
+	timeoutUpdate = setTimeout(setComponentValue, 500)
+}
 </script>
 
 <template>
@@ -62,7 +65,6 @@ const onBlur = () =>
 			:disabled="props.disabled || props.args.disabled"
 			v-model="value"
 			@update:modelValue="onUpdateModelValue"
-			@blur="onBlur"
 		>
 			<template #label v-if="props.args.label">
 				{{ props.args.label }}
