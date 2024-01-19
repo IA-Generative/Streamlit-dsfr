@@ -565,7 +565,7 @@ def dsfr_range(
 	disabled: Optional[bool] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
 	hint: Optional[str] = None, # Alias for 'help'
-	messages: Optional[list[str]] = None,
+	messages: Optional[dict] = None,
 	id: Optional[str] = None,
 	lowerValue: Optional[Union[int, float]] = None,
 	message: Optional[str] = None,
