@@ -243,7 +243,7 @@ def dsfr_input(
 	value: Optional[str] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
-	# type: Optional[str] = None, # 'default' | 'password' # Standard
+	type: Optional[str] = None, # Semi-standard
 	help: Optional[str] = None, # Standard
 	# autocomplete: Optional[str] = None, # Standard
 	# on_change: Optional[Callable] = None, # Standard
@@ -254,7 +254,6 @@ def dsfr_input(
 	disabled: Optional[bool] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
 	hint: Optional[str] = None, # Alias for 'help'
-	type: Optional[str] = None,
 	labelVisible: Optional[bool] = None,
 	id: Optional[str] = None,
 	descriptionId: Optional[str] = None,
@@ -289,6 +288,8 @@ def dsfr_input(
 		kwargs['disabled'] = disabled
 
 	if type is not None:
+		if type == 'default':
+			kwargs['type'] = 'text'
 		kwargs['type'] = type
 
 	if labelVisible is not None:
@@ -322,7 +323,7 @@ def dsfr_text_input(
 	value: Optional[str] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
-	# type: Optional[str] = None, # 'default' | 'password' # Standard
+	type: Optional[str] = None, # 'default' | 'password' # Standard
 	help: Optional[str] = None, # Standard
 	# autocomplete: Optional[str] = None, # Standard
 	# on_change: Optional[Callable] = None, # Standard
@@ -354,6 +355,7 @@ def dsfr_text_input(
 		label = label,
 		value = value,
 		key = key,
+		type = type,
 		help = help,
 		disabled = disabled,
 		hint = hint,
