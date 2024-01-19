@@ -79,8 +79,13 @@ function onUpdateModelValue()
 	</div>
 </template>
 
-<!-- <style scoped>
-.component {
-	margin: 4px; /* Margin for the input outline on focus */
+<style scoped>
+.component :deep(.fr-range[data-fr-js-range]:after) {
+	clip-path: polygon(
+		var(--progress-left) 0,
+		calc(var(--progress-right) - 24px) 0,
+		calc(var(--progress-right) - 24px) 100%,
+		var(--progress-left) 100%
+	);
 }
-</style> -->
+</style>
