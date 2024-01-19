@@ -65,7 +65,7 @@ const onInput = (event: InputEvent) =>
 </template>
 
 <style scoped>
-.component :deep(fr-fieldset__element) {
+.component :deep(.fr-fieldset__element) {
 	margin-bottom: 0;
 	padding-left: 0;
 	padding-right: 0;
