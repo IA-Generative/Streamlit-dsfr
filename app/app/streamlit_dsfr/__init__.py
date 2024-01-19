@@ -268,9 +268,6 @@ def dsfr_input(
 ):
 	"""
 	Streamlit DSFR Input component
-
-	Streamlit standard component equivalent:
-	https://docs.streamlit.io/library/api-reference/widgets/st.text_input
 	"""
 	kwargs['label'] = label
 
@@ -340,6 +337,12 @@ def dsfr_text_input(
 	requiredTip: Optional[str] = None,
 	**kwargs,
 ):
+	"""
+	Streamlit DSFR Text Input component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.text_input
+	"""
 	return dsfr_input(
 		label = label,
 		value = value,
@@ -387,6 +390,12 @@ def dsfr_text_area(
 	requiredTip: Optional[str] = None,
 	**kwargs,
 ):
+	"""
+	Streamlit DSFR Text Area component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.text_area
+	"""
 	return dsfr_input(
 		label = label,
 		value = value,
