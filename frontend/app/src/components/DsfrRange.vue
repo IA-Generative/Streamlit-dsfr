@@ -54,7 +54,7 @@ function onUpdateModelValue()
 		timeoutUpdate = null
 	}
 
-	timeoutUpdate = setTimeout(setComponentValue, 500)
+	timeoutUpdate = setTimeout(setComponentValue, 200)
 }
 </script>
 
