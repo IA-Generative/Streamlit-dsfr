@@ -129,11 +129,17 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Composants Streamlit')
 
+	st_val = st.slider('Ceci est un curseur')
+	st.write(st_val)
+
 	st_val = st.slider('Ceci est un curseur', 0, 100, 50)
 	st.write(st_val)
 
 with col_right:
 	st.markdown('#### Composants DSFR')
+
+	dsfr_val = dsfr_range('Ceci est un curseur')
+	st.write(dsfr_val)
 
 	dsfr_val = dsfr_range('Ceci est un curseur', 0, 100, 50)
 	st.write(dsfr_val)
