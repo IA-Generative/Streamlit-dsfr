@@ -10,6 +10,8 @@ useStreamlit()
 
 const props = defineProps<
 	ComponentProps<{
+		type?: string
+		placeholder?: string
 		disabled?: boolean
 		// Props
 		labelVisible?: boolean

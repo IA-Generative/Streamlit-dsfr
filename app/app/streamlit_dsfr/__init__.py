@@ -250,10 +250,11 @@ def dsfr_input(
 	# args: Optional[tuple] = None, # Standard
 	# kwargs: Optional[dict] = None, # Standard
 	*,
-	# placeholder: Optional[str] = None, # Standard
+	placeholder: Optional[str] = None, # Standard
 	disabled: Optional[bool] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
 	hint: Optional[str] = None, # Alias for 'help'
+	type: Optional[str] = None,
 	labelVisible: Optional[bool] = None,
 	id: Optional[str] = None,
 	descriptionId: Optional[str] = None,
@@ -281,8 +282,14 @@ def dsfr_input(
 	elif hint is not None:
 		kwargs['hint'] = hint
 
+	if placeholder is not None:
+		kwargs['placeholder'] = placeholder
+
 	if disabled is not None:
 		kwargs['disabled'] = disabled
+
+	if type is not None:
+		kwargs['type'] = type
 
 	if labelVisible is not None:
 		kwargs['labelVisible'] = labelVisible
