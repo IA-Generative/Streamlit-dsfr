@@ -30,8 +30,8 @@ const props = defineProps<
 	}>
 >()
 
-const lastValue = ref('')
-const value = ref('')
+const lastValue = ref(props.args.modelValue)
+const value = ref(props.args.modelValue)
 
 // Bind the input value to `value`
 
