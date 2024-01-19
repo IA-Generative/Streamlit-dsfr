@@ -330,7 +330,7 @@ def dsfr_text_input(
 	# args: Optional[tuple] = None, # Standard
 	# kwargs: Optional[dict] = None, # Standard
 	*,
-	# placeholder: Optional[str] = None, # Standard
+	placeholder: Optional[str] = None, # Standard
 	disabled: Optional[bool] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
 	hint: Optional[str] = None, # Alias for 'help'
@@ -357,6 +357,7 @@ def dsfr_text_input(
 		key = key,
 		type = type,
 		help = help,
+		placeholder = placeholder,
 		disabled = disabled,
 		hint = hint,
 		labelVisible = labelVisible,
@@ -385,7 +386,7 @@ def dsfr_number_input(
 	# args: Optional[tuple] = None, # Standard
 	# kwargs: Optional[dict] = None, # Standard
 	*,
-	# placeholder: Optional[str] = None, # Standard
+	placeholder: Optional[str] = None, # Standard
 	disabled: Optional[bool] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
 	hint: Optional[str] = None, # Alias for 'help'
@@ -416,6 +417,7 @@ def dsfr_number_input(
 		key = key,
 		type = 'number',
 		help = help,
+		placeholder = placeholder,
 		disabled = disabled,
 		hint = hint,
 		labelVisible = labelVisible,
@@ -446,7 +448,7 @@ def dsfr_text_area(
 	# args: Optional[tuple] = None, # Standard
 	# kwargs: Optional[dict] = None, # Standard
 	*,
-	# placeholder: Optional[str] = None, # Standard
+	placeholder: Optional[str] = None, # Standard
 	disabled: Optional[bool] = None, # Standard
 	# label_visibility: Optional[str] = None, # 'visible' (default), 'hidden', 'collapse' # Standard
 	hint: Optional[str] = None, # Alias for 'help'
@@ -472,6 +474,7 @@ def dsfr_text_area(
 		value = value,
 		key = key,
 		help = help,
+		placeholder = placeholder,
 		disabled = disabled,
 		hint = hint,
 		labelVisible = labelVisible,
