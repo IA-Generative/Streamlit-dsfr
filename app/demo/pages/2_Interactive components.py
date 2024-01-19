@@ -6,7 +6,8 @@ from streamlit_dsfr import \
 	dsfr_button, \
 	dsfr_checkbox, \
 	dsfr_radio, \
-	dsfr_input, \
+	dsfr_text_input, \
+	dsfr_text_area, \
 	dsfr_range
 
 from disable_sidebar import disable_sidebar
@@ -109,10 +110,16 @@ with col_left:
 	st_val = st.text_input('Ceci est un champ de saisie')
 	st.write(st_val)
 
+	st_val = st.text_area('Ceci est une zone de texte')
+	st.write(st_val)
+
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_val = dsfr_input('Ceci est un champ de saisie')
+	dsfr_val = dsfr_text_input('Ceci est un champ de saisie')
+	st.write(dsfr_val)
+
+	dsfr_val = dsfr_text_area('Ceci est une zone de texte')
 	st.write(dsfr_val)
 
 # ---
