@@ -439,11 +439,10 @@ def dsfr_number_input(
 def dsfr_text_area(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
+	# height: Optional[int] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
-	# type: Optional[str] = None, # 'default' | 'password' # Standard
 	help: Optional[str] = None, # Standard
-	# autocomplete: Optional[str] = None, # Standard
 	# on_change: Optional[Callable] = None, # Standard
 	# args: Optional[tuple] = None, # Standard
 	# kwargs: Optional[dict] = None, # Standard
