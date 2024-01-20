@@ -36,7 +36,7 @@ const props = defineProps<
 	}>
 >()
 
-const value = ref<string>(props.args.modelValue)
+const value = ref<string>(props.args.modelValue || '')
 
 function parseOptions(options: Option[] | undefined): Option[]
 {

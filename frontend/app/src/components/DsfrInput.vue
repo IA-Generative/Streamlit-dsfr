@@ -31,8 +31,8 @@ const props = defineProps<
 	}>
 >()
 
-const lastValue = ref('')
-const value = ref('')
+const value = ref<string>(props.args.modelValue || '')
+const lastValue = ref(value.value)
 
 // Bind the input value to `value`
 // Update the Steamlit value when:
