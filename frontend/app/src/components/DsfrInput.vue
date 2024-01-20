@@ -88,4 +88,9 @@ const onKeydown = (event: KeyboardEvent) =>
 .component {
 	margin: 4px; /* Margin for the input outline on focus */
 }
+
+.component :deep(textarea.fr-input) {
+	min-height: 5.75rem;
+	resize: none; /* While we don't send the new height to Streamlit */
+}
 </style>
