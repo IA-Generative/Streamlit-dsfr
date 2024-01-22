@@ -39,13 +39,7 @@ const lastValue = ref(value.value)
 // - the input lose focus, if the value has changed
 // - the user press enter, if the input is focused and the value has changed
 
-function onInput(event: Event)
-{
-	const target = event.target as HTMLInputElement
-	value.value = target.value
-}
-
-function onBlur()
+function setComponentValue()
 {
 	if (value.value !== lastValue.value)
 	{
@@ -54,12 +48,22 @@ function onBlur()
 	}
 }
 
+function onInput(event: Event)
+{
+	const target = event.target as HTMLInputElement
+	value.value = target.value
+}
+
+function onBlur()
+{
+	setComponentValue()
+}
+
 function onKeydown(event: KeyboardEvent)
 {
-	if (event.key === 'Enter' && value.value !== lastValue.value)
+	if (event.key === 'Enter')
 	{
-		lastValue.value = value.value
-		Streamlit.setComponentValue(value.value)
+		setComponentValue()
 	}
 }
 </script>
