@@ -40,7 +40,15 @@ function setComponentValue()
 	if (value.value !== lastValue.value)
 	{
 		lastValue.value = value.value
-		Streamlit.setComponentValue(value.value)
+
+		if (value.value !== '' && props.args.type === 'number')
+		{
+			Streamlit.setComponentValue(Number(value.value))
+		}
+		else
+		{
+			Streamlit.setComponentValue(value.value)
+		}
 	}
 }
 
