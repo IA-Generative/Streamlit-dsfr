@@ -35,10 +35,6 @@ const props = defineProps<
 const value = ref<string>(props.args.modelValue || '')
 const lastValue = ref(value.value)
 
-// Update the Steamlit value when:
-// - the input lose focus, if the value has changed
-// - the user press enter, if the input is focused and the value has changed
-
 function setComponentValue()
 {
 	if (value.value !== lastValue.value)
@@ -47,6 +43,10 @@ function setComponentValue()
 		Streamlit.setComponentValue(value.value)
 	}
 }
+
+// Update the Steamlit value when:
+// - the input lose focus, if the value has changed
+// - the user press enter, if the input is focused and the value has changed
 
 function onInput(event: Event)
 {
