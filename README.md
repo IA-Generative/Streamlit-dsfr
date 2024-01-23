@@ -3,22 +3,13 @@
 VueDsfr components for Streamlit
 
 
-## Installation instructions
+## Installation & Usage instructions
 
 ```sh
 pip install streamlit-dsfr
 ```
 
-
-## Usage instructions
-
-```python
-import streamlit as st
-from streamlit_dsfr import st_dsfr_button
-
-value = st_dsfr_button()
-st.write(value)
-```
+See [the package description on PyPI](https://pypi.org/project/streamlit-dsfr/#description) (or [here](app/app/README.md)) for usage instructions.
 
 
 ## Development instructions
