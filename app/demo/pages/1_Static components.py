@@ -28,28 +28,40 @@ st.divider()
 
 st.header('Alertes')
 
-dsfr_alert('Ceci est une alerte')
-dsfr_alert('Alerte', 'Ceci est une alerte avec un titre h5', titleTag = 'h5')
-dsfr_alert('Erreur : titre du message', 'Description', type = 'error')
-dsfr_alert('Succès de l\'envoi', 'Description', type = 'success')
-dsfr_alert('Information : titre du message', 'Description détaillée du message', type = 'info')
-dsfr_alert('Attention : titre du message', 'Description détaillée du message', type = 'warning')
-dsfr_alert('Information : titre de l\'information', small = True)
-dsfr_alert('Information : titre de l\'information', type = 'success', small = True)
-dsfr_alert('Information : titre de l\'information', type = 'error', small = True)
+with st.echo('below'):
+	dsfr_alert('Ceci est une alerte')
+
+with st.echo('below'):
+	dsfr_alert('Alerte', 'Ceci est une alerte avec un titre h5', titleTag = 'h5')
+
+with st.echo('below'):
+	dsfr_alert('Erreur : titre du message', 'Description', type = 'error')
+	dsfr_alert('Succès de l\'envoi', 'Description', type = 'success')
+	dsfr_alert('Information : titre du message', 'Description détaillée du message', type = 'info')
+	dsfr_alert('Attention : titre du message', 'Description détaillée du message', type = 'warning')
+
+with st.echo('below'):
+	dsfr_alert('Information : titre de l\'information', small = True)
+	dsfr_alert('Information : titre de l\'information', type = 'success', small = True)
+	dsfr_alert('Information : titre de l\'information', type = 'error', small = True)
 
 # ---
 st.divider()
 
 st.header('Badges')
 
-dsfr_badge('Ceci est un badge')
-dsfr_badge('Ceci est une erreur', type = 'error')
-dsfr_badge('Ceci est un succès', type = 'success')
-dsfr_badge('Ceci est un avertissement', type = 'warning')
-dsfr_badge('Ceci est une info', type = 'info')
-dsfr_badge('Ceci est une nouvelle', type = 'new')
-dsfr_badge('Ceci est un petit badge', small = True)
+with st.echo('below'):
+	dsfr_badge('Ceci est un badge')
+
+with st.echo('below'):
+	dsfr_badge('Ceci est une erreur', type = 'error')
+	dsfr_badge('Ceci est un succès', type = 'success')
+	dsfr_badge('Ceci est un avertissement', type = 'warning')
+	dsfr_badge('Ceci est une info', type = 'info')
+	dsfr_badge('Ceci est une nouvelle', type = 'new')
+
+with st.echo('below'):
+	dsfr_badge('Ceci est un petit badge', small = True)
 
 # ---
 st.divider()
@@ -73,22 +85,25 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Composants Streamlit')
 
-	st.image(
-		'https://placekitten.com/300/200',
-		caption = 'Ceci est une légende',
-	)
+	with st.echo('below'):
+		st.image(
+			'https://placekitten.com/300/200',
+			caption = 'Ceci est une légende',
+		)
 
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_picture(
-		'https://placekitten.com/300/200',
-		caption = 'Ceci est une légende',
-	)
+	with st.echo('below'):
+		dsfr_picture(
+			'https://placekitten.com/300/200',
+			caption = 'Ceci est une légende',
+		)
 
-	dsfr_picture(
-		'https://placekitten.com/400/200',
-		caption = 'Ceci est une légende',
-		alt = 'Ceci est une description alternative',
-		ratio = '32x9',
-	)
+	with st.echo('below'):
+		dsfr_picture(
+			'https://placekitten.com/400/200',
+			caption = 'Ceci est une légende',
+			alt = 'Ceci est une description alternative',
+			ratio = '32x9',
+		)
