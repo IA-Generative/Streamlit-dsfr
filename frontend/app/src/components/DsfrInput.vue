@@ -31,37 +31,49 @@ const props = defineProps<
 	}>
 >()
 
+// Bind the input value to `value`
 const value = ref<string>(props.args.modelValue || '')
 const lastValue = ref(value.value)
 
-// Bind the input value to `value`
+function setComponentValue()
+{
+	if (value.value !== lastValue.value)
+	{
+		lastValue.value = value.value
+
+		if (value.value !== '' && props.args.type === 'number')
+		{
+			Streamlit.setComponentValue(Number(value.value))
+		}
+		else
+		{
+			Streamlit.setComponentValue(value.value)
+		}
+	}
+}
+
 // Update the Steamlit value when:
 // - the input lose focus, if the value has changed
 // - the user press enter, if the input is focused and the value has changed
 
-const onInput = (event: Event) =>
-	{
-		const target = event.target as HTMLInputElement
-		value.value = target.value
-	}
+function onInput(event: Event)
+{
+	const target = event.target as HTMLInputElement
+	value.value = target.value
+}
 
-const onBlur = () =>
-	{
-		if (value.value !== lastValue.value)
-		{
-			lastValue.value = value.value
-			Streamlit.setComponentValue(value.value)
-		}
-	}
+function onBlur()
+{
+	setComponentValue()
+}
 
-const onKeydown = (event: KeyboardEvent) =>
+function onKeydown(event: KeyboardEvent)
+{
+	if (event.key === 'Enter')
 	{
-		if (event.key === 'Enter' && value.value !== lastValue.value)
-		{
-			lastValue.value = value.value
-			Streamlit.setComponentValue(value.value)
-		}
+		setComponentValue()
 	}
+}
 </script>
 
 <template>

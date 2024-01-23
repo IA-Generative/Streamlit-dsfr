@@ -14,7 +14,7 @@ from streamlit_dsfr import \
 	dsfr_range
 
 from disable_sidebar import disable_sidebar
-from css_font_family import css_font_family
+from override_font_family import override_font_family
 from nav_menu import nav_menu
 
 # ---
@@ -27,7 +27,7 @@ disable_sidebar()
 st.title('Composants interactifs')
 
 # CSS font family override
-css_font_family()
+override_font_family()
 
 # Navigation menu
 nav_menu()
