@@ -102,7 +102,7 @@ def dsfr_badge(
 dsfr_alert = alert
 
 def breadcrumb(
-	links: str | list[str] | list[(str, str)] | list[dict[str, str]] | None = None,
+	links: Optional[Union[str, list[str], list[tuple[str, str]], list[dict[str, str]]]] = None,
 	*,
 	id: Optional[str] = None,
 	key: Optional[str] = None,
