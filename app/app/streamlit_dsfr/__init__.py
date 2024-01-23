@@ -42,7 +42,6 @@ else:
                 path = os.path.join(build_dir, supported_components[component]),
             )
 
-
 # Components wrapper functions for users
 
 def dsfr_alert(
@@ -849,3 +848,7 @@ def dsfr_range(
 	return _dsfr_range_func(**kwargs, key = key, default = kwargs['modelValue'])
 
 dsfr_slider = dsfr_range
+
+# Util functions for users
+
+from override_font_family import override_font_family
