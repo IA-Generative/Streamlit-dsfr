@@ -1,6 +1,6 @@
 import streamlit as st
 
-def css_font_family():
+def override_font_family():
 	"""
 	Set CSS font family
 	"""
