@@ -11,6 +11,8 @@ pip install streamlit-dsfr
 
 See [the package description on PyPI](https://pypi.org/project/streamlit-dsfr/#description) (or [here](app/app/README.md)) for usage instructions.
 
+See [the demo app](app/demo/) source code for a complete usage example.
+
 
 ## Development instructions
 
