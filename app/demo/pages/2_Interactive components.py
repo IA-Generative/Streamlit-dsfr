@@ -232,6 +232,9 @@ with col_right:
 	)
 	st.write(dsfr_val)
 
+	# DSFR component does not support multiple files upload
+	st.write('Le composant DSFR ne permet pas de téléverser plusieurs fichiers')
+
 # ---
 st.divider()
 
