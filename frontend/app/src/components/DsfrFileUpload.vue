@@ -24,8 +24,16 @@ const props = defineProps<
 	}>
 >()
 
+interface UploadedFileRec
+{
+	id: string
+	name: string
+	type: string
+	data: string // bytes in base64
+}
+
 // Bind the input value to `value`
-const value = ref<string | undefined>(undefined)
+const value = ref<UploadedFileRec | undefined>(undefined)
 const lastValue = ref(value.value)
 
 function setComponentValue()
@@ -46,9 +54,14 @@ function onChange(files: FileList | null)
 		const file = files[0]
 		const reader = new FileReader()
 		reader.addEventListener('load', () => {
-			const base64 = reader.result as string
-			const base64WithoutPrefix = base64.split(',')[1]
-			value.value = base64WithoutPrefix
+			const dataUrl = reader.result as string
+			const base64 = dataUrl.split(',')[1]
+			value.value = {
+				'id': `${props.args.key || props.args.id || 'file_upload'}_1`,
+				'name':	file['name'],
+				'type': file['type'],
+				'data': base64,
+			}
 			setComponentValue()
 		})
 		reader.readAsDataURL(file)
