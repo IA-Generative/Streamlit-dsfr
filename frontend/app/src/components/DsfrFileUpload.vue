@@ -19,6 +19,8 @@ const props = defineProps<
 		disabled?: boolean
 		accept?: string[]
 		modelValue?: string
+		// Streamlit
+		key?: string
 	}>
 >()
 
