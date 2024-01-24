@@ -184,6 +184,42 @@ def dsfr_button(
 
 	return _dsfr_button_func(**kwargs, key = key, default = False)
 
+def dsfr_link_button(
+	label: str, # Standard
+	url: str, # Standard
+	*,
+	key: Optional[Union[str, int]] = None,
+	help: Optional[str] = None, # Standard
+	type: Optional[str] = None, # Standard # 'primary' | 'secondary'
+	disabled: Optional[bool] = None, # Standard
+	use_container_width: Optional[bool] = None, # Standard
+):
+	"""
+	Streamlit DSFR Link Button component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.link_button
+	"""
+	value = dsfr_button(
+		label = label,
+		key = key,
+		help = help,
+		type = type,
+		disabled = disabled,
+		use_container_width = use_container_width,
+	)
+
+	if value:
+		components.html(
+			f"""
+<script type="text/javascript">
+	window.open('{url}', '_blank').focus();
+</script>
+			""",
+		)
+
+	return None
+
 def dsfr_checkbox(
 	label: str, # Standard
 	value: Optional[bool] = None, # Standard
