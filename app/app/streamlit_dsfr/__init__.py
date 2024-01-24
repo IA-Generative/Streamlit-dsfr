@@ -1,7 +1,11 @@
 import os
 from typing import Optional, Union, Iterable, Callable
+import json
+import base64
 
 import streamlit.components.v1 as components
+from streamlit.runtime.uploaded_file_manager import UploadedFile
+from streamlit.proto.Common_pb2 import FileURLs as FileURLsProto
 
 # Release flag constant. Set to True when releasing the component.
 _RELEASE = False
@@ -13,6 +17,7 @@ supported_components = {
     'dsfr_breadcrumb': 'st_dsfr_breadcrumb',
     'dsfr_button': 'st_dsfr_button',
 	'dsfr_checkbox': 'st_dsfr_checkbox',
+	'dsfr_file_upload': 'st_dsfr_file_upload',
     'dsfr_input': 'st_dsfr_input',
 	'dsfr_picture': 'st_dsfr_picture',
     'dsfr_radio': 'st_dsfr_radio',
@@ -237,6 +242,92 @@ def dsfr_checkbox(
 		kwargs['validMessage'] = validMessage
 
 	return _dsfr_checkbox_func(**kwargs, key = key, default = False)
+
+_ext2mimeTypes = None
+
+def ext2mimeTypes():
+	if _ext2mimeTypes is None:
+		global _ext2mimeTypes
+		with open(os.path.join(os.path.dirname(__file__), 'mimeTypes.json'), 'r') as f:
+			_ext2mimeTypes = json.load(f)
+	return _ext2mimeTypes
+
+def dsfr_file_upload(
+	label: str, # Standard
+	type: Optional[Union[str, list[str]]] = None, # Standard # extensions, e.g. ['png', 'jpg']
+	# accept_multiple_files: Optional[bool] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	help: Optional[str] = None, # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
+	*,
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # Standard
+	id: Optional[str] = None,
+	hint: Optional[str] = None, # Alias for 'help'
+	error: Optional[str] = None,
+	validMessage: Optional[str] = None,
+	# modelValue: Optional[str] = None,
+	**kwargs,
+):
+	"""
+	Streamlit DSFR Checkbox component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.checkbox
+	"""
+	kwargs['label'] = label
+
+	if help is not None:
+		kwargs['hint'] = help
+	elif hint is not None:
+		kwargs['hint'] = hint
+
+	# Convert type to list of MimeTypes
+	if type is not None:
+		if isinstance(type, str):
+			type = [type]
+		_ext2mimeTypesDict = ext2mimeTypes()
+		accept = [
+			_ext2mimeTypesDict[f'.{ext}']
+			for ext in type
+		]
+		kwargs['accept'] = accept
+
+	if disabled is not None:
+		kwargs['disabled'] = disabled
+
+	if id is not None:
+		kwargs['id'] = id
+	if error is not None:
+		kwargs['error'] = error
+	if validMessage is not None:
+		kwargs['validMessage'] = validMessage
+
+	files = _dsfr_file_upload_func(**kwargs, key = key, default = None)
+
+	if not files:
+		return None
+
+	# Convert files to UploadedFile
+	# Decode file['data'] from base64
+	return [
+		UploadedFile(
+			{
+				'file_id': file['id'],
+				'name':	file['name'],
+				'type': file['type'],
+				'data': base64.b64decode(file['data']),
+			},
+			FileURLsProto(
+				file_id = file['id'],
+				delete_url = None, # ?
+				upload_url = None, # ?
+			),
+		)
+		for file in files
+	]
 
 def dsfr_input(
 	label: str, # Standard
