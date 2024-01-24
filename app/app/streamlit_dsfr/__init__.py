@@ -220,6 +220,42 @@ def dsfr_link_button(
 
 	return None
 
+def dsfr_copy_button(
+	label: str,
+	content: str,
+	*,
+	key: Optional[Union[str, int]] = None,
+	help: Optional[str] = None,
+	type: Optional[str] = None, # 'primary' | 'secondary'
+	disabled: Optional[bool] = None,
+	use_container_width: Optional[bool] = None,
+):
+	"""
+	Streamlit DSFR Copy Button component
+	"""
+	value = dsfr_button(
+		label = label,
+		key = key,
+		help = help,
+		type = type,
+		disabled = disabled,
+		use_container_width = use_container_width,
+	)
+
+	if value:
+		components.html(
+			f"""
+<script type="text/javascript">
+	navigator.clipboard.writeText('{content}')
+		.catch(err => {{
+			console.error('Failed to copy: ', err);
+		}});
+</script>
+			""",
+		)
+
+	return None
+
 def dsfr_checkbox(
 	label: str, # Standard
 	value: Optional[bool] = None, # Standard
