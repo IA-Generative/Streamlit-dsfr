@@ -329,6 +329,8 @@ def dsfr_file_upload(
 		for file in files
 	]
 
+dsfr_file_uploader = dsfr_file_upload
+
 def dsfr_input(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
