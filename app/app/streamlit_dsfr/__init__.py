@@ -307,27 +307,23 @@ def dsfr_file_upload(
 
 	files = _dsfr_file_upload_func(**kwargs, key = key, default = None)
 
-	if not files:
+	if not files: # None or empty list
 		return None
 
-	# Convert files to UploadedFile
-	# Decode file['data'] from base64
-	return [
-		UploadedFile(
-			{
-				'file_id': file['id'],
-				'name':	file['name'],
-				'type': file['type'],
-				'data': base64.b64decode(file['data']),
-			},
-			FileURLsProto(
-				file_id = file['id'],
-				delete_url = None, # ?
-				upload_url = None, # ?
-			),
-		)
-		for file in files
-	]
+	file = files[0]
+	return UploadedFile(
+		{
+			'file_id': file['id'],
+			'name':	file['name'],
+			'type': file['type'],
+			'data': base64.b64decode(file['data']), # Decode bytes
+		},
+		FileURLsProto(
+			file_id = file['id'],
+			delete_url = None, # ?
+			upload_url = None, # ?
+		),
+	)
 
 dsfr_file_uploader = dsfr_file_upload
 
