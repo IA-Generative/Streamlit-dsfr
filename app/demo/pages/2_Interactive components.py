@@ -11,6 +11,7 @@ from streamlit_dsfr import \
 	dsfr_text_area, \
 	dsfr_date_input, \
 	dsfr_time_input, \
+	dsfr_file_uploader, \
 	dsfr_range
 
 from disable_sidebar import disable_sidebar
@@ -200,6 +201,35 @@ with col_right:
 	st.write(dsfr_val)
 
 	dsfr_val = dsfr_range('Ceci est un curseur', 0, 100, 50, small = True)
+	st.write(dsfr_val)
+
+# ---
+st.divider()
+
+st.header('Téléversement de fichier')
+
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st.markdown('#### Composants Streamlit')
+
+	st_val = st.file_uploader(
+		'Ceci est un téléversement de fichier',
+	)
+	st.write(st_val)
+
+	st_val = st.file_uploader(
+		'Ceci est un téléversement de plusieurs fichiers',
+		accept_multiple_files = True,
+	)
+	st.write(st_val)
+
+with col_right:
+	st.markdown('#### Composants DSFR')
+
+	dsfr_val = dsfr_file_uploader(
+		'Ceci est un téléversement de fichier',
+	)
 	st.write(dsfr_val)
 
 # ---
