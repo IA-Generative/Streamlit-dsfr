@@ -867,9 +867,12 @@ def radio(
 	"""
 	kwargs['legend'] = label
 
+	if format_func is None:
+		format_func = lambda x: x
+
 	kwargs['options'] = [
 		{
-			'label': option,
+			'label': format_func(option),
 			'value': option,
 		}
 		for option in options
@@ -879,10 +882,6 @@ def radio(
 		index = 0
 	if index < len(kwargs['options']):
 		kwargs['modelValue'] = kwargs['options'][index]['value']
-
-	if format_func is not None:
-		for i in range(len(kwargs['options'])):
-			kwargs['options'][i]['label'] = format_func(kwargs['options'][i]['value'])
 
 	if disabled is not None:
 		if isinstance(disabled, bool):
