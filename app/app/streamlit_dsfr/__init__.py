@@ -200,26 +200,15 @@ def dsfr_link_button(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.link_button
 	"""
-	value = dsfr_button(
+	return dsfr_button(
 		label = label,
 		key = key,
 		help = help,
 		type = type,
 		disabled = disabled,
 		use_container_width = use_container_width,
+		link = url,
 	)
-
-	if value:
-		components.html(
-			f"""
-<script type="text/javascript">
-	window.open('{url}', '_blank').focus();
-</script>
-			""",
-			height = 0,
-		)
-
-	return None
 
 def dsfr_copy_button(
 	label: str,
@@ -234,29 +223,15 @@ def dsfr_copy_button(
 	"""
 	Streamlit DSFR Copy Button component
 	"""
-	value = dsfr_button(
+	return dsfr_button(
 		label = label,
 		key = key,
 		help = help,
 		type = type,
 		disabled = disabled,
 		use_container_width = use_container_width,
+		copy = content,
 	)
-
-	if value:
-		components.html(
-			f"""
-<script type="text/javascript">
-	navigator.clipboard.writeText('{content}')
-		.catch(err => {{
-			console.error('Failed to copy: ', err);
-		}});
-</script>
-			""",
-			height = 0,
-		)
-
-	return None
 
 def dsfr_checkbox(
 	label: str, # Standard

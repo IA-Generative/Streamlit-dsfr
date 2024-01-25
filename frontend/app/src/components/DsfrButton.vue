@@ -19,6 +19,9 @@ const props = defineProps<
 		iconRight?: boolean
 		noOutline?: boolean
 		size?: '' | 'small' | 'sm' | 'lg' | 'large' | 'md' | 'medium'
+		// Custom props
+		link?: string
+		copy?: string
 	}>
 >()
 
@@ -65,6 +68,19 @@ const onClick = () =>
 		{
 			clicked.value = true
 			Streamlit.setComponentValue(clicked.value)
+		}
+
+		if (props.args.link)
+		{
+			window.open(props.args.link, '_blank')?.focus()
+		}
+		else if (props.args.copy)
+		{
+			navigator.clipboard.writeText(props.args.copy)
+				.catch(err =>
+					{
+						console.error('Failed to copy:', err)
+					})
 		}
 	}
 
