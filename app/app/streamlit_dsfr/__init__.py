@@ -314,12 +314,8 @@ def file_uploader(
 	if validMessage is not None:
 		kwargs['validMessage'] = validMessage
 
-	files = _dsfr_file_upload_func(**kwargs, key = key, default = None)
+	file = _dsfr_file_upload_func(**kwargs, key = key, default = None)
 
-	if not files: # None or empty list
-		return None
-
-	file = files[0]
 	return UploadedFile(
 		{
 			'file_id': file['id'],
