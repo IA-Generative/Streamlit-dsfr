@@ -99,6 +99,8 @@ with col_right:
 col_left, col_right = st.columns(2)
 
 with col_right:
+	st.divider()
+
 	with st.echo():
 		stdsfr.picture(
 			'https://placekitten.com/400/200',
