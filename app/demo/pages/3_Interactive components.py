@@ -282,27 +282,30 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Composants Streamlit')
 
-	st_val = st.file_uploader(
-		'Ceci est un téléversement de fichier',
-	)
-	st.write(st_val)
+	with st.echo('below'):
+		st_val = st.file_uploader(
+			'Ceci est un téléversement de fichier',
+		)
+		st.write(st_val)
 
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_val = stdsfr.file_uploader(
-		'Ceci est un téléversement de fichier',
-	)
-	st.write(dsfr_val)
+	with st.echo('below'):
+		dsfr_val = stdsfr.file_uploader(
+			'Ceci est un téléversement de fichier',
+		)
+		st.write(dsfr_val)
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st_val = st.file_uploader(
-		'Ceci est un téléversement de plusieurs fichiers',
-		accept_multiple_files = True,
-	)
-	st.write(st_val)
+	with st.echo('below'):
+		st_val = st.file_uploader(
+			'Ceci est un téléversement de plusieurs fichiers',
+			accept_multiple_files = True,
+		)
+		st.write(st_val)
 
 with col_right:
 	# DSFR component does not support multiple files upload
