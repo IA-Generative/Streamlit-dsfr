@@ -30,7 +30,7 @@ st.header('Boutons')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Composants Streamlit')
+	st.markdown('#### Composant Streamlit')
 
 	with st.echo('below'):
 		st_val = st.button('Ceci est un bouton')
@@ -44,7 +44,7 @@ with col_left:
 		st.write(st_val)
 
 with col_right:
-	st.markdown('#### Composants DSFR')
+	st.markdown('#### Composant DSFR')
 
 	with st.echo('below'):
 		dsfr_val = stdsfr.button('Ceci est un bouton')
@@ -65,7 +65,7 @@ st.header('Cases à cocher')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Composants Streamlit')
+	st.markdown('#### Composant Streamlit')
 
 	with st.echo('below'):
 		st_val = st.checkbox('Ceci est une case à cocher')
@@ -79,7 +79,7 @@ with col_left:
 		st.write(st_val)
 
 with col_right:
-	st.markdown('#### Composants DSFR')
+	st.markdown('#### Composant DSFR')
 
 	with st.echo('below'):
 		dsfr_val = stdsfr.checkbox('Ceci est une case à cocher')
@@ -107,7 +107,7 @@ st.header('Champs de saisie')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Composants Streamlit')
+	st.markdown('#### Composant Streamlit')
 
 	with st.echo('below'):
 		st_val = st.text_input('Ceci est un champ de saisie')
@@ -137,7 +137,7 @@ with col_left:
 		st.write(st_val)
 
 with col_right:
-	st.markdown('#### Composants DSFR')
+	st.markdown('#### Composant DSFR')
 
 	with st.echo('below'):
 		dsfr_val = stdsfr.text_input('Ceci est un champ de saisie')
@@ -174,14 +174,14 @@ st.header('Boutons radio')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Composants Streamlit')
+	st.markdown('#### Composant Streamlit')
 
 	with st.echo('below'):
 		st_val = st.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 1)
 		st.write(st_val)
 
 with col_right:
-	st.markdown('#### Composants DSFR')
+	st.markdown('#### Composant DSFR')
 
 	with st.echo('below'):
 		dsfr_val = stdsfr.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 1)
@@ -199,7 +199,7 @@ st.header('Curseur')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Composants Streamlit')
+	st.markdown('#### Composant Streamlit')
 
 	with st.echo('below'):
 		st_val = st.slider('Ceci est un curseur')
@@ -210,7 +210,7 @@ with col_left:
 		st.write(st_val)
 
 with col_right:
-	st.markdown('#### Composants DSFR')
+	st.markdown('#### Composant DSFR')
 
 	with st.echo('below'):
 		dsfr_val = stdsfr.range('Ceci est un curseur')

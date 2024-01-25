@@ -79,7 +79,7 @@ st.header('Images')
 col_left, col_right = st.columns(2)
 
 with col_left:
-	st.markdown('#### Composants Streamlit')
+	st.markdown('#### Composant Streamlit')
 
 	with st.echo('below'):
 		st.image(
@@ -88,7 +88,7 @@ with col_left:
 		)
 
 with col_right:
-	st.markdown('#### Composants DSFR')
+	st.markdown('#### Composant DSFR')
 
 	with st.echo('below'):
 		stdsfr.picture(
