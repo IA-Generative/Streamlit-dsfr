@@ -24,15 +24,15 @@ st.write(value)
 ```
 
 Available static components:
-- `dsfr_alert`
-- `dsfr_badge`
-- `dsfr_picture`
+- `stdsfr.alert`
+- `stdsfr.badge`
+- `stdsfr.image`
 
 Available interactive components:
-- `dsfr_button`
-- `dsfr_checkbox`
-- `dsfr_radio`
-- `dsfr_text_input`
-- `dsfr_number_input`
-- `dsfr_text_area`
-- `dsfr_range`
+- `stdsfr.button`
+- `stdsfr.checkbox`
+- `stdsfr.radio`
+- `stdsfr.text_input`
+- `stdsfr.number_input`
+- `stdsfr.text_area`
+- `stdsfr.slider`
