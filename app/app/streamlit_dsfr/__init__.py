@@ -77,7 +77,9 @@ def alert(
 
 	return _dsfr_alert_func(title = title, **kwargs, key = key, default = None)
 
-def dsfr_badge(
+dsfr_alert = alert
+
+def badge(
 	label: str,
 	type: Optional[str] = None,
 	small: Optional[bool] = None,
@@ -98,7 +100,7 @@ def dsfr_badge(
 
 	return _dsfr_badge_func(label = label, **kwargs, key = key, default = None)
 
-dsfr_alert = alert
+dsfr_badge = badge
 
 def breadcrumb(
 	links: Optional[Union[str, list[str], list[tuple[str, str]], list[dict[str, str]]]] = None,
