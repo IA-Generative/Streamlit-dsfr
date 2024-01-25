@@ -98,15 +98,8 @@ const onBlur = () =>
 <template>
 	<div class="component" :style="style">
 		<DsfrButton
-			:label="props.args.label"
-			:secondary="props.args.secondary"
-			:tertiary="props.args.tertiary"
+			v-bind="props.args"
 			:disabled="props.disabled || props.args.disabled"
-			:icon="props.args.icon"
-			:size="props.args.size"
-			:no-outline="props.args.noOutline"
-			:icon-only="props.args.iconOnly"
-			:icon-right="props.args.iconRight"
 			@click="onClick"
 			@focus="onFocus"
 			@blur="onBlur"
