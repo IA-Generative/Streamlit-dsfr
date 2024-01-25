@@ -49,12 +49,6 @@ onUnmounted(() =>
 
 const onClick = () =>
 	{
-		if (!clicked.value)
-		{
-			clicked.value = true
-			Streamlit.setComponentValue(clicked.value)
-		}
-
 		if (props.args.link)
 		{
 			window.open(props.args.link, '_blank')?.focus()
@@ -66,6 +60,12 @@ const onClick = () =>
 					{
 						console.error('Failed to copy:', err)
 					})
+		}
+
+		if (!clicked.value)
+		{
+			clicked.value = true
+			Streamlit.setComponentValue(clicked.value)
 		}
 	}
 
