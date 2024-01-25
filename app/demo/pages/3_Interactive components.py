@@ -36,6 +36,16 @@ with col_left:
 		st_val = st.button('Ceci est un bouton')
 		st.write(st_val)
 
+with col_right:
+	st.markdown('#### Composant DSFR')
+
+	with st.echo('below'):
+		dsfr_val = stdsfr.button('Ceci est un bouton')
+		st.write(dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_left:
 	with st.echo('below'):
 		st_val = st.button(
 			f'Ceci est un nombre aléatoire: {math.floor(random.random() * 100)}',
@@ -44,12 +54,6 @@ with col_left:
 		st.write(st_val)
 
 with col_right:
-	st.markdown('#### Composant DSFR')
-
-	with st.echo('below'):
-		dsfr_val = stdsfr.button('Ceci est un bouton')
-		st.write(dsfr_val)
-
 	with st.echo('below'):
 		dsfr_val = stdsfr.button(
 			f'Ceci est un nombre aléatoire: {math.floor(random.random() * 100)}',
@@ -71,6 +75,26 @@ with col_left:
 		st_val = st.checkbox('Ceci est une case à cocher')
 		st.write(st_val)
 
+with col_right:
+	st.markdown('#### Composant DSFR')
+
+	with st.echo('below'):
+		dsfr_val = stdsfr.checkbox('Ceci est une case à cocher')
+		st.write(dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	with st.echo('below'):
+		dsfr_val = stdsfr.checkbox(
+			'Ceci est une petite case à cocher',
+			small = True,
+		)
+		st.write(dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_left:
 	with st.echo('below'):
 		st_val = st.checkbox(
 			'Ceci est une case à cocher',
@@ -79,23 +103,10 @@ with col_left:
 		st.write(st_val)
 
 with col_right:
-	st.markdown('#### Composant DSFR')
-
-	with st.echo('below'):
-		dsfr_val = stdsfr.checkbox('Ceci est une case à cocher')
-		st.write(dsfr_val)
-
 	with st.echo('below'):
 		dsfr_val = stdsfr.checkbox(
 			'Ceci est une case à cocher',
 			help = 'Ceci est une aide',
-		)
-		st.write(dsfr_val)
-
-	with st.echo('below'):
-		dsfr_val = stdsfr.checkbox(
-			'Ceci est une petite case à cocher',
-			small = True,
 		)
 		st.write(dsfr_val)
 
@@ -113,29 +124,6 @@ with col_left:
 		st_val = st.text_input('Ceci est un champ de saisie')
 		st.write(st_val)
 
-	with st.echo('below'):
-		st_val = st.text_input(
-			'Ceci est un champ de saisie',
-			help = 'Ceci est une aide',
-		)
-		st.write(st_val)
-
-	with st.echo('below'):
-		st_val = st.number_input('Ceci est un champ de saisie numérique')
-		st.write(st_val)
-
-	with st.echo('below'):
-		st_val = st.text_area('Ceci est une zone de texte')
-		st.write(st_val)
-
-	with st.echo('below'):
-		st_val = st.date_input('Ceci est un champ de saisie de date')
-		st.write(st_val)
-
-	with st.echo('below'):
-		st_val = st.time_input('Ceci est un champ de saisie de temps')
-		st.write(st_val)
-
 with col_right:
 	st.markdown('#### Composant DSFR')
 
@@ -143,6 +131,17 @@ with col_right:
 		dsfr_val = stdsfr.text_input('Ceci est un champ de saisie')
 		st.write(dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_left:
+	with st.echo('below'):
+		st_val = st.text_input(
+			'Ceci est un champ de saisie',
+			help = 'Ceci est une aide',
+		)
+		st.write(st_val)
+
+with col_right:
 	with st.echo('below'):
 		dsfr_val = stdsfr.text_input(
 			'Ceci est un champ de saisie',
@@ -150,18 +149,52 @@ with col_right:
 		)
 		st.write(dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_left:
+	with st.echo('below'):
+		st_val = st.number_input('Ceci est un champ de saisie numérique')
+		st.write(st_val)
+
+with col_right:
 	with st.echo('below'):
 		dsfr_val = stdsfr.number_input('Ceci est un champ de saisie numérique')
 		st.write(dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_left:
+	with st.echo('below'):
+		st_val = st.text_area('Ceci est une zone de texte')
+		st.write(st_val)
+
+with col_right:
 	with st.echo('below'):
 		dsfr_val = stdsfr.text_area('Ceci est une zone de texte')
 		st.write(dsfr_val)
 
+# WIP
+col_left, col_right = st.columns(2)
+
+with col_left:
+	with st.echo('below'):
+		st_val = st.date_input('Ceci est un champ de saisie de date')
+		st.write(st_val)
+
+with col_right:
 	with st.echo('below'):
 		dsfr_val = stdsfr.date_input('Ceci est un champ de saisie de date')
 		st.write(dsfr_val)
 
+# WIP
+col_left, col_right = st.columns(2)
+
+with col_left:
+	with st.echo('below'):
+		st_val = st.time_input('Ceci est un champ de saisie de temps')
+		st.write(st_val)
+
+with col_right:
 	with st.echo('below'):
 		dsfr_val = stdsfr.time_input('Ceci est un champ de saisie de temps')
 		st.write(dsfr_val)
@@ -177,18 +210,33 @@ with col_left:
 	st.markdown('#### Composant Streamlit')
 
 	with st.echo('below'):
-		st_val = st.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 1)
+		st_val = st.radio(
+			'Ceci sont des boutons radio',
+			['Option 1', 'Option 2 (default)', 'Option 3'],
+			1,
+		)
 		st.write(st_val)
 
 with col_right:
 	st.markdown('#### Composant DSFR')
 
 	with st.echo('below'):
-		dsfr_val = stdsfr.radio('Ceci sont des boutons radio', ['Option 1', 'Option 2 (default)', 'Option 3'], 1)
+		dsfr_val = stdsfr.radio(
+			'Ceci sont des boutons radio',
+			['Option 1', 'Option 2 (default)', 'Option 3'],
+			1,
+		)
 		st.write(dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_right:
 	with st.echo('below'):
-		dsfr_val = stdsfr.radio('Ceci sont des petits boutons radio', ['Small option 1', 'Small option 2', 'Small option 3'], small = True)
+		dsfr_val = stdsfr.radio(
+			'Ceci sont des petits boutons radio',
+			['Small option 1', 'Small option 2', 'Small option 3'],
+			small = True,
+		)
 		st.write(dsfr_val)
 
 # ---
@@ -205,10 +253,6 @@ with col_left:
 		st_val = st.slider('Ceci est un curseur')
 		st.write(st_val)
 
-	with st.echo('below'):
-		st_val = st.slider('Ceci est un curseur', 0, 100, 50)
-		st.write(st_val)
-
 with col_right:
 	st.markdown('#### Composant DSFR')
 
@@ -216,6 +260,14 @@ with col_right:
 		dsfr_val = stdsfr.range('Ceci est un curseur')
 		st.write(dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_left:
+	with st.echo('below'):
+		st_val = st.slider('Ceci est un curseur', 0, 100, 50)
+		st.write(st_val)
+
+with col_right:
 	with st.echo('below'):
 		dsfr_val = stdsfr.range('Ceci est un curseur', 0, 100, 50, small = True)
 		st.write(dsfr_val)
