@@ -316,6 +316,9 @@ def file_uploader(
 
 	file = _dsfr_file_upload_func(**kwargs, key = key, default = None)
 
+	if not file:
+		return None
+
 	return UploadedFile(
 		{
 			'file_id': file['id'],
