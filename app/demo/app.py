@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_dsfr import override_font_family
+import streamlit_dsfr as stdsfr
 
 from disable_sidebar import disable_sidebar
 from nav_menu import nav_menu
@@ -14,7 +14,7 @@ disable_sidebar()
 st.title('Demo composants DSFR')
 
 # CSS font family override
-override_font_family()
+stdsfr.override_font_family()
 
 # Navigation menu
 nav_menu()
