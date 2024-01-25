@@ -568,12 +568,17 @@ def number_input(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.number_input
 	"""
-	if min_value is not None:
-		if value is None:
-			value = min_value
-
 	if value is None:
-		value = 0
+		if min_value is not None:
+			value = min_value
+		else:
+			value = 0.0
+
+	if step is not None:
+		if isinstance(step, int):
+			step = 1
+		else:
+			step = 0.01
 
 	return dsfr_input(
 		label = label,
