@@ -313,6 +313,30 @@ with col_right:
 		)
 		st.write('Value:', dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st.divider()
+
+	with st.echo():
+		st_val = st.radio(
+			'Ceci sont des boutons radio',
+			['Option 1', 'Option 2', 'Option 3'],
+			format_func = lambda x: str(x) + '!',
+		)
+		st.write('Value:', st_val)
+
+with col_right:
+	st.divider()
+
+	with st.echo():
+		dsfr_val = stdsfr.radio(
+			'Ceci sont des petits boutons radio',
+			['Option 1', 'Option 2', 'Option 3'],
+			format_func = lambda x: str(x) + '!',
+		)
+		st.write('Value:', dsfr_val)
+
 # ---
 st.divider()
 
