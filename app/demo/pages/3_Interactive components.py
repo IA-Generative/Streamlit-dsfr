@@ -34,14 +34,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.button('Ceci est un bouton')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.markdown('#### Composant DSFR')
 
 	with st.echo():
 		dsfr_val = stdsfr.button('Ceci est un bouton')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -53,7 +53,7 @@ with col_left:
 			f'Ceci est un nombre aléatoire: {math.floor(random.random() * 100)}',
 			key = 'st_random_button',
 		)
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
@@ -63,7 +63,7 @@ with col_right:
 			f'Ceci est un nombre aléatoire: {math.floor(random.random() * 100)}',
 			key = 'dsfr_random_button',
 		)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 # ---
 st.divider()
@@ -111,14 +111,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.checkbox('Ceci est une case à cocher')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.markdown('#### Composant DSFR')
 
 	with st.echo():
 		dsfr_val = stdsfr.checkbox('Ceci est une case à cocher')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -130,7 +130,7 @@ with col_right:
 			'Ceci est une petite case à cocher',
 			small = True,
 		)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -142,7 +142,7 @@ with col_left:
 			'Ceci est une case à cocher',
 			help = 'Ceci est une aide',
 		)
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
@@ -152,7 +152,7 @@ with col_right:
 			'Ceci est une case à cocher',
 			help = 'Ceci est une aide',
 		)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 # ---
 st.divider()
@@ -166,14 +166,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.text_input('Ceci est un champ de saisie')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.markdown('#### Composant DSFR')
 
 	with st.echo():
 		dsfr_val = stdsfr.text_input('Ceci est un champ de saisie')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -185,7 +185,7 @@ with col_left:
 			'Ceci est un champ de saisie',
 			help = 'Ceci est une aide',
 		)
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
@@ -195,7 +195,7 @@ with col_right:
 			'Ceci est un champ de saisie',
 			help = 'Ceci est une aide',
 		)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -204,14 +204,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.number_input('Ceci est un champ de saisie numérique')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
 
 	with st.echo():
 		dsfr_val = stdsfr.number_input('Ceci est un champ de saisie numérique')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -220,14 +220,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.text_area('Ceci est une zone de texte')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
 
 	with st.echo():
 		dsfr_val = stdsfr.text_area('Ceci est une zone de texte')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 # WIP
 col_left, col_right = st.columns(2)
@@ -237,14 +237,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.date_input('Ceci est un champ de saisie de date')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
 
 	with st.echo():
 		dsfr_val = stdsfr.date_input('Ceci est un champ de saisie de date')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 # WIP
 col_left, col_right = st.columns(2)
@@ -254,14 +254,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.time_input('Ceci est un champ de saisie de temps')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
 
 	with st.echo():
 		dsfr_val = stdsfr.time_input('Ceci est un champ de saisie de temps')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 # ---
 st.divider()
@@ -279,7 +279,7 @@ with col_left:
 			['Option 1', 'Option 2 (default)', 'Option 3'],
 			1,
 		)
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.markdown('#### Composant DSFR')
@@ -290,7 +290,7 @@ with col_right:
 			['Option 1', 'Option 2 (default)', 'Option 3'],
 			1,
 		)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -303,7 +303,7 @@ with col_right:
 			['Small option 1', 'Small option 2', 'Small option 3'],
 			small = True,
 		)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 # ---
 st.divider()
@@ -317,14 +317,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.slider('Ceci est un curseur')
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.markdown('#### Composant DSFR')
 
 	with st.echo():
 		dsfr_val = stdsfr.range('Ceci est un curseur')
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -333,14 +333,14 @@ with col_left:
 
 	with st.echo():
 		st_val = st.slider('Ceci est un curseur', 0, 100, 50)
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
 
 	with st.echo():
 		dsfr_val = stdsfr.range('Ceci est un curseur', 0, 100, 50, small = True)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 # ---
 st.divider()
@@ -356,7 +356,7 @@ with col_left:
 		st_val = st.file_uploader(
 			'Ceci est un téléversement de fichier',
 		)
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.markdown('#### Composants DSFR')
@@ -365,7 +365,7 @@ with col_right:
 		dsfr_val = stdsfr.file_uploader(
 			'Ceci est un téléversement de fichier',
 		)
-		st.write(dsfr_val)
+		st.write('Value:', dsfr_val)
 
 col_left, col_right = st.columns(2)
 
@@ -377,7 +377,7 @@ with col_left:
 			'Ceci est un téléversement de plusieurs fichiers',
 			accept_multiple_files = True,
 		)
-		st.write(st_val)
+		st.write('Value:', st_val)
 
 with col_right:
 	st.divider()
