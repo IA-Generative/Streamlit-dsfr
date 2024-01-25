@@ -875,10 +875,10 @@ def radio(
 		for option in options
 	]
 
-	if index is not None:
+	if index is None:
+		index = 0
+	if index < len(kwargs['options']):
 		kwargs['modelValue'] = kwargs['options'][index]['value']
-	else:
-		kwargs['modelValue'] = kwargs.get('options', [{}])[0].get('value')
 
 	if format_func is not None:
 		for i in range(len(kwargs['options'])):
