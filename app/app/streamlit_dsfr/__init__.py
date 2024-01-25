@@ -4,7 +4,7 @@ import json
 import base64
 
 import streamlit.components.v1 as components
-from streamlit.runtime.uploaded_file_manager import UploadedFile
+from streamlit.runtime.uploaded_file_manager import UploadedFile, UploadedFileRec
 from streamlit.proto.Common_pb2 import FileURLs as FileURLsProto
 
 # Release flag constant. Set to True when releasing the component.
@@ -320,12 +320,12 @@ def file_uploader(
 		return None
 
 	return UploadedFile(
-		{
-			'file_id': file['id'],
-			'name':	file['name'],
-			'type': file['type'],
-			'data': base64.b64decode(file['data']), # Decode bytes
-		},
+		UploadedFileRec(
+			file_id = file['id'],
+			name = file['name'],
+			type = file['type'],
+			data = base64.b64decode(file['data']), # Decode bytes
+		),
 		FileURLsProto(
 			file_id = file['id'],
 			delete_url = None, # ?
