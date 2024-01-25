@@ -879,4 +879,4 @@ dsfr_slider = range
 
 # Util functions for users
 
-from override_font_family import override_font_family
+from .override_font_family import override_font_family
