@@ -32,7 +32,7 @@ const props = defineProps<
 >()
 
 // Bind the input value to `value`
-const value = ref<string>(props.args.modelValue || '')
+const value = ref<string>(props.args.modelValue ?? '')
 const lastValue = ref(value.value)
 
 function setComponentValue()
