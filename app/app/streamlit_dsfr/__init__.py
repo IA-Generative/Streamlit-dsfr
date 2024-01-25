@@ -574,7 +574,7 @@ def number_input(
 		else:
 			value = 0.0
 
-	if step is not None:
+	if step is None:
 		if isinstance(step, int):
 			step = 1
 		else:
