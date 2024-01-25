@@ -255,8 +255,8 @@ dsfr_checkbox = checkbox
 _ext2mimeTypes = None
 
 def ext2mimeTypes():
+	global _ext2mimeTypes
 	if _ext2mimeTypes is None:
-		global _ext2mimeTypes
 		with open(os.path.join(os.path.dirname(__file__), 'mimeTypes.json'), 'r') as f:
 			_ext2mimeTypes = json.load(f)
 	return _ext2mimeTypes
