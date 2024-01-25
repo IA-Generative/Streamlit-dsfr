@@ -287,12 +287,6 @@ with col_left:
 	)
 	st.write(st_val)
 
-	st_val = st.file_uploader(
-		'Ceci est un téléversement de plusieurs fichiers',
-		accept_multiple_files = True,
-	)
-	st.write(st_val)
-
 with col_right:
 	st.markdown('#### Composants DSFR')
 
@@ -301,5 +295,15 @@ with col_right:
 	)
 	st.write(dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st_val = st.file_uploader(
+		'Ceci est un téléversement de plusieurs fichiers',
+		accept_multiple_files = True,
+	)
+	st.write(st_val)
+
+with col_right:
 	# DSFR component does not support multiple files upload
 	st.write('Le composant DSFR ne permet pas de téléverser plusieurs fichiers')
