@@ -1,7 +1,12 @@
 import os
 from typing import Optional, Union, Iterable, Callable
+import json
+import base64
+import hashlib
 
 import streamlit.components.v1 as components
+from streamlit.runtime.uploaded_file_manager import UploadedFile, UploadedFileRec
+from streamlit.proto.Common_pb2 import FileURLs as FileURLsProto
 
 # Release flag constant. Set to True when releasing the component.
 _RELEASE = False
@@ -13,6 +18,7 @@ supported_components = {
     'dsfr_breadcrumb': 'st_dsfr_breadcrumb',
     'dsfr_button': 'st_dsfr_button',
 	'dsfr_checkbox': 'st_dsfr_checkbox',
+	'dsfr_file_upload': 'st_dsfr_file_upload',
     'dsfr_input': 'st_dsfr_input',
 	'dsfr_picture': 'st_dsfr_picture',
     'dsfr_radio': 'st_dsfr_radio',
@@ -42,10 +48,9 @@ else:
                 path = os.path.join(build_dir, supported_components[component]),
             )
 
-
 # Components wrapper functions for users
 
-def dsfr_alert(
+def alert(
 	title: str,
 	description: Optional[str] = None,
 	type: Optional[str] = None,
@@ -78,7 +83,9 @@ def dsfr_alert(
 
 	return _dsfr_alert_func(title = title, **kwargs, key = key, default = None)
 
-def dsfr_badge(
+dsfr_alert = alert
+
+def badge(
 	label: str,
 	type: Optional[str] = None,
 	small: Optional[bool] = None,
@@ -99,8 +106,10 @@ def dsfr_badge(
 
 	return _dsfr_badge_func(label = label, **kwargs, key = key, default = None)
 
-def dsfr_breadcrumb(
-	links: str | list[str] | list[(str, str)] | list[dict[str, str]] | None = None,
+dsfr_badge = badge
+
+def breadcrumb(
+	links: Optional[Union[str, list[str], list[tuple[str, str]], list[dict[str, str]]]] = None,
 	*,
 	id: Optional[str] = None,
 	key: Optional[str] = None,
@@ -128,7 +137,9 @@ def dsfr_breadcrumb(
 
 	return _dsfr_breadcrumb_func(**kwargs, key = key, default = False)
 
-def dsfr_button(
+dsfr_breadcrumb = breadcrumb
+
+def button(
 	label: str, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
 	# help: Optional[str] = None, # Standard
@@ -184,7 +195,62 @@ def dsfr_button(
 
 	return _dsfr_button_func(**kwargs, key = key, default = False)
 
-def dsfr_checkbox(
+dsfr_button = button
+
+def link_button(
+	label: str, # Standard
+	url: str, # Standard
+	*,
+	key: Optional[Union[str, int]] = None,
+	help: Optional[str] = None, # Standard
+	type: Optional[str] = None, # Standard # 'primary' | 'secondary'
+	disabled: Optional[bool] = None, # Standard
+	use_container_width: Optional[bool] = None, # Standard
+):
+	"""
+	Streamlit DSFR Link Button component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.link_button
+	"""
+	return button(
+		label = label,
+		key = key,
+		help = help,
+		type = type,
+		disabled = disabled,
+		use_container_width = use_container_width,
+		link = url,
+	)
+
+dsfr_link_button = link_button
+
+def copy_button(
+	label: str,
+	content: str,
+	*,
+	key: Optional[Union[str, int]] = None,
+	help: Optional[str] = None,
+	type: Optional[str] = None, # 'primary' | 'secondary'
+	disabled: Optional[bool] = None,
+	use_container_width: Optional[bool] = None,
+):
+	"""
+	Streamlit DSFR Copy Button component
+	"""
+	return button(
+		label = label,
+		key = key,
+		help = help,
+		type = type,
+		disabled = disabled,
+		use_container_width = use_container_width,
+		copy = content,
+	)
+
+dsfr_copy_button = copy_button
+
+def checkbox(
 	label: str, # Standard
 	value: Optional[bool] = None, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
@@ -238,7 +304,95 @@ def dsfr_checkbox(
 
 	return _dsfr_checkbox_func(**kwargs, key = key, default = False)
 
-def dsfr_input(
+dsfr_checkbox = checkbox
+
+_ext2mimeTypes = None
+
+def ext2mimeTypes():
+	global _ext2mimeTypes
+	if _ext2mimeTypes is None:
+		with open(os.path.join(os.path.dirname(__file__), 'mimeTypes.json'), 'r') as f:
+			_ext2mimeTypes = json.load(f)
+	return _ext2mimeTypes
+
+def file_uploader(
+	label: str, # Standard
+	type: Optional[Union[str, list[str]]] = None, # Standard # extensions, e.g. ['png', 'jpg']
+	# accept_multiple_files: Optional[bool] = None, # Standard
+	key: Optional[Union[str, int]] = None, # Standard
+	help: Optional[str] = None, # Standard
+	# on_change: Optional[Callable] = None, # Standard
+	# args: Optional[tuple] = None, # Standard
+	# kwargs: Optional[dict] = None, # Standard
+	*,
+	disabled: Optional[bool] = None, # Standard
+	# label_visibility: Optional[str] = None, # Standard
+	id: Optional[str] = None,
+	hint: Optional[str] = None, # Alias for 'help'
+	error: Optional[str] = None,
+	validMessage: Optional[str] = None,
+	# modelValue: Optional[str] = None,
+	**kwargs,
+):
+	"""
+	Streamlit DSFR Checkbox component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.checkbox
+	"""
+	kwargs['label'] = label
+
+	if help is not None:
+		kwargs['hint'] = help
+	elif hint is not None:
+		kwargs['hint'] = hint
+
+	# Convert type to list of MimeTypes
+	if type is not None:
+		if isinstance(type, str):
+			type = [type]
+		_ext2mimeTypesDict = ext2mimeTypes()
+		accept = [
+			_ext2mimeTypesDict[f'.{ext}']
+			for ext in type
+		]
+		kwargs['accept'] = accept
+
+	if disabled is not None:
+		kwargs['disabled'] = disabled
+
+	if id is not None:
+		kwargs['id'] = id
+	if error is not None:
+		kwargs['error'] = error
+	if validMessage is not None:
+		kwargs['validMessage'] = validMessage
+
+	file = _dsfr_file_upload_func(**kwargs, key = key, default = None)
+
+	if not file:
+		return None
+
+	id = hashlib.sha256(file['data'].encode('utf-8')).hexdigest()
+
+	return UploadedFile(
+		UploadedFileRec(
+			file_id = id,
+			name = file['name'],
+			type = file['type'],
+			data = base64.b64decode(file['data']), # Decode bytes
+		),
+		FileURLsProto(
+			file_id = id,
+			delete_url = None, # ?
+			upload_url = None, # ?
+		),
+	)
+
+dsfr_file_upload = file_uploader
+dsfr_file_uploader = file_uploader
+
+def input(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
@@ -318,7 +472,9 @@ def dsfr_input(
 
 	return _dsfr_input_func(**kwargs, key = key, default = kwargs['modelValue'])
 
-def dsfr_text_input(
+dsfr_input = input
+
+def text_input(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
@@ -376,7 +532,9 @@ def dsfr_text_input(
 		**kwargs,
 	)
 
-def dsfr_number_input(
+dsfr_text_input = text_input
+
+def number_input(
 	label: str, # Standard
 	min_value: Optional[Union[int, float]] = None, # Standard
 	max_value: Optional[Union[int, float]] = None, # Standard
@@ -410,12 +568,17 @@ def dsfr_number_input(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.number_input
 	"""
-	if min_value is not None:
-		if value is None:
-			value = min_value
-
 	if value is None:
-		value = 0
+		if min_value is not None:
+			value = min_value
+		else:
+			value = 0.0
+
+	if step is None:
+		if isinstance(step, int):
+			step = 1
+		else:
+			step = 0.01
 
 	return dsfr_input(
 		label = label,
@@ -442,7 +605,9 @@ def dsfr_number_input(
 		**kwargs,
 	)
 
-def dsfr_text_area(
+dsfr_number_input = number_input
+
+def text_area(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
 	# height: Optional[int] = None, # Standard
@@ -498,7 +663,9 @@ def dsfr_text_area(
 		**kwargs,
 	)
 
-def dsfr_date_input(
+dsfr_text_area = text_area
+
+def date_input(
 	label: str, # Standard
 	# value: Optional[Union[datetime, str]] = None, # Standard
 	value: Optional[str] = None, # Semi-standard
@@ -558,7 +725,9 @@ def dsfr_date_input(
 		**kwargs,
 	)
 
-def dsfr_time_input(
+dsfr_date_input = date_input
+
+def time_input(
 	label: str, # Standard
 	# value: Optional[Union[datetime, str]] = None, # Standard
 	value: Optional[str] = None, # Semi-standard
@@ -614,7 +783,9 @@ def dsfr_time_input(
 		**kwargs,
 	)
 
-def dsfr_picture(
+dsfr_time_input = time_input
+
+def picture(
 	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]], # Standard
 	image: str, # Semi-standard
 	# caption: Optional[Union[str, List[str]]] = None, # Standard
@@ -657,7 +828,11 @@ def dsfr_picture(
 
 	return _dsfr_picture_func(**kwargs, key = key, default = None)
 
-def dsfr_radio(
+image = picture
+dsfr_picture = picture
+dsfr_image = picture
+
+def radio(
 	label: str, # Standard
 	options: Iterable[str], # Standard
 	index: Optional[int] = None, # Standard
@@ -752,7 +927,9 @@ def dsfr_radio(
 
 	return _dsfr_radio_func(**kwargs, key = key, default = kwargs['modelValue'])
 
-def dsfr_range(
+dsfr_radio = radio
+
+def range(
 	label: str, # Standard
 	# min_value: Optional[Union[int, float, datetime, timedelta]] = None, # Standard
 	min_value: Optional[Union[int, float]] = None, # Semi-standard
@@ -848,4 +1025,10 @@ def dsfr_range(
 
 	return _dsfr_range_func(**kwargs, key = key, default = kwargs['modelValue'])
 
-dsfr_slider = dsfr_range
+slider = range
+dsfr_range = range
+dsfr_slider = range
+
+# Util functions for users
+
+from .override_font_family import override_font_family

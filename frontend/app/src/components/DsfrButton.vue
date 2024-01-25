@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButton } from '@gouvminint/vue-dsfr'
 
@@ -19,26 +19,14 @@ const props = defineProps<
 		iconRight?: boolean
 		noOutline?: boolean
 		size?: '' | 'small' | 'sm' | 'lg' | 'large' | 'md' | 'medium'
+		// Custom props
+		link?: string
+		copy?: string
 	}>
 >()
 
-// Default props values
-watch(() => props.args, () =>
-	{
-		props.args.label ||= 'Button'
-		props.args.secondary ??= false
-		props.args.tertiary ??= false
-		props.args.disabled ??= false
-		props.args.iconOnly ??= false
-		props.args.iconRight ??= false
-		props.args.noOutline ??= false
-		props.args.size ??= ''
-	},
-	{ deep: true, immediate: true },
-)
-
-const clicked = ref(false)
-const isFocused = ref(false)
+const clicked = ref<boolean>(false)
+const isFocused = ref<boolean>(false)
 
 const onRenderEvent = (_event: Event): void =>
 	{
@@ -61,6 +49,19 @@ onUnmounted(() =>
 
 const onClick = () =>
 	{
+		if (props.args.link)
+		{
+			window.open(props.args.link, '_blank')?.focus()
+		}
+		else if (props.args.copy)
+		{
+			navigator.clipboard.writeText(props.args.copy)
+				.catch(err =>
+					{
+						console.error('Failed to copy:', err)
+					})
+		}
+
 		if (!clicked.value)
 		{
 			clicked.value = true
@@ -82,15 +83,9 @@ const onBlur = () =>
 <template>
 	<div class="component" :style="style">
 		<DsfrButton
-			:label="props.args.label"
-			:secondary="props.args.secondary"
-			:tertiary="props.args.tertiary"
+			v-bind="props.args"
+			:label="props.args.label || 'Button'"
 			:disabled="props.disabled || props.args.disabled"
-			:icon="props.args.icon"
-			:size="props.args.size"
-			:no-outline="props.args.noOutline"
-			:icon-only="props.args.iconOnly"
-			:icon-right="props.args.iconRight"
 			@click="onClick"
 			@focus="onFocus"
 			@blur="onBlur"

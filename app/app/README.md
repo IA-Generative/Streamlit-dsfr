@@ -14,9 +14,12 @@ pip install streamlit-dsfr
 
 ```python
 import streamlit as st
-from streamlit_dsfr import dsfr_button
+import streamlit_dsfr as stdsfr
 
-value = dsfr_button()
+# Instead of st.button():
+value = stdsfr.button()
+
+# Returns True or False
 st.write(value)
 ```
 
