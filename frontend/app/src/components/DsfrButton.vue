@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButton } from '@gouvminint/vue-dsfr'
 
@@ -25,23 +25,8 @@ const props = defineProps<
 	}>
 >()
 
-// Default props values
-watch(() => props.args, () =>
-	{
-		props.args.label ||= 'Button'
-		props.args.secondary ??= false
-		props.args.tertiary ??= false
-		props.args.disabled ??= false
-		props.args.iconOnly ??= false
-		props.args.iconRight ??= false
-		props.args.noOutline ??= false
-		props.args.size ??= ''
-	},
-	{ deep: true, immediate: true },
-)
-
-const clicked = ref(false)
-const isFocused = ref(false)
+const clicked = ref<boolean>(false)
+const isFocused = ref<boolean>(false)
 
 const onRenderEvent = (_event: Event): void =>
 	{
@@ -99,6 +84,7 @@ const onBlur = () =>
 	<div class="component" :style="style">
 		<DsfrButton
 			v-bind="props.args"
+			:label="props.args.label || 'Button'"
 			:disabled="props.disabled || props.args.disabled"
 			@click="onClick"
 			@focus="onFocus"
