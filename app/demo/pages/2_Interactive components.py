@@ -2,8 +2,11 @@ import math
 import random
 
 import streamlit as st
+import streamlit.components.v1 as components
 from streamlit_dsfr import \
 	dsfr_button, \
+	dsfr_link_button, \
+	dsfr_copy_button, \
 	dsfr_checkbox, \
 	dsfr_radio, \
 	dsfr_text_input, \
@@ -62,6 +65,40 @@ with col_right:
 		key = 'dsfr_random_button',
 	)
 	st.write(dsfr_val)
+
+# ---
+st.divider()
+
+st.header('Boutons lien')
+
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st.markdown('#### Composants Streamlit')
+
+	st.link_button('Ceci est un bouton lien', 'https://www.streamlit.io')
+
+with col_right:
+	st.markdown('#### Composants DSFR')
+
+	dsfr_link_button('Ceci est un bouton lien', 'https://www.streamlit.io')
+
+# ---
+st.divider()
+
+st.header('Boutons copie')
+
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st.markdown('#### Composants Streamlit')
+
+	st.markdown('Pas d\'équivalent Streamlit')
+
+with col_right:
+	st.markdown('#### Composants DSFR')
+
+	dsfr_copy_button('Ceci est un bouton copie', 'dsfr_copy_button')
 
 # ---
 st.divider()
