@@ -261,7 +261,7 @@ def ext2mimeTypes():
 			_ext2mimeTypes = json.load(f)
 	return _ext2mimeTypes
 
-def dsfr_file_upload(
+def file_uploader(
 	label: str, # Standard
 	type: Optional[Union[str, list[str]]] = None, # Standard # extensions, e.g. ['png', 'jpg']
 	# accept_multiple_files: Optional[bool] = None, # Standard
@@ -334,7 +334,8 @@ def dsfr_file_upload(
 		),
 	)
 
-dsfr_file_uploader = dsfr_file_upload
+dsfr_file_upload = file_uploader
+dsfr_file_uploader = file_uploader
 
 def input(
 	label: str, # Standard
