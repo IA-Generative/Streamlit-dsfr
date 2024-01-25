@@ -76,7 +76,7 @@ with col_left:
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_link_button('Ceci est un bouton lien', 'https://www.streamlit.io')
+	stdsfr.link_button('Ceci est un bouton lien', 'https://www.streamlit.io')
 
 # ---
 st.divider()
@@ -93,7 +93,7 @@ with col_left:
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_copy_button('Ceci est un bouton copie', 'dsfr_copy_button')
+	stdsfr.copy_button('Ceci est un bouton copie', 'dsfr_copy_button')
 
 # ---
 st.divider()

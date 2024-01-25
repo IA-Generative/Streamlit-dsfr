@@ -197,7 +197,7 @@ def button(
 
 dsfr_button = button
 
-def dsfr_link_button(
+def link_button(
 	label: str, # Standard
 	url: str, # Standard
 	*,
@@ -213,7 +213,7 @@ def dsfr_link_button(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/widgets/st.link_button
 	"""
-	return dsfr_button(
+	return button(
 		label = label,
 		key = key,
 		help = help,
@@ -223,7 +223,9 @@ def dsfr_link_button(
 		link = url,
 	)
 
-def dsfr_copy_button(
+dsfr_link_button = link_button
+
+def copy_button(
 	label: str,
 	content: str,
 	*,
@@ -236,7 +238,7 @@ def dsfr_copy_button(
 	"""
 	Streamlit DSFR Copy Button component
 	"""
-	return dsfr_button(
+	return button(
 		label = label,
 		key = key,
 		help = help,
@@ -245,6 +247,8 @@ def dsfr_copy_button(
 		use_container_width = use_container_width,
 		copy = content,
 	)
+
+dsfr_copy_button = copy_button
 
 def checkbox(
 	label: str, # Standard
