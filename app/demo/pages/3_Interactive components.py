@@ -219,17 +219,3 @@ with col_right:
 	with st.echo('below'):
 		dsfr_val = stdsfr.range('Ceci est un curseur', 0, 100, 50, small = True)
 		st.write(dsfr_val)
-
-# ---
-st.divider()
-
-if stdsfr.button('Cliquez moi'):
-	st.markdown('Vous avez cliqué sur le bouton')
-
-st.markdown('---')
-st.header('Composant avec des arguments variables')
-
-name_input = st.text_input('Entrez un nom', value = 'Streamlit')
-
-if stdsfr.button(name_input):
-	st.markdown('Vous avez cliqué sur le bouton')
