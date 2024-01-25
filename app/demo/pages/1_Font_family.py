@@ -23,15 +23,11 @@ st.markdown('DSFR utilise la police de caractères `Marianne`.')
 
 st.header('Remplacer la police de caractères')
 
-st.markdown("""
-```python
-from streamlit_dsfr import override_font_family
-override_font_family()
-```
-""")
+with st.echo('below'):
+	from streamlit_dsfr import override_font_family
 
-# CSS font family override
-override_font_family()
+	# CSS font family override
+	override_font_family()
 
 st.header('Example')
 
