@@ -32,7 +32,6 @@ interface UploadedFileRec
 	data: string // bytes in base64
 }
 
-// Bind the input value to `value`
 const value = ref<UploadedFileRec | undefined>(undefined)
 const lastValue = ref(value.value)
 
@@ -51,11 +50,11 @@ function onChange(files: FileList | null)
 	{
 		// Using File, FileReady, get the raw bytes
 		// Then, encode in base64 and send to steamlit
-		const file = files[0]
+		const file = files[0]!
 		const reader = new FileReader()
 		reader.addEventListener('load', () => {
 			const dataUrl = reader.result as string
-			const base64 = dataUrl.split(',')[1]
+			const base64 = dataUrl.split(',')[1]!
 			value.value = {
 				'id': `${props.args.key || props.args.id || 'file_upload'}_1`,
 				'name':	file['name'],
@@ -69,6 +68,7 @@ function onChange(files: FileList | null)
 	else
 	{
 		value.value = undefined
+		setComponentValue()
 	}
 }
 </script>
@@ -78,7 +78,6 @@ function onChange(files: FileList | null)
 		<DsfrFileUpload
 			v-bind="props.args"
 			:disabled="props.disabled || props.args.disabled"
-			v-model="value"
 			@change="onChange"
 		/>
 	</div>
