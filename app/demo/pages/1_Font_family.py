@@ -19,8 +19,14 @@ nav_menu()
 # ---
 st.divider()
 
+st.markdown('DSFR utilise la police de caractères `Marianne`.')
+
+st.header('Remplacer la police de caractères')
+
 # CSS font family override
 override_font_family()
 
-st.markdown('### This is a title')
+st.header('Example')
+
+st.markdown('#### This is a title')
 st.markdown('This is a paragraph.')
