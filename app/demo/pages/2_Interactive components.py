@@ -11,10 +11,10 @@ from streamlit_dsfr import \
 	dsfr_text_area, \
 	dsfr_date_input, \
 	dsfr_time_input, \
-	dsfr_range
+	dsfr_range, \
+	override_font_family
 
 from disable_sidebar import disable_sidebar
-from override_font_family import override_font_family
 from nav_menu import nav_menu
 
 # ---

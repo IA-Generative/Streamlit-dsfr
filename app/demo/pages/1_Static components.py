@@ -2,10 +2,10 @@ import streamlit as st
 from streamlit_dsfr import \
 	dsfr_alert, \
 	dsfr_badge, \
-	dsfr_picture
+	dsfr_picture, \
+	override_font_family
 
 from disable_sidebar import disable_sidebar
-from override_font_family import override_font_family
 from nav_menu import nav_menu
 
 # ---
