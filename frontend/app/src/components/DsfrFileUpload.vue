@@ -23,16 +23,15 @@ const props = defineProps<
 	}>
 >()
 
-interface UploadedFileRec
+interface FileData
 {
-	id: string
 	name: string
 	type: string
 	data: string // bytes in base64
 }
 
-let value: UploadedFileRec | undefined = undefined
-let lastValue: UploadedFileRec | undefined = value
+let value: FileData | undefined = undefined
+let lastValue: FileData | undefined = value
 
 function setComponentValue()
 {
@@ -55,7 +54,6 @@ function onChange(files: FileList | null)
 			const dataUrl = reader.result as string
 			const base64 = dataUrl.split(',')[1]!
 			value = {
-				'id': `${props.args.key || props.args.id || 'file_upload'}_1`,
 				'name':	file['name'],
 				'type': file['type'],
 				'data': base64,
