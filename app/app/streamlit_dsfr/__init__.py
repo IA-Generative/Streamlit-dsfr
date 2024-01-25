@@ -2,6 +2,7 @@ import os
 from typing import Optional, Union, Iterable, Callable
 import json
 import base64
+import uuid
 
 import streamlit.components.v1 as components
 from streamlit.runtime.uploaded_file_manager import UploadedFile, UploadedFileRec
@@ -315,19 +316,20 @@ def file_uploader(
 		kwargs['validMessage'] = validMessage
 
 	file = _dsfr_file_upload_func(**kwargs, key = key, default = None)
+	id = str(uuid.uuid4())
 
 	if not file:
 		return None
 
 	return UploadedFile(
 		UploadedFileRec(
-			file_id = file['id'],
+			file_id = id,
 			name = file['name'],
 			type = file['type'],
 			data = base64.b64decode(file['data']), # Decode bytes
 		),
 		FileURLsProto(
-			file_id = file['id'],
+			file_id = id,
 			delete_url = None, # ?
 			upload_url = None, # ?
 		),
