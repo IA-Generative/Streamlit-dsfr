@@ -45,7 +45,7 @@ else:
 
 # Components wrapper functions for users
 
-def dsfr_alert(
+def alert(
 	title: str,
 	description: Optional[str] = None,
 	type: Optional[str] = None,
@@ -99,8 +99,10 @@ def dsfr_badge(
 
 	return _dsfr_badge_func(label = label, **kwargs, key = key, default = None)
 
-def dsfr_breadcrumb(
-	links: str | list[str] | list[(str, str)] | list[dict[str, str]] | None = None,
+dsfr_alert = alert
+
+def breadcrumb(
+	links: Optional[Union[str, list[str], list[tuple[str, str]], list[dict[str, str]]]] = None,
 	*,
 	id: Optional[str] = None,
 	key: Optional[str] = None,
@@ -128,7 +130,9 @@ def dsfr_breadcrumb(
 
 	return _dsfr_breadcrumb_func(**kwargs, key = key, default = False)
 
-def dsfr_button(
+dsfr_breadcrumb = breadcrumb
+
+def button(
 	label: str, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
 	# help: Optional[str] = None, # Standard
@@ -184,7 +188,9 @@ def dsfr_button(
 
 	return _dsfr_button_func(**kwargs, key = key, default = False)
 
-def dsfr_checkbox(
+dsfr_button = button
+
+def checkbox(
 	label: str, # Standard
 	value: Optional[bool] = None, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
@@ -238,7 +244,9 @@ def dsfr_checkbox(
 
 	return _dsfr_checkbox_func(**kwargs, key = key, default = False)
 
-def dsfr_input(
+dsfr_checkbox = checkbox
+
+def input(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
@@ -318,7 +326,9 @@ def dsfr_input(
 
 	return _dsfr_input_func(**kwargs, key = key, default = kwargs['modelValue'])
 
-def dsfr_text_input(
+dsfr_input = input
+
+def text_input(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
@@ -376,7 +386,9 @@ def dsfr_text_input(
 		**kwargs,
 	)
 
-def dsfr_number_input(
+dsfr_text_input = text_input
+
+def number_input(
 	label: str, # Standard
 	min_value: Optional[Union[int, float]] = None, # Standard
 	max_value: Optional[Union[int, float]] = None, # Standard
@@ -442,7 +454,9 @@ def dsfr_number_input(
 		**kwargs,
 	)
 
-def dsfr_text_area(
+dsfr_number_input = number_input
+
+def text_area(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
 	# height: Optional[int] = None, # Standard
@@ -498,7 +512,9 @@ def dsfr_text_area(
 		**kwargs,
 	)
 
-def dsfr_date_input(
+dsfr_text_area = text_area
+
+def date_input(
 	label: str, # Standard
 	# value: Optional[Union[datetime, str]] = None, # Standard
 	value: Optional[str] = None, # Semi-standard
@@ -558,7 +574,9 @@ def dsfr_date_input(
 		**kwargs,
 	)
 
-def dsfr_time_input(
+dsfr_date_input = date_input
+
+def time_input(
 	label: str, # Standard
 	# value: Optional[Union[datetime, str]] = None, # Standard
 	value: Optional[str] = None, # Semi-standard
@@ -614,7 +632,9 @@ def dsfr_time_input(
 		**kwargs,
 	)
 
-def dsfr_picture(
+dsfr_time_input = time_input
+
+def picture(
 	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]], # Standard
 	image: str, # Semi-standard
 	# caption: Optional[Union[str, List[str]]] = None, # Standard
@@ -657,7 +677,9 @@ def dsfr_picture(
 
 	return _dsfr_picture_func(**kwargs, key = key, default = None)
 
-def dsfr_radio(
+dsfr_picture = picture
+
+def radio(
 	label: str, # Standard
 	options: Iterable[str], # Standard
 	index: Optional[int] = None, # Standard
@@ -752,7 +774,9 @@ def dsfr_radio(
 
 	return _dsfr_radio_func(**kwargs, key = key, default = kwargs['modelValue'])
 
-def dsfr_range(
+dsfr_radio = radio
+
+def range(
 	label: str, # Standard
 	# min_value: Optional[Union[int, float, datetime, timedelta]] = None, # Standard
 	min_value: Optional[Union[int, float]] = None, # Semi-standard
@@ -848,4 +872,5 @@ def dsfr_range(
 
 	return _dsfr_range_func(**kwargs, key = key, default = kwargs['modelValue'])
 
-dsfr_slider = dsfr_range
+dsfr_range = range
+dsfr_slider = range
