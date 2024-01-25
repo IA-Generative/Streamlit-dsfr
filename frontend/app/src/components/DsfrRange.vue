@@ -31,7 +31,7 @@ const props = defineProps<
 >()
 
 // Bind the input value to `value`
-const value = ref<string>(props.args.modelValue || '')
+const value = ref<number>(props.args.modelValue ?? props.args.min ?? 0)
 const lastValue = ref(value.value)
 
 let timeoutUpdate: NodeJS.Timeout | null = null
