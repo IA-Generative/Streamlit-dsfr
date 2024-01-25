@@ -11,7 +11,7 @@ disable_sidebar()
 
 # ---
 
-st.title('Remplacer la police de caractères')
+st.title('Police de caractères')
 
 # Navigation menu
 nav_menu()
