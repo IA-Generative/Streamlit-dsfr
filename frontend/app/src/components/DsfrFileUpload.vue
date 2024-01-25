@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrFileUpload } from '@gouvminint/vue-dsfr'
 
@@ -32,15 +31,15 @@ interface UploadedFileRec
 	data: string // bytes in base64
 }
 
-const value = ref<UploadedFileRec | undefined>(undefined)
-const lastValue = ref(value.value)
+let value: UploadedFileRec | undefined = undefined
+let lastValue: UploadedFileRec | undefined = value
 
 function setComponentValue()
 {
-	if (value.value !== lastValue.value)
+	if (value !== lastValue)
 	{
-		lastValue.value = value.value
-		Streamlit.setComponentValue(value.value)
+		lastValue = value
+		Streamlit.setComponentValue(value)
 	}
 }
 
@@ -55,7 +54,7 @@ function onChange(files: FileList | null)
 		reader.addEventListener('load', () => {
 			const dataUrl = reader.result as string
 			const base64 = dataUrl.split(',')[1]!
-			value.value = {
+			value = {
 				'id': `${props.args.key || props.args.id || 'file_upload'}_1`,
 				'name':	file['name'],
 				'type': file['type'],
@@ -67,7 +66,7 @@ function onChange(files: FileList | null)
 	}
 	else
 	{
-		value.value = undefined
+		value = undefined
 		setComponentValue()
 	}
 }
