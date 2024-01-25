@@ -24,19 +24,19 @@ st.divider()
 
 st.header('Alertes')
 
-with st.echo('below'):
+with st.echo():
 	stdsfr.alert('Ceci est une alerte')
 
-with st.echo('below'):
+with st.echo():
 	stdsfr.alert('Alerte', 'Ceci est une alerte avec un titre h5', titleTag = 'h5')
 
-with st.echo('below'):
+with st.echo():
 	stdsfr.alert('Erreur : titre du message', 'Description', type = 'error')
 	stdsfr.alert('Succès de l\'envoi', 'Description', type = 'success')
 	stdsfr.alert('Information : titre du message', 'Description détaillée du message', type = 'info')
 	stdsfr.alert('Attention : titre du message', 'Description détaillée du message', type = 'warning')
 
-with st.echo('below'):
+with st.echo():
 	stdsfr.alert('Information : titre de l\'information', small = True)
 	stdsfr.alert('Information : titre de l\'information', type = 'success', small = True)
 	stdsfr.alert('Information : titre de l\'information', type = 'error', small = True)
@@ -46,17 +46,17 @@ st.divider()
 
 st.header('Badges')
 
-with st.echo('below'):
+with st.echo():
 	stdsfr.badge('Ceci est un badge')
 
-with st.echo('below'):
+with st.echo():
 	stdsfr.badge('Ceci est une erreur', type = 'error')
 	stdsfr.badge('Ceci est un succès', type = 'success')
 	stdsfr.badge('Ceci est un avertissement', type = 'warning')
 	stdsfr.badge('Ceci est une info', type = 'info')
 	stdsfr.badge('Ceci est une nouvelle', type = 'new')
 
-with st.echo('below'):
+with st.echo():
 	stdsfr.badge('Ceci est un petit badge', small = True)
 
 # ---
@@ -81,7 +81,7 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Composant Streamlit')
 
-	with st.echo('below'):
+	with st.echo():
 		st.image(
 			'https://placekitten.com/300/200',
 			caption = 'Ceci est une légende',
@@ -90,7 +90,7 @@ with col_left:
 with col_right:
 	st.markdown('#### Composant DSFR')
 
-	with st.echo('below'):
+	with st.echo():
 		stdsfr.picture(
 			'https://placekitten.com/300/200',
 			caption = 'Ceci est une légende',
@@ -99,7 +99,7 @@ with col_right:
 col_left, col_right = st.columns(2)
 
 with col_right:
-	with st.echo('below'):
+	with st.echo():
 		stdsfr.picture(
 			'https://placekitten.com/400/200',
 			caption = 'Ceci est une légende',
