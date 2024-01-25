@@ -676,7 +676,9 @@ def picture(
 
 	return _dsfr_picture_func(**kwargs, key = key, default = None)
 
+image = picture
 dsfr_picture = picture
+dsfr_image = picture
 
 def radio(
 	label: str, # Standard
@@ -871,6 +873,7 @@ def range(
 
 	return _dsfr_range_func(**kwargs, key = key, default = kwargs['modelValue'])
 
+slider = range
 dsfr_range = range
 dsfr_slider = range
 
