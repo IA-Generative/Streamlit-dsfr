@@ -216,6 +216,7 @@ def dsfr_link_button(
 	window.open('{url}', '_blank').focus();
 </script>
 			""",
+			height = 0,
 		)
 
 	return None
@@ -252,6 +253,7 @@ def dsfr_copy_button(
 		}});
 </script>
 			""",
+			height = 0,
 		)
 
 	return None
