@@ -316,10 +316,11 @@ def file_uploader(
 		kwargs['validMessage'] = validMessage
 
 	file = _dsfr_file_upload_func(**kwargs, key = key, default = None)
-	id = hashlib.sha256(file['data'].encode('utf-8')).hexdigest()
 
 	if not file:
 		return None
+
+	id = hashlib.sha256(file['data'].encode('utf-8')).hexdigest()
 
 	return UploadedFile(
 		UploadedFileRec(
