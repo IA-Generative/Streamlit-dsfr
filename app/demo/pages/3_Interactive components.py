@@ -263,7 +263,7 @@ with col_left:
 with col_right:
 	st.markdown('#### Composants DSFR')
 
-	dsfr_val = dsfr_file_uploader(
+	dsfr_val = stdsfr.file_uploader(
 		'Ceci est un téléversement de fichier',
 	)
 	st.write(dsfr_val)
