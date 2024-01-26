@@ -3,6 +3,7 @@ from typing import Optional, Union, Iterable, Callable
 import json
 import base64
 import hashlib
+from io import BytesIO
 
 import streamlit.components.v1 as components
 from streamlit.runtime.uploaded_file_manager import UploadedFile, UploadedFileRec
@@ -787,7 +788,7 @@ dsfr_time_input = time_input
 
 def picture(
 	# image: Union[np.ndarray, List[np.ndarray], BytesIO, str, List[str]], # Standard
-	image: str, # Semi-standard
+	image: [BytesIO, str], # Semi-standard
 	# caption: Optional[Union[str, List[str]]] = None, # Standard
 	caption: Optional[str] = None, # Semi-standard
 	size: Optional[str] = None, # 'small' | 'medium' | 'large'
@@ -810,7 +811,14 @@ def picture(
 	Streamlit standard component equivalent:
 	https://docs.streamlit.io/library/api-reference/media/st.image
 	"""
-	kwargs['src'] = image
+	if isinstance(image, BytesIO):
+		# Convert BytesIO to base64
+		image_data = base64.b64encode(image.getvalue()).decode('utf-8')
+		# Get image type (if possible, in child class of BytesIO like streamlit's UploadedFile)
+		image_type = image.type if hasattr(image, 'type') else 'image/png'
+		kwargs['src'] = f'data:{image_type};base64,{image_data}'
+	elif isinstance(image, str):
+		kwargs['src'] = image
 
 	if caption is not None:
 		kwargs['legend'] = caption
