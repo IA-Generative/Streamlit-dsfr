@@ -6,6 +6,12 @@ from nav_menu import nav_menu
 
 # ---
 
+st.set_page_config(
+	page_title = 'Police de caractères',
+)
+
+# ---
+
 # Disable sidebar
 disable_sidebar()
 

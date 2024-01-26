@@ -9,6 +9,12 @@ from nav_menu import nav_menu
 
 # ---
 
+st.set_page_config(
+	page_title = 'Composants interactifs',
+)
+
+# ---
+
 # Disable sidebar
 disable_sidebar()
 

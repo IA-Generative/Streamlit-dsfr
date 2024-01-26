@@ -6,12 +6,18 @@ from nav_menu import nav_menu
 
 # ---
 
+st.set_page_config(
+	page_title = 'Demo Streamlit DSFR',
+)
+
+# ---
+
 # Disable sidebar
 disable_sidebar()
 
 # ---
 
-st.title('Demo composants DSFR')
+st.title('Demo Streamlit DSFR')
 
 # CSS font family override
 stdsfr.override_font_family()
