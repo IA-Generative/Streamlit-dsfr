@@ -399,7 +399,7 @@ with col_right:
 		)
 		st.write('Value:', dsfr_val)
 		if dsfr_val.type.startswith('image'):
-			st.image(dsfr_val)
+			stdsfr.picture(dsfr_val)
 
 col_left, col_right = st.columns(2)
 
