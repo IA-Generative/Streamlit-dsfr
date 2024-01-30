@@ -62,11 +62,14 @@ const onClick = () =>
 					})
 		}
 
-		if (!clicked.value)
+		if (clicked.value)
 		{
-			clicked.value = true
+			clicked.value = false
 			Streamlit.setComponentValue(clicked.value)
 		}
+
+		clicked.value = true
+		Streamlit.setComponentValue(clicked.value)
 	}
 
 const onFocus = () =>
