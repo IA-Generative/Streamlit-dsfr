@@ -419,6 +419,7 @@ def input(
 	labelClass: Optional[str] = None,
 	wrapperClass: Optional[str] = None,
 	requiredTip: Optional[str] = None,
+	height: Optional[int] = None,
 	**kwargs,
 ):
 	"""
@@ -470,6 +471,8 @@ def input(
 		kwargs['wrapperClass'] = wrapperClass
 	if requiredTip is not None:
 		kwargs['requiredTip'] = requiredTip
+	if height is not None:
+		kwargs['height'] = height
 
 	return _dsfr_input_func(**kwargs, key = key, default = kwargs['modelValue'])
 
@@ -611,7 +614,7 @@ dsfr_number_input = number_input
 def text_area(
 	label: str, # Standard
 	value: Optional[str] = None, # Standard
-	# height: Optional[int] = None, # Standard
+	height: Optional[int] = None, # Standard
 	# max_chars: Optional[int] = None, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
 	help: Optional[str] = None, # Standard
@@ -646,6 +649,7 @@ def text_area(
 	return dsfr_input(
 		label = label,
 		value = value,
+		height = height,
 		key = key,
 		help = help,
 		placeholder = placeholder,
