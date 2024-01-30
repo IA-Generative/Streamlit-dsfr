@@ -28,6 +28,8 @@ const props = defineProps<
 		// Slots
 		label?: string
 		requiredTip?: string
+		// Custom
+		height?: string
 	}>
 >()
 
@@ -77,7 +79,12 @@ function onKeydown(event: KeyboardEvent)
 </script>
 
 <template>
-	<div class="component">
+	<div
+		class="component"
+		:style="{
+			'--dsfr-input-height': props.args.height ? `${props.args.height}px` : '5.75rem',
+		}"
+	>
 		<DsfrInput
 			v-bind="props.args"
 			:disabled="props.disabled || props.args.disabled"
@@ -102,7 +109,7 @@ function onKeydown(event: KeyboardEvent)
 }
 
 .component :deep(textarea.fr-input) {
-	min-height: 5.75rem;
+	min-height: var(--dsfr-input-height);
 	resize: none; /* While we don't send the new height to Streamlit */
 }
 </style>
