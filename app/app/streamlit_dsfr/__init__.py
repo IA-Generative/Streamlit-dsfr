@@ -391,7 +391,7 @@ def buttons_group(
 	if equisized is not None:
 		kwargs['equisized'] = equisized
 
-	return _dsfr_buttons_group_func(**kwargs, key = key, default = False)
+	return _dsfr_buttons_group_func(**kwargs, key = key, default = [False for _ in buttons])
 
 dsfr_buttons_group = buttons_group
 
