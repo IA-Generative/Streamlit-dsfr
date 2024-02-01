@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButton } from '@gouvminint/vue-dsfr'
 
@@ -26,26 +26,6 @@ const props = defineProps<
 >()
 
 const clicked = ref<boolean>(false)
-const isFocused = ref<boolean>(false)
-
-const onRenderEvent = (_event: Event): void =>
-	{
-		if (!isFocused.value && clicked.value)
-		{
-			clicked.value = false
-			Streamlit.setComponentValue(clicked.value)
-		}
-	}
-
-onMounted(() =>
-	{
-		Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
-
-onUnmounted(() =>
-	{
-		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
 
 const onClick = () =>
 	{
@@ -70,16 +50,9 @@ const onClick = () =>
 
 		clicked.value = true
 		Streamlit.setComponentValue(clicked.value)
-	}
 
-const onFocus = () =>
-	{
-		isFocused.value = true
-	}
-
-const onBlur = () =>
-	{
-		isFocused.value = false
+		clicked.value = false
+		Streamlit.setComponentValue(clicked.value)
 	}
 </script>
 
