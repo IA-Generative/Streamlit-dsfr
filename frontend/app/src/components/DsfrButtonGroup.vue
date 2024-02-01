@@ -34,14 +34,14 @@ const props = defineProps<
 	}>
 >()
 
-const clicked = ref<boolean>(false)
+const clicked = ref<boolean[]>(Array(props.args.buttons?.length ?? 0).fill(false))
 const isFocused = ref<boolean>(false)
 
 const onRenderEvent = (_event: Event): void =>
 	{
 		if (!isFocused.value && clicked.value)
 		{
-			clicked.value = false
+			clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
 			Streamlit.setComponentValue(clicked.value)
 		}
 	}
@@ -56,9 +56,30 @@ onUnmounted(() =>
 		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
 	})
 
-const onClick = () =>
+const onClick = (event: any) =>
 	{
-		// TODO: Which button was clicked?
+		let button = event.target
+		while (button && !button.classList.contains('fr-btn'))
+		{
+			button = button.parentElement
+		}
+
+		clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
+
+		if (!button)
+		{
+			Streamlit.setComponentValue(clicked.value)
+			return
+		}
+
+		// Button is located at `.component .fr-btns-group > li > .fr-btn`
+		// Get the index of the button in the group
+		const index = Array.from(
+			button.parentElement?.parentElement?.children ?? []
+		).indexOf(button.parentElement)
+
+		clicked.value[index] = true
+		Streamlit.setComponentValue(clicked.value)
 	}
 
 const onFocus = () =>
