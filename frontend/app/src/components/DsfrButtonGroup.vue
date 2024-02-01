@@ -64,8 +64,6 @@ const onClick = (event: any) =>
 			button = button.parentElement
 		}
 
-		clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
-
 		if (!button)
 		{
 			Streamlit.setComponentValue(clicked.value)
@@ -77,6 +75,30 @@ const onClick = (event: any) =>
 		const index = Array.from(
 			button.parentElement?.parentElement?.children ?? []
 		).indexOf(button.parentElement)
+
+		const buttonArgs = props.args.buttons?.[index]
+
+		if (buttonArgs)
+		{
+			if (buttonArgs.link)
+			{
+				window.open(buttonArgs.link, '_blank')?.focus()
+			}
+			else if (buttonArgs.copy)
+			{
+				navigator.clipboard.writeText(buttonArgs.copy)
+					.catch(err =>
+						{
+							console.error('Failed to copy:', err)
+						})
+			}
+		}
+
+		if (clicked.value.some(value => value))
+		{
+			clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
+			Streamlit.setComponentValue(clicked.value)
+		}
 
 		clicked.value[index] = true
 		Streamlit.setComponentValue(clicked.value)
