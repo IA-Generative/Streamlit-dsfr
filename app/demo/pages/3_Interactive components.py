@@ -74,6 +74,43 @@ with col_right:
 # ---
 st.divider()
 
+st.header('Groupe de boutons')
+
+col_left, col_right = st.columns(2)
+
+with col_left:
+	st.markdown('#### Composant Streamlit')
+
+	st.markdown('Pas d\'équivalent Streamlit')
+
+with col_right:
+	st.markdown('#### Composant DSFR')
+
+	with st.echo():
+		dsfr_val = stdsfr.buttons_group([
+			'Ceci est un bouton',
+			'Ceci est un autre bouton',
+		])
+		st.write('Value:', dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	st.markdown('#### Composant DSFR')
+
+	with st.echo():
+		dsfr_val = stdsfr.buttons_group(
+			[
+				'Ceci est un bouton',
+				'Ceci est un autre bouton',
+			],
+			inline = True,
+		)
+		st.write('Value:', dsfr_val)
+
+# ---
+st.divider()
+
 st.header('Boutons lien')
 
 col_left, col_right = st.columns(2)
@@ -103,7 +140,6 @@ col_left, col_right = st.columns(2)
 
 with col_left:
 	st.markdown('#### Composants Streamlit')
-
 	st.markdown('Pas d\'équivalent Streamlit')
 
 with col_right:
