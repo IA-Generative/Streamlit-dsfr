@@ -27,33 +27,33 @@ const props = defineProps<
 
 const clicked = ref<boolean>(false)
 
-const onClick = () =>
+function onClick()
+{
+	if (props.args.link)
 	{
-		if (props.args.link)
-		{
-			window.open(props.args.link, '_blank')?.focus()
-		}
-		else if (props.args.copy)
-		{
-			navigator.clipboard.writeText(props.args.copy)
-				.catch(err =>
-					{
-						console.error('Failed to copy:', err)
-					})
-		}
+		window.open(props.args.link, '_blank')?.focus()
+	}
+	else if (props.args.copy)
+	{
+		navigator.clipboard.writeText(props.args.copy)
+			.catch(err =>
+				{
+					console.error('Failed to copy:', err)
+				})
+	}
 
-		if (clicked.value)
-		{
-			clicked.value = false
-			Streamlit.setComponentValue(clicked.value)
-		}
-
-		clicked.value = true
-		Streamlit.setComponentValue(clicked.value)
-
+	if (clicked.value)
+	{
 		clicked.value = false
 		Streamlit.setComponentValue(clicked.value)
 	}
+
+	clicked.value = true
+	Streamlit.setComponentValue(clicked.value)
+
+	clicked.value = false
+	Streamlit.setComponentValue(clicked.value)
+}
 </script>
 
 <template>
