@@ -376,6 +376,8 @@ def buttons_group(
 			for button in buttons:
 				button['copy'] = copy
 
+	kwargs['buttons'] = buttons
+
 	if align is not None:
 		kwargs['align'] = align
 	if inline is not None:
