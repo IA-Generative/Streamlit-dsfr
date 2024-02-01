@@ -31,8 +31,6 @@ const props = defineProps<
 			copy?: string
 		}[]
 		equisized?: boolean
-		// Custom props
-		inline?: boolean
 	}>
 >()
 
