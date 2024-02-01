@@ -178,7 +178,7 @@ def button(
 		if type == 'secondary':
 			kwargs['secondary'] = True
 		elif type == 'tertiary':
-			kwargs['secondary'] = True
+			kwargs['tertiary'] = True
 	else:
 		if secondary is not None:
 			kwargs['secondary'] = secondary
