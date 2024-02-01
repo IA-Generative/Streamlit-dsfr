@@ -42,7 +42,7 @@ const onRenderEvent = (_event: Event): void =>
 		if (!isFocused.value && clicked.value)
 		{
 			clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
-			Streamlit.setComponentValue(clicked.value)
+			Streamlit.setComponentValue([...clicked.value])
 		}
 	}
 
@@ -66,7 +66,7 @@ const onClick = (event: any) =>
 
 		if (!button)
 		{
-			Streamlit.setComponentValue(clicked.value)
+			Streamlit.setComponentValue([...clicked.value])
 			return
 		}
 
@@ -97,11 +97,11 @@ const onClick = (event: any) =>
 		if (clicked.value.some(value => value))
 		{
 			clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
-			Streamlit.setComponentValue(clicked.value)
+			Streamlit.setComponentValue([...clicked.value])
 		}
 
 		clicked.value[index] = true
-		Streamlit.setComponentValue(clicked.value)
+		Streamlit.setComponentValue([...clicked.value])
 	}
 
 const onFocus = () =>
