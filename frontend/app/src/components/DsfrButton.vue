@@ -27,7 +27,7 @@ const props = defineProps<
 
 const clicked = ref<boolean>(false)
 
-function onClick()
+async function onClick()
 {
 	if (props.args.link)
 	{
@@ -46,10 +46,14 @@ function onClick()
 	{
 		clicked.value = false
 		Streamlit.setComponentValue(clicked.value)
+
+		await new Promise(resolve => setTimeout(resolve, 100))
 	}
 
 	clicked.value = true
 	Streamlit.setComponentValue(clicked.value)
+
+	await new Promise(resolve => setTimeout(resolve, 100))
 
 	clicked.value = false
 	Streamlit.setComponentValue(clicked.value)
