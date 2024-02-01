@@ -18,6 +18,7 @@ supported_components = {
     'dsfr_badge': 'st_dsfr_badge',
     'dsfr_breadcrumb': 'st_dsfr_breadcrumb',
     'dsfr_button': 'st_dsfr_button',
+    'dsfr_buttons_group': 'st_dsfr_buttons_group',
 	'dsfr_checkbox': 'st_dsfr_checkbox',
 	'dsfr_file_upload': 'st_dsfr_file_upload',
     'dsfr_input': 'st_dsfr_input',
@@ -250,6 +251,147 @@ def copy_button(
 	)
 
 dsfr_copy_button = copy_button
+
+def buttons_group(
+	labels: Iterable[str],
+	key: Optional[Union[str, int]] = None,
+	inline: Optional[bool] = None,
+	size: Optional[str] = None,
+	*,
+	disabled: Union[Optional[bool], list[Optional[bool]]] = None,
+	# Buttons
+	type: Union[Optional[str], list[Optional[str]]] = None,
+	secondary: Union[Optional[bool], list[Optional[bool]]] = None,
+	tertiary: Union[Optional[bool], list[Optional[bool]]] = None,
+	icon: Union[Optional[str], list[Optional[str]]] = None,
+	iconOnly: Union[Optional[bool], list[Optional[bool]]] = None,
+	noOutline: Union[Optional[bool], list[Optional[bool]]] = None,
+	link: Union[Optional[str], list[Optional[str]]] = None,
+	copy: Union[Optional[str], list[Optional[str]]] = None,
+	# Group
+	align: Optional[str] = None,
+	reverse: Optional[bool] = None,
+	iconRight: Optional[bool] = None,
+	equisized: Optional[bool] = None,
+	**kwargs,
+):
+	"""
+	Streamlit DSFR Button component
+
+	Streamlit standard component equivalent:
+	https://docs.streamlit.io/library/api-reference/widgets/st.button
+	"""
+
+	buttons = []
+
+	if isinstance(labels, str):
+		labels = [labels]
+	for label in labels:
+		buttons.append({
+			'label': label,
+		})
+
+	if type is not None:
+		if isinstance(type, list):
+			for i, each in enumerate(type):
+				if each == 'secondary':
+					kwargs['secondary'] = True
+				elif each == 'tertiary':
+					kwargs['tertiary'] = True
+		else:
+			for button in buttons:
+				if type == 'secondary':
+					kwargs['secondary'] = True
+				elif type == 'tertiary':
+					kwargs['tertiary'] = True
+	else:
+		if secondary is not None:
+			if isinstance(secondary, list):
+				for i, each in enumerate(secondary):
+					if each is not None:
+						buttons[i]['secondary'] = each
+			else:
+				for button in buttons:
+					button['secondary'] = secondary
+		if tertiary is not None:
+			if isinstance(tertiary, list):
+				for i, each in enumerate(tertiary):
+					if each is not None:
+						buttons[i]['tertiary'] = each
+			else:
+				for button in buttons:
+					button['tertiary'] = tertiary
+
+	if disabled is not None:
+		if isinstance(disabled, list):
+			for i, each in enumerate(disabled):
+				if each is not None:
+					buttons[i]['disabled'] = each
+		else:
+			for button in buttons:
+				button['disabled'] = disabled
+
+	if icon is not None:
+		if isinstance(icon, list):
+			for i, each in enumerate(icon):
+				if each is not None:
+					buttons[i]['icon'] = each
+		else:
+			for button in buttons:
+				button['icon'] = icon
+
+	if iconOnly is not None:
+		if isinstance(iconOnly, list):
+			for i, each in enumerate(iconOnly):
+				if each is not None:
+					buttons[i]['iconOnly'] = each
+		else:
+			for button in buttons:
+				button['iconOnly'] = iconOnly
+
+	if noOutline is not None:
+		if isinstance(noOutline, list):
+			for i, each in enumerate(noOutline):
+				if each is not None:
+					buttons[i]['noOutline'] = each
+		else:
+			for button in buttons:
+				button['noOutline'] = noOutline
+
+	if link is not None:
+		if isinstance(link, list):
+			for i, each in enumerate(link):
+				if each is not None:
+					buttons[i]['link'] = each
+		else:
+			for button in buttons:
+				button['link'] = link
+
+	if copy is not None:
+		if isinstance(copy, list):
+			for i, each in enumerate(copy):
+				if each is not None:
+					buttons[i]['copy'] = each
+		else:
+			for button in buttons:
+				button['copy'] = copy
+
+	if align is not None:
+		kwargs['align'] = align
+	if inline is not None:
+		kwargs['inlineLayoutWhen'] = 'always' if inline else 'never'
+	if reverse is not None:
+		kwargs['reverse'] = reverse
+	if iconRight is not None:
+		kwargs['iconRight'] = iconRight
+	if size is not None:
+		kwargs['size'] = size
+	if equisized is not None:
+		kwargs['equisized'] = equisized
+
+	return _dsfr_buttons_group_func(**kwargs, key = key, default = False)
+
+dsfr_buttons_group = buttons_group
 
 def checkbox(
 	label: str, # Standard
