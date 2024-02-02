@@ -22,10 +22,8 @@ const props = defineProps<
 			disabled?: boolean
 			icon?: string
 			iconOnly?: boolean
-			// iconRight?: boolean
 			noOutline?: boolean
-			// size?: '' | 'small' | 'sm' | 'lg' | 'large' | 'md' | 'medium'
-			// Om
+			// Omitted: iconRight, size
 			// Custom props
 			link?: string
 			copy?: string
