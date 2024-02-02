@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButtonGroup } from '@gouvminint/vue-dsfr'
 
@@ -35,26 +35,6 @@ const props = defineProps<
 >()
 
 const clicked = ref<boolean[]>(Array(props.args.buttons?.length ?? 0).fill(false))
-const isFocused = ref<boolean>(false)
-
-const onRenderEvent = (_event: Event): void =>
-	{
-		if (!isFocused.value && clicked.value)
-		{
-			clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
-			Streamlit.setComponentValue([...clicked.value])
-		}
-	}
-
-onMounted(() =>
-	{
-		Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
-
-onUnmounted(() =>
-	{
-		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
 
 const onClick = (event: any) =>
 	{
@@ -103,16 +83,6 @@ const onClick = (event: any) =>
 		clicked.value[index] = true
 		Streamlit.setComponentValue([...clicked.value])
 	}
-
-const onFocus = () =>
-	{
-		isFocused.value = true
-	}
-
-const onBlur = () =>
-	{
-		isFocused.value = false
-	}
 </script>
 
 <template>
@@ -121,8 +91,6 @@ const onBlur = () =>
 			v-bind="props.args"
 			:disabled="props.disabled || props.args.disabled"
 			@click="onClick"
-			@focus="onFocus"
-			@blur="onBlur"
 		/>
 	</div>
 </template>
