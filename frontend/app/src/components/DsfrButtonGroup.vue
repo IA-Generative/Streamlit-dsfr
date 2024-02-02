@@ -36,53 +36,53 @@ const props = defineProps<
 
 const clicked = ref<boolean[]>(Array(props.args.buttons?.length ?? 0).fill(false))
 
-const onClick = (event: any) =>
+function onClick(event: any)
+{
+	let button = event.target
+	while (button && !button.classList.contains('fr-btn'))
 	{
-		let button = event.target
-		while (button && !button.classList.contains('fr-btn'))
+		button = button.parentElement
+	}
+
+	if (!button)
+	{
+		Streamlit.setComponentValue([...clicked.value])
+		return
+	}
+
+	// Button is located at `.component .fr-btns-group > li > .fr-btn`
+	// Get the index of the button in the group
+	const index = Array.from(
+		button.parentElement?.parentElement?.children ?? []
+	).indexOf(button.parentElement)
+
+	const buttonArgs = props.args.buttons?.[index]
+
+	if (buttonArgs)
+	{
+		if (buttonArgs.link)
 		{
-			button = button.parentElement
+			window.open(buttonArgs.link, '_blank')?.focus()
 		}
-
-		if (!button)
+		else if (buttonArgs.copy)
 		{
-			Streamlit.setComponentValue([...clicked.value])
-			return
+			navigator.clipboard.writeText(buttonArgs.copy)
+				.catch(err =>
+					{
+						console.error('Failed to copy:', err)
+					})
 		}
+	}
 
-		// Button is located at `.component .fr-btns-group > li > .fr-btn`
-		// Get the index of the button in the group
-		const index = Array.from(
-			button.parentElement?.parentElement?.children ?? []
-		).indexOf(button.parentElement)
-
-		const buttonArgs = props.args.buttons?.[index]
-
-		if (buttonArgs)
-		{
-			if (buttonArgs.link)
-			{
-				window.open(buttonArgs.link, '_blank')?.focus()
-			}
-			else if (buttonArgs.copy)
-			{
-				navigator.clipboard.writeText(buttonArgs.copy)
-					.catch(err =>
-						{
-							console.error('Failed to copy:', err)
-						})
-			}
-		}
-
-		if (clicked.value.some(value => value))
-		{
-			clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
-			Streamlit.setComponentValue([...clicked.value])
-		}
-
-		clicked.value[index] = true
+	if (clicked.value.some(value => value))
+	{
+		clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
 		Streamlit.setComponentValue([...clicked.value])
 	}
+
+	clicked.value[index] = true
+	Streamlit.setComponentValue([...clicked.value])
+}
 </script>
 
 <template>
