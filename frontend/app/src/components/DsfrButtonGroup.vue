@@ -36,7 +36,7 @@ const props = defineProps<
 
 const clicked = ref<boolean[]>(Array(props.args.buttons?.length ?? 0).fill(false))
 
-function onClick(event: any)
+async function onClick(event: any)
 {
 	let button = event.target
 	while (button && !button.classList.contains('fr-btn'))
@@ -46,7 +46,7 @@ function onClick(event: any)
 
 	if (!button)
 	{
-		Streamlit.setComponentValue([...clicked.value])
+		console.error('Button not found for click event:', event)
 		return
 	}
 
@@ -78,9 +78,16 @@ function onClick(event: any)
 	{
 		clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
 		Streamlit.setComponentValue([...clicked.value])
+
+		await new Promise(resolve => setTimeout(resolve, 50))
 	}
 
 	clicked.value[index] = true
+	Streamlit.setComponentValue([...clicked.value])
+
+	await new Promise(resolve => setTimeout(resolve, 50))
+
+	clicked.value[index] = false
 	Streamlit.setComponentValue([...clicked.value])
 }
 </script>
