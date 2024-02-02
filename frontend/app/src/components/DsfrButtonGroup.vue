@@ -99,3 +99,10 @@ async function onClick(event: any)
 		/>
 	</div>
 </template>
+
+<style scoped>
+.component {
+	/* Remove the bottom margin of the button group */
+	margin-bottom: -1rem;
+}
+</style>
