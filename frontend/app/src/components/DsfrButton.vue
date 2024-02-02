@@ -47,13 +47,13 @@ async function onClick()
 		clicked.value = false
 		Streamlit.setComponentValue(clicked.value)
 
-		await new Promise(resolve => setTimeout(resolve, 100))
+		await new Promise(resolve => setTimeout(resolve, 50))
 	}
 
 	clicked.value = true
 	Streamlit.setComponentValue(clicked.value)
 
-	await new Promise(resolve => setTimeout(resolve, 100))
+	await new Promise(resolve => setTimeout(resolve, 50))
 
 	clicked.value = false
 	Streamlit.setComponentValue(clicked.value)
