@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButton } from '@gouvminint/vue-dsfr'
 
@@ -26,61 +26,38 @@ const props = defineProps<
 >()
 
 const clicked = ref<boolean>(false)
-const isFocused = ref<boolean>(false)
 
-const onRenderEvent = (_event: Event): void =>
+async function onClick()
+{
+	if (props.args.link)
 	{
-		if (!isFocused.value && clicked.value)
-		{
-			clicked.value = false
-			Streamlit.setComponentValue(clicked.value)
-		}
+		window.open(props.args.link, '_blank')?.focus()
+	}
+	else if (props.args.copy)
+	{
+		navigator.clipboard.writeText(props.args.copy)
+			.catch(err =>
+				{
+					console.error('Failed to copy:', err)
+				})
 	}
 
-onMounted(() =>
+	if (clicked.value)
 	{
-		Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
-
-onUnmounted(() =>
-	{
-		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
-	})
-
-const onClick = () =>
-	{
-		if (props.args.link)
-		{
-			window.open(props.args.link, '_blank')?.focus()
-		}
-		else if (props.args.copy)
-		{
-			navigator.clipboard.writeText(props.args.copy)
-				.catch(err =>
-					{
-						console.error('Failed to copy:', err)
-					})
-		}
-
-		if (clicked.value)
-		{
-			clicked.value = false
-			Streamlit.setComponentValue(clicked.value)
-		}
-
-		clicked.value = true
+		clicked.value = false
 		Streamlit.setComponentValue(clicked.value)
+
+		await new Promise(resolve => setTimeout(resolve, 50))
 	}
 
-const onFocus = () =>
-	{
-		isFocused.value = true
-	}
+	clicked.value = true
+	Streamlit.setComponentValue(clicked.value)
 
-const onBlur = () =>
-	{
-		isFocused.value = false
-	}
+	await new Promise(resolve => setTimeout(resolve, 50))
+
+	clicked.value = false
+	Streamlit.setComponentValue(clicked.value)
+}
 </script>
 
 <template>

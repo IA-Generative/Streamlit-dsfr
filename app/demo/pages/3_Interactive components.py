@@ -38,16 +38,30 @@ col_left, col_right = st.columns(2)
 with col_left:
 	st.markdown('#### Composant Streamlit')
 
+	if 'st_button_count' not in st.session_state:
+		st.session_state['st_button_count'] = 0
+
 	with st.echo():
 		st_val = st.button('Ceci est un bouton')
 		st.write('Value:', st_val)
 
+	if st_val:
+		st.session_state['st_button_count'] += 1
+	st.write('Nombre de clics:', st.session_state['st_button_count'])
+
 with col_right:
 	st.markdown('#### Composant DSFR')
+
+	if 'dsfr_button_count' not in st.session_state:
+		st.session_state['dsfr_button_count'] = 0
 
 	with st.echo():
 		dsfr_val = stdsfr.button('Ceci est un bouton')
 		st.write('Value:', dsfr_val)
+
+	if dsfr_val:
+		st.session_state['dsfr_button_count'] += 1
+	st.write('Nombre de clics:', st.session_state['dsfr_button_count'])
 
 col_left, col_right = st.columns(2)
 
