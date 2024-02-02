@@ -108,7 +108,7 @@ async function onClick(event: any)
 	<div class="component" :style="style">
 		<DsfrButtonGroup
 			v-bind="props.args"
-			:disabled="props.disabled || props.args.disabled"
+			:disabled="clicked.value.some(value => value) || props.disabled || props.args.disabled"
 			@click="onClick"
 		/>
 	</div>
