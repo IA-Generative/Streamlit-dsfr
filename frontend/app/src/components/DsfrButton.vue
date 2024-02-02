@@ -67,8 +67,6 @@ async function onClick()
 			:label="props.args.label || 'Button'"
 			:disabled="props.disabled || props.args.disabled"
 			@click="onClick"
-			@focus="onFocus"
-			@blur="onBlur"
 		/>
 	</div>
 </template>
