@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButton } from '@gouvminint/vue-dsfr'
 
@@ -26,6 +26,7 @@ const props = defineProps<
 >()
 
 const clicked = ref<boolean>(false)
+const disabled = computed(() => clicked.value || props.disabled || props.args.disabled)
 
 function onRenderEvent(_event: Event): void
 {
@@ -79,7 +80,7 @@ async function onClick()
 		<DsfrButton
 			v-bind="props.args"
 			:label="props.args.label || 'Button'"
-			:disabled="clicked.value || props.disabled || props.args.disabled"
+			:disabled="disabled"
 			@click="onClick"
 		/>
 	</div>
