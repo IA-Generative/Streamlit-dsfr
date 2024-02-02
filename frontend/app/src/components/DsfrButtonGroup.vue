@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButtonGroup } from '@gouvminint/vue-dsfr'
 
@@ -33,6 +33,25 @@ const props = defineProps<
 >()
 
 const clicked = ref<boolean[]>(Array(props.args.buttons?.length ?? 0).fill(false))
+
+function onRenderEvent(_event: Event): void
+{
+	if (clicked.value.some(value => value))
+	{
+		clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
+		Streamlit.setComponentValue([...clicked.value])
+	}
+}
+
+onMounted(() =>
+	{
+		Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
+	})
+
+onUnmounted(() =>
+	{
+		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
+	})
 
 async function onClick(event: any)
 {
@@ -81,11 +100,6 @@ async function onClick(event: any)
 	}
 
 	clicked.value[index] = true
-	Streamlit.setComponentValue([...clicked.value])
-
-	await new Promise(resolve => setTimeout(resolve, 50))
-
-	clicked.value[index] = false
 	Streamlit.setComponentValue([...clicked.value])
 }
 </script>

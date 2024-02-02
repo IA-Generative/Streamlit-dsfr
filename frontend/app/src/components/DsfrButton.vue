@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButton } from '@gouvminint/vue-dsfr'
 
@@ -27,6 +27,25 @@ const props = defineProps<
 
 const clicked = ref<boolean>(false)
 
+function onRenderEvent(_event: Event): void
+{
+	if (clicked.value)
+	{
+		clicked.value = false
+		Streamlit.setComponentValue(clicked.value)
+	}
+}
+
+onMounted(() =>
+	{
+		Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
+	})
+
+onUnmounted(() =>
+	{
+		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
+	})
+
 async function onClick()
 {
 	if (props.args.link)
@@ -51,11 +70,6 @@ async function onClick()
 	}
 
 	clicked.value = true
-	Streamlit.setComponentValue(clicked.value)
-
-	await new Promise(resolve => setTimeout(resolve, 50))
-
-	clicked.value = false
 	Streamlit.setComponentValue(clicked.value)
 }
 </script>
