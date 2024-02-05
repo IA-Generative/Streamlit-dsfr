@@ -95,6 +95,7 @@ function iconToIconify(icon: string | undefined): string | undefined
 			v-bind="props.args"
 			label=""
 			icon=""
+			iconOnly=""
 			:disabled="disabled"
 			@click="onClick"
 		>
