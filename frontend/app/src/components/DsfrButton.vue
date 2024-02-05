@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, computed } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
-import { DsfrButton } from '@gouvminint/vue-dsfr'
 
 import '~/assets/iconify-icon.min.js'
 
-import { useStreamlit } from '../streamlit'
-import type { ComponentProps } from '../types/ComponentProps.d.ts'
+import { useStreamlit } from '~/streamlit'
+import type { ComponentProps } from '~/types/ComponentProps.d.ts'
+import DsfrButton from '~/components/dsfr/DsfrButton.vue'
 
 useStreamlit()
 
 const props = defineProps<
 	ComponentProps<{
-		label?: string | undefined
+		label?: string
 		secondary?: boolean
 		tertiary?: boolean
 		disabled?: boolean
-		icon?: string | undefined
+		icon?: string
 		iconOnly?: boolean
 		iconRight?: boolean
 		noOutline?: boolean
@@ -51,19 +51,6 @@ onUnmounted(() =>
 
 async function onClick()
 {
-	if (props.args.link)
-	{
-		window.open(props.args.link, '_blank')?.focus()
-	}
-	else if (props.args.copy)
-	{
-		navigator.clipboard.writeText(props.args.copy)
-			.catch(err =>
-				{
-					console.error('Failed to copy:', err)
-				})
-	}
-
 	if (clicked.value)
 	{
 		clicked.value = false
@@ -75,46 +62,14 @@ async function onClick()
 	clicked.value = true
 	Streamlit.setComponentValue(clicked.value)
 }
-
-function iconToIconify(icon: string | undefined): string | undefined
-{
-	if (!icon)
-	{
-		return icon
-	}
-
-	// Replace first '-' with ':'
-	// E.g. convert 'ri-search-line' to 'ri:search-line'
-	return icon.replace('-', ':')
-}
 </script>
 
 <template>
-	<div class="component" :style="style" :data-icon-only="props.args.iconOnly ? '' : undefined">
+	<div class="component" :style="style">
 		<DsfrButton
 			v-bind="props.args"
-			:label="undefined"
-			:icon="undefined"
-			:iconOnly="undefined"
 			:disabled="disabled"
-			@click="onClick"
-		>
-			<template v-if="props.args.icon">
-				<iconify-icon :icon="iconToIconify(props.args.icon)"></iconify-icon>
-			</template>
-			<span v-if="!props.args.iconOnly">
-				{{ props.args.label }}
-			</span>
-		</DsfrButton>
+			:onClick="onClick"
+		/>
 	</div>
 </template>
-
-<style scoped>
-.component :deep(.fr-btn > span) {
-	display: contents;
-}
-.component[data-icon-only] :deep(.fr-btn) {
-	padding-inline: .5rem;
-	font-size: 1.5em;
-}
-</style>
