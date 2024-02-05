@@ -147,6 +147,29 @@ with col_right:
 		)
 		st.write('Value:', dsfr_val)
 
+col_left, col_right = st.columns(2)
+
+with col_right:
+	st.markdown('#### Composant DSFR')
+
+	with st.echo():
+		dsfr_val = stdsfr.buttons_group(
+			[
+				'Ceci est un bouton avec icône',
+				'Ceci est un autre bouton avec icône',
+			],
+			inline = True,
+			icon = [
+				'ri-search-line',
+				'ri-search-line',
+			],
+			iconOnly = [
+				False,
+				True,
+			],
+		)
+		st.write('Value:', dsfr_val)
+
 # ---
 st.divider()
 
