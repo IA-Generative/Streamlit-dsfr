@@ -5,7 +5,7 @@ import { DsfrButtonGroup } from '@gouvminint/vue-dsfr'
 
 import { useStreamlit } from '~/streamlit'
 import type { ComponentProps } from '~/types/ComponentProps.d.ts'
-import DsfrButton from '~/components/DsfrButton.vue'
+import DsfrButton from '~/components/dsfr/DsfrButton.vue'
 
 useStreamlit()
 
