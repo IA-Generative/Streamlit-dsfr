@@ -107,3 +107,10 @@ function iconToIconify(icon: string | undefined): string | undefined
 		</DsfrButton>
 	</div>
 </template>
+
+<style scoped>
+.component[data-icon-only]
+{
+	font-size: 1.5em;
+}
+</style>
