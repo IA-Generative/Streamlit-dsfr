@@ -101,16 +101,18 @@ function iconToIconify(icon: string | undefined): string | undefined
 			<template v-if="props.args.icon">
 				<iconify-icon :icon="iconToIconify(props.args.icon)"></iconify-icon>
 			</template>
-			<Fragment v-if="!props.args.iconOnly">
+			<span v-if="!props.args.iconOnly">
 				{{ props.args.label }}
-			</Fragment>
+			</span>
 		</DsfrButton>
 	</div>
 </template>
 
 <style scoped>
-.component[data-icon-only]
-{
+.component :deep(.fr-btn > span) {
+	display: contents;
+}
+.component[data-icon-only] :deep(.fr-btn) {
 	font-size: 1.5em;
 }
 </style>
