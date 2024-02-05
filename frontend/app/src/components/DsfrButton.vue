@@ -3,6 +3,8 @@ import { onMounted, onUnmounted, ref, computed } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButton } from '@gouvminint/vue-dsfr'
 
+import '~/assets/iconify-icon.min.js'
+
 import { useStreamlit } from '../streamlit'
 import type { ComponentProps } from '../types/ComponentProps.d.ts'
 
@@ -73,15 +75,35 @@ async function onClick()
 	clicked.value = true
 	Streamlit.setComponentValue(clicked.value)
 }
+
+function iconToIconify(icon: string | undefined): string | undefined
+{
+	if (!icon)
+	{
+		return icon
+	}
+
+	// Replace first '-' with ':'
+	// E.g. convert 'ri-search-line' to 'ri:search-line'
+	return icon.replace('-', ':')
+}
 </script>
 
 <template>
-	<div class="component" :style="style">
+	<div class="component" :style="style" :data-icon-only="props.args.iconOnly ? '' : undefined">
 		<DsfrButton
 			v-bind="props.args"
-			:label="props.args.label || 'Button'"
+			label=""
+			icon=""
 			:disabled="disabled"
 			@click="onClick"
-		/>
+		>
+			<template v-if="props.args.icon">
+				<iconify-icon :icon="iconToIconify(props.args.icon)"></iconify-icon>
+			</template>
+			<Fragment v-if="!props.args.iconOnly">
+				{{ props.args.label }}
+			</Fragment>
+		</DsfrButton>
 	</div>
 </template>
