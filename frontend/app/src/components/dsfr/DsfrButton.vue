@@ -57,7 +57,7 @@ function iconToIconify(icon: string | undefined): string | undefined
 			:label="undefined"
 			:icon="undefined"
 			:iconOnly="undefined"
-			:onClick="onClick"
+			@click="onClick"
 		>
 			<template v-if="props.icon">
 				<iconify-icon :icon="iconToIconify(props.icon)"></iconify-icon>

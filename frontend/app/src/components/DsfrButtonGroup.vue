@@ -86,7 +86,7 @@ function onClickButton(index: number): (event: MouseEvent) => Promise<void>
 				<DsfrButton
 					v-bind="button"
 					:disabled="clicked[i] || props.disabled || button.disabled"
-					:onClick="onClickButton(i)"
+					@click="onClickButton(i)"
 				/>
 			</li>
 		</DsfrButtonGroup>

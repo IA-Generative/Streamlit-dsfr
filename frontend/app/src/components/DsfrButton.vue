@@ -69,7 +69,7 @@ async function onClick()
 		<DsfrButton
 			v-bind="props.args"
 			:disabled="disabled"
-			:onClick="onClick"
+			@click="onClick"
 		/>
 	</div>
 </template>
