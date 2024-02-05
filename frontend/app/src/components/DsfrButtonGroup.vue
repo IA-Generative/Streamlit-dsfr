@@ -54,21 +54,18 @@ onUnmounted(() =>
 		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
 	})
 
-function onClickButton(index: number): (event: MouseEvent) => void
+async function onClickIndex(index: number): Promise<void>
 {
-	return async (): Promise<void> =>
-		{
-			if (clicked.value.some(value => value))
-			{
-				clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
-				Streamlit.setComponentValue([...clicked.value])
+	if (clicked.value.some(value => value))
+	{
+		clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
+		Streamlit.setComponentValue([...clicked.value])
 
-				await new Promise(resolve => setTimeout(resolve, 50))
-			}
+		await new Promise(resolve => setTimeout(resolve, 50))
+	}
 
-			clicked.value[index] = true
-			Streamlit.setComponentValue([...clicked.value])
-		}
+	clicked.value[index] = true
+	Streamlit.setComponentValue([...clicked.value])
 }
 </script>
 
@@ -86,7 +83,7 @@ function onClickButton(index: number): (event: MouseEvent) => void
 				<DsfrButton
 					v-bind="button"
 					:disabled="clicked[i] || props.disabled || button.disabled"
-					@click="onClickButton(i)"
+					@click="() => onClickIndex(i)"
 				/>
 			</li>
 		</DsfrButtonGroup>
