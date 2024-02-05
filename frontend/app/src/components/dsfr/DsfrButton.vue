@@ -77,7 +77,9 @@ function iconToIconify(icon: string | undefined): string | undefined
 	display: contents;
 }
 .dsfr-component[data-icon-only] :deep(.fr-btn) {
-	padding-inline: .5rem;
+	padding-inline: .5rem !important;
+}
+.dsfr-component[data-icon-only] :deep(.fr-btn iconify-icon) {
 	font-size: 1.5em;
 }
 </style>
