@@ -114,6 +114,7 @@ function iconToIconify(icon: string | undefined): string | undefined
 	display: contents;
 }
 .component[data-icon-only] :deep(.fr-btn) {
+	padding-inline: .5rem;
 	font-size: 1.5em;
 }
 </style>
