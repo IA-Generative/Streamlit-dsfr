@@ -13,10 +13,13 @@ const props = defineProps<{
 	iconRight?: boolean
 	noOutline?: boolean
 	size?: '' | 'small' | 'sm' | 'lg' | 'large' | 'md' | 'medium'
-	onClick?: ($event: MouseEvent) => void
 	// Custom props
 	link?: string
 	copy?: string
+}>()
+
+const emit = defineEmits<{
+	(e: 'click', event: MouseEvent): void
 }>()
 
 function onClick(event: MouseEvent): void
@@ -34,7 +37,7 @@ function onClick(event: MouseEvent): void
 				})
 	}
 
-	return props.onClick?.(event)
+	emit('click', event)
 }
 
 function iconToIconify(icon: string | undefined): string | undefined
