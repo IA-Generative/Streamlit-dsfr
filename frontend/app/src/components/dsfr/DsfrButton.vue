@@ -53,7 +53,7 @@ function iconToIconify(icon: string | undefined): string | undefined
 <template>
 	<div class="dsfr-component" :data-icon-only="props.iconOnly ? '' : undefined">
 		<DsfrButton
-			v-bind="props"
+			v-bind="(props as any)"
 			:label="undefined"
 			:icon="undefined"
 			:iconOnly="undefined"
