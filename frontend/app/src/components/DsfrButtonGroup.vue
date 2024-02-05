@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { Streamlit } from '~/stcomponentlib'
 import { DsfrButtonGroup } from '@gouvminint/vue-dsfr'
 
-import { useStreamlit } from '../streamlit'
-import type { ComponentProps } from '../types/ComponentProps.d.ts'
+import { useStreamlit } from '~/streamlit'
+import type { ComponentProps } from '~/types/ComponentProps.d.ts'
+import DsfrButton from '~/components/DsfrButton.vue'
 
 useStreamlit()
 
@@ -33,16 +34,6 @@ const props = defineProps<
 >()
 
 const clicked = ref<boolean[]>(Array(props.args.buttons?.length ?? 0).fill(false))
-const buttons = computed(() => ([
-	...(props.args.buttons
-		? props.args.buttons.map(
-			(button, index) => ({
-				...button,
-				disabled: button.disabled || clicked.value[index] || props.disabled || props.args.disabled,
-			}))
-		: []
-	),
-]))
 
 function onRenderEvent(_event: Event): void
 {
@@ -63,54 +54,21 @@ onUnmounted(() =>
 		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
 	})
 
-async function onClick(event: any)
+function onClickButton(index: number): (event: MouseEvent) => Promise<void>
 {
-	let button = event.target
-	while (button && !button.classList.contains('fr-btn'))
-	{
-		button = button.parentElement
-	}
-
-	if (!button)
-	{
-		console.error('Button not found for click event:', event)
-		return
-	}
-
-	// Button is located at `.component .fr-btns-group > li > .fr-btn`
-	// Get the index of the button in the group
-	const index = Array.from(
-		button.parentElement?.parentElement?.children ?? []
-	).indexOf(button.parentElement)
-
-	const buttonArgs = props.args.buttons?.[index]
-
-	if (buttonArgs)
-	{
-		if (buttonArgs.link)
+	return async (): Promise<void> =>
 		{
-			window.open(buttonArgs.link, '_blank')?.focus()
+			if (clicked.value.some(value => value))
+			{
+				clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
+				Streamlit.setComponentValue([...clicked.value])
+
+				await new Promise(resolve => setTimeout(resolve, 50))
+			}
+
+			clicked.value[index] = true
+			Streamlit.setComponentValue([...clicked.value])
 		}
-		else if (buttonArgs.copy)
-		{
-			navigator.clipboard.writeText(buttonArgs.copy)
-				.catch(err =>
-					{
-						console.error('Failed to copy:', err)
-					})
-		}
-	}
-
-	if (clicked.value.some(value => value))
-	{
-		clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
-		Streamlit.setComponentValue([...clicked.value])
-
-		await new Promise(resolve => setTimeout(resolve, 50))
-	}
-
-	clicked.value[index] = true
-	Streamlit.setComponentValue([...clicked.value])
 }
 </script>
 
@@ -118,10 +76,20 @@ async function onClick(event: any)
 	<div class="component" :style="style">
 		<DsfrButtonGroup
 			v-bind="props.args"
-			:buttons="buttons"
+			:buttons="undefined"
 			:disabled="props.disabled || props.args.disabled"
-			@click="onClick"
-		/>
+		>
+			<li
+				v-for="(button, i) in (props.args.buttons || [])"
+				:key="i"
+			>
+				<DsfrButton
+					v-bind="button"
+					:disabled="button.disabled || clicked[i] || props.disabled || props.args.disabled"
+					:onClick="onClickButton(i)"
+				/>
+			</li>
+		</DsfrButtonGroup>
 	</div>
 </template>
 
