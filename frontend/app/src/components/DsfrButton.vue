@@ -93,9 +93,9 @@ function iconToIconify(icon: string | undefined): string | undefined
 	<div class="component" :style="style" :data-icon-only="props.args.iconOnly ? '' : undefined">
 		<DsfrButton
 			v-bind="props.args"
-			label=""
-			icon=""
-			iconOnly=""
+			:label="undefined"
+			:icon="undefined"
+			:iconOnly="undefined"
 			:disabled="disabled"
 			@click="onClick"
 		>
