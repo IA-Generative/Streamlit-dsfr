@@ -54,7 +54,7 @@ onUnmounted(() =>
 		Streamlit.events.removeEventListener(Streamlit.RENDER_EVENT, onRenderEvent)
 	})
 
-function onClickButton(index: number): (event: MouseEvent) => Promise<void>
+function onClickButton(index: number): (event: MouseEvent) => void
 {
 	return async (): Promise<void> =>
 		{
