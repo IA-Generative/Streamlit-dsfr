@@ -92,6 +92,10 @@ async function onClickIndex(index: number): Promise<void>
 
 <style scoped>
 .component {
+	/* Ensure consistent height */
+	overflow: hidden;
+}
+.component :deep(.fr-btns-group) {
 	/* Remove the bottom margin of the button group */
 	margin-bottom: -1rem;
 }
