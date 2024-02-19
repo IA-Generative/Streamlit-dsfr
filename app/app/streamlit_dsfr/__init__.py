@@ -447,7 +447,7 @@ def checkbox(
 	if validMessage is not None:
 		kwargs['validMessage'] = validMessage
 
-	return _dsfr_checkbox_func(**kwargs, key = key, default = False)
+	return _dsfr_checkbox_func(**kwargs, key = key, default = kwargs['modelValue'])
 
 dsfr_checkbox = checkbox
 
