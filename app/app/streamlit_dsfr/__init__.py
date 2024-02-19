@@ -1133,29 +1133,28 @@ def range(
 	if min_value is None:
 		min_value = 0
 	kwargs['min'] = min_value
-	if value is None:
-		value = min_value
 
 	if max_value is not None:
 		kwargs['max'] = max_value
 
-	if value is not None:
-		kwargs['modelValue'] = value
-		if min_value is None:
-			if isinstance(value, int):
-				kwargs['min'] = 0
-			elif isinstance(value, float):
-				kwargs['min'] = 0.0
-		if max_value is None:
-			if isinstance(value, int):
-				kwargs['max'] = 100
-			elif isinstance(value, float):
-				kwargs['max'] = 1.0
-		if step is None:
-			if isinstance(value, int):
-				kwargs['step'] = 1
-			elif isinstance(value, float):
-				kwargs['step'] = 0.01
+	if value is None:
+		value = min_value
+	kwargs['modelValue'] = value
+	if min_value is None:
+		if isinstance(value, int):
+			kwargs['min'] = 0
+		elif isinstance(value, float):
+			kwargs['min'] = 0.0
+	if max_value is None:
+		if isinstance(value, int):
+			kwargs['max'] = 100
+		elif isinstance(value, float):
+			kwargs['max'] = 1.0
+	if step is None:
+		if isinstance(value, int):
+			kwargs['step'] = 1
+		elif isinstance(value, float):
+			kwargs['step'] = 0.01
 
 	if id is not None:
 		kwargs['id'] = id
