@@ -1037,16 +1037,23 @@ def radio(
 		for option in options
 	]
 
+	lenoptions = len(kwargs['options'])
+
 	if index is None:
 		index = 0
-	if index < len(kwargs['options']):
-		kwargs['modelValue'] = kwargs['options'][index]['value']
+	if lenoptions > 0:
+		if index < lenoptions:
+			kwargs['modelValue'] = kwargs['options'][index]['value']
+		else:
+			kwargs['modelValue'] = kwargs['options'][0]['value']
+	else:
+		kwargs['modelValue'] = None
 
 	if disabled is not None:
 		if isinstance(disabled, bool):
 			kwargs['disabled'] = disabled
 		elif isinstance(disabled, Iterable):
-			if len(disabled) > len(kwargs['options']):
+			if len(disabled) > lenoptions:
 				raise ValueError('disabled as a list cannot be longer than options')
 			for index, value in enumerate(disabled):
 				kwargs['options'][index]['disabled'] = value
@@ -1061,7 +1068,7 @@ def radio(
 	if captions is None:
 		captions = hints
 	if captions is not None:
-		if len(captions) > len(kwargs['options']):
+		if len(captions) > lenoptions:
 			raise ValueError('captions cannot be longer than options')
 		for index, value in enumerate(captions):
 			kwargs['options'][index]['hint'] = value
