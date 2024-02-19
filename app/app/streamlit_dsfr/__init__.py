@@ -1122,6 +1122,32 @@ def range(
 	"""
 	kwargs['label'] = label
 
+	if value is None:
+		value = 0
+	kwargs['modelValue'] = value
+	if min_value is None:
+		if isinstance(value, int):
+			min_value = 0
+		elif isinstance(value, float):
+			min_value = 0.0
+	if max_value is None:
+		if isinstance(value, int):
+			max_value = 100
+		elif isinstance(value, float):
+			max_value = 1.0
+	if step is None:
+		if isinstance(value, int):
+			step = 1
+		elif isinstance(value, float):
+			step = 0.01
+
+	if min_value is not None:
+		kwargs['min'] = min_value
+	if max_value is not None:
+		kwargs['max'] = max_value
+	if step is not None:
+		kwargs['step'] = step
+
 	if help is not None:
 		kwargs['hint'] = help
 	elif hint is not None:
@@ -1129,32 +1155,6 @@ def range(
 
 	if messages is not None:
 		kwargs['messages'] = messages
-
-	if min_value is None:
-		min_value = 0
-	kwargs['min'] = min_value
-
-	if max_value is not None:
-		kwargs['max'] = max_value
-
-	if value is None:
-		value = min_value
-	kwargs['modelValue'] = value
-	if min_value is None:
-		if isinstance(value, int):
-			kwargs['min'] = 0
-		elif isinstance(value, float):
-			kwargs['min'] = 0.0
-	if max_value is None:
-		if isinstance(value, int):
-			kwargs['max'] = 100
-		elif isinstance(value, float):
-			kwargs['max'] = 1.0
-	if step is None:
-		if isinstance(value, int):
-			kwargs['step'] = 1
-		elif isinstance(value, float):
-			kwargs['step'] = 0.01
 
 	if id is not None:
 		kwargs['id'] = id
@@ -1170,9 +1170,6 @@ def range(
 		kwargs['small'] = small
 	if hideIndicators is not None:
 		kwargs['hideIndicators'] = hideIndicators
-
-	if step is not None:
-		kwargs['step'] = step
 
 	if disabled is not None:
 		kwargs['disabled'] = disabled
