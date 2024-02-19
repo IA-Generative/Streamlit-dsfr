@@ -1128,14 +1128,14 @@ def range(
 	kwargs['modelValue'] = value
 	if min_value is None:
 		if isinstance(value, int):
-			min_value = 0
+			min_value = min(0, value)
 		elif isinstance(value, float):
-			min_value = 0.0
+			min_value = min(0.0, value)
 	if max_value is None:
 		if isinstance(value, int):
-			max_value = 100
+			max_value = max(100, value)
 		elif isinstance(value, float):
-			max_value = 1.0
+			max_value = max(1.0, value)
 	if step is None:
 		if isinstance(value, int):
 			step = 1
