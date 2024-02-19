@@ -1091,7 +1091,8 @@ def range(
 	# max_value: Optional[Union[int, float, datetime, timedelta]] = None, # Standard
 	max_value: Optional[Union[int, float]] = None, # Semi-standard
 	# value: Optional[Union[int, float, tuple[int, int], tuple[float, float], tuple[datetime, datetime], Tuple[timedelta, timedelta]]] = None, # Standard
-	value: Optional[Union[int, float, tuple[int, int], tuple[float, float]]] = None, # Semi-standard
+	# value: Optional[Union[int, float, tuple[int, int], tuple[float, float]]] = None, # Semi-standard
+	value: Optional[Union[int, float]] = None, # Semi-standard
 	# step: Optional[Union[int, float, datetime, timedelta]] = None, # Standard
 	step: Optional[Union[int, float]] = None, # Semi-standard
 	# format: Optional[str] = None, # Standard
