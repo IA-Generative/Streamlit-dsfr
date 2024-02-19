@@ -425,6 +425,9 @@ def checkbox(
 
 	if value is not None:
 		kwargs['modelValue'] = value
+	else:
+		kwargs['modelValue'] = False
+
 	if help is not None:
 		kwargs['hint'] = help
 
