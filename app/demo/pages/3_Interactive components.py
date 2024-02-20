@@ -289,8 +289,10 @@ with col_left:
 	st.divider()
 
 	with st.echo():
+		default_val = 'I need help!'
 		st_val = st.text_input(
 			'Ceci est un champ de saisie',
+			value = default_val,
 			help = 'Ceci est une aide',
 		)
 		st.write('Value:', st_val)
@@ -299,8 +301,10 @@ with col_right:
 	st.divider()
 
 	with st.echo():
+		default_val = 'I need help!'
 		dsfr_val = stdsfr.text_input(
 			'Ceci est un champ de saisie',
+			value = default_val,
 			help = 'Ceci est une aide',
 		)
 		st.write('Value:', dsfr_val)
