@@ -28,7 +28,7 @@ const props = defineProps<
 	}>
 >()
 
-const checked = ref(false)
+const checked = ref<boolean>(props.args.modelValue ?? false)
 const style = reactive<{ [key: string]: string }>({})
 
 if (props.theme)
