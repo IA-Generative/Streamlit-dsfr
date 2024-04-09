@@ -105,21 +105,21 @@ Example: To compute the green color for the success button:
 We solve `x` for `f(0, x, 0) = f(0, 0, 145)`: `x ~= 64`
 */
 
-.dsfr-component.dsfr-button-success :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
+.dsfr-component.dsfr-button-success :deep(.fr-btn:not(:hover):not(:active)) {
 	background-color: rgb(0, 64, 0);
 }
 .dsfr-component.dsfr-button-success :deep(.fr-btn) {
 	--hover: rgb(0, 115, 0);
 	--active: rgb(0, 120, 0);
 }
-.dsfr-component.dsfr-button-warning :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
+.dsfr-component.dsfr-button-warning :deep(.fr-btn:not(:hover):not(:active)) {
 	background-color: rgb(74, 37, 0);
 }
 .dsfr-component.dsfr-button-warning :deep(.fr-btn) {
 	--hover: rgb(132, 66, 0);
 	--active: rgb(138, 69, 0);
 }
-.dsfr-component.dsfr-button-danger :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
+.dsfr-component.dsfr-button-danger :deep(.fr-btn:not(:hover):not(:active)) {
 	background-color: rgb(90, 0, 0);
 }
 .dsfr-component.dsfr-button-danger :deep(.fr-btn) {
