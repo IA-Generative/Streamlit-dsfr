@@ -59,8 +59,8 @@ function iconToIconify(icon: string | undefined): string | undefined
 	>
 		<DsfrButton
 			v-bind="(props as any)"
-			:secondary="props.secondary || props.style === 'secondary'"
-			:tertiary="props.tertiary || props.style === 'tertiary'"
+			:secondary="props.style === 'secondary'"
+			:tertiary="props.style === 'tertiary'"
 			:label="undefined"
 			:icon="undefined"
 			:iconOnly="undefined"
