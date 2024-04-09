@@ -118,6 +118,45 @@ with col_right:
 
 	with st.echo():
 		dsfr_val = stdsfr.button(
+			f'Ceci est un bouton de succès',
+			icon = 'ri-search-line',
+			type = 'success',
+		)
+		st.write('Value:', dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	st.divider()
+
+	with st.echo():
+		dsfr_val = stdsfr.button(
+			f'Ceci est un bouton d\'avertissement',
+			icon = 'ri-search-line',
+			type = 'warning',
+		)
+		st.write('Value:', dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	st.divider()
+
+	with st.echo():
+		dsfr_val = stdsfr.button(
+			f'Ceci est un bouton de danger',
+			icon = 'ri-search-line',
+			type = 'danger',
+		)
+		st.write('Value:', dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	st.divider()
+
+	with st.echo():
+		dsfr_val = stdsfr.button(
 			f'Ceci est un bouton avec icône',
 			icon = 'ri-search-line',
 		)
