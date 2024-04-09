@@ -90,25 +90,40 @@ function iconToIconify(icon: string | undefined): string | undefined
 .dsfr-component[data-icon-only] :deep(.fr-btn iconify-icon) {
 	font-size: 1.5em;
 }
+
+/*
+Standard button colors:
+- bg-default: rgb(0, 0, 145); #000091
+- bg-hover: rgb(18, 18, 255); #1212ff
+- bg-active: rgb(35, 35, 255); #2323ff
+
+To compute the other colors,
+we use the following formula to balance perceived brightness:
+`f(R, G, B) = sqrt( 0.299 * R^2 + 0.587 * G^2 + 0.114 * B^2 )`
+
+Example: To compute the green color for the success button:
+We solve `x` for `f(0, x, 0) = f(0, 0, 145)`: `x ~= 64`
+*/
+
 .dsfr-component.dsfr-button-success :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
-	background-color: #009100;
+	background-color: rgb(0, 64, 0);
 }
 .dsfr-component.dsfr-button-success :deep(.fr-btn) {
-	--hover: #12ff12;
-	--active: #23ff23;
+	--hover: rgb(0, 115, 0);
+	--active: rgb(0, 120, 0);
 }
 .dsfr-component.dsfr-button-warning :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
-	background-color: #919100;
+	background-color: rgb(74, 37, 0);
 }
 .dsfr-component.dsfr-button-warning :deep(.fr-btn) {
-	--hover: #ffff12;
-	--active: #ffff23;
+	--hover: rgb(132, 66, 0);
+	--active: rgb(138, 69, 0);
 }
 .dsfr-component.dsfr-button-danger :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
-	background-color: #910000;
+	background-color: rgb(90, 0, 0);
 }
 .dsfr-component.dsfr-button-danger :deep(.fr-btn) {
-	--hover: #ff1212;
-	--active: #ff2323;
+	--hover: rgb(160, 0, 0);
+	--active: rgb(169, 0, 0);
 }
 </style>
