@@ -5,9 +5,7 @@ import '~/assets/iconify-icon.min.js'
 
 const props = defineProps<{
 	label?: string
-	style?: 'primary' | 'secondary' | 'tertiary'
-	secondary?: boolean
-	tertiary?: boolean
+	style?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'
 	disabled?: boolean
 	icon?: string
 	iconOnly?: boolean

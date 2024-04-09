@@ -141,7 +141,7 @@ def breadcrumb(
 
 dsfr_breadcrumb = breadcrumb
 
-ButtonStyle = Optional[Literal['primary', 'secondary', 'tertiary']]
+ButtonStyle = Optional[Literal['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger']]
 
 def button(
 	label: str, # Standard
