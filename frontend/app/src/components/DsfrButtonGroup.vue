@@ -65,6 +65,11 @@ async function onClickIndex(index: number): Promise<void>
 
 	clicked.value[index] = true
 	Streamlit.setComponentValue([...clicked.value])
+
+	await new Promise(resolve => setTimeout(resolve, 50))
+
+	clicked.value[index] = false
+	Streamlit.setComponentValue([...clicked.value])
 }
 </script>
 
