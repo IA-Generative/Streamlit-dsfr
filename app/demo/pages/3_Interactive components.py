@@ -92,6 +92,32 @@ with col_right:
 
 	with st.echo():
 		dsfr_val = stdsfr.button(
+			f'Ceci est un bouton secondaire',
+			icon = 'ri-search-line',
+			secondary = True,
+		)
+		st.write('Value:', dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	st.divider()
+
+	with st.echo():
+		dsfr_val = stdsfr.button(
+			f'Ceci est un bouton tertiaire',
+			icon = 'ri-search-line',
+			tertiary = True,
+		)
+		st.write('Value:', dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	st.divider()
+
+	with st.echo():
+		dsfr_val = stdsfr.button(
 			f'Ceci est un bouton avec icône',
 			icon = 'ri-search-line',
 		)
