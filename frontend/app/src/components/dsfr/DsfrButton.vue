@@ -90,4 +90,25 @@ function iconToIconify(icon: string | undefined): string | undefined
 .dsfr-component[data-icon-only] :deep(.fr-btn iconify-icon) {
 	font-size: 1.5em;
 }
+.dsfr-component.dsfr-button-success :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
+	background-color: #009100;
+}
+.dsfr-component.dsfr-button-success :deep(.fr-btn) {
+	--hover: #12ff12;
+	--active: #23ff23;
+}
+.dsfr-component.dsfr-button-warning :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
+	background-color: #919100;
+}
+.dsfr-component.dsfr-button-warning :deep(.fr-btn) {
+	--hover: #ffff12;
+	--active: #ffff23;
+}
+.dsfr-component.dsfr-button-danger :deep(.fr-btn:not(:hover):not(:focus):not(:active)) {
+	background-color: #910000;
+}
+.dsfr-component.dsfr-button-danger :deep(.fr-btn) {
+	--hover: #ff1212;
+	--active: #ff2323;
+}
 </style>
