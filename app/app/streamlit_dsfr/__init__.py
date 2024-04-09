@@ -304,8 +304,13 @@ def buttons_group(
 						type[i] = 'tertiary'
 
 	if type is not None:
-		if not isinstance(type, list):
-			type = [ type for _ in buttons ]
+		if isinstance(type, list):
+			for i, each in enumerate(type):
+				if each is not None:
+					buttons[i]['type'] = each
+		else:
+			for button in buttons:
+				button['type'] = type
 
 	if disabled is not None:
 		if isinstance(disabled, list):
