@@ -18,8 +18,7 @@ const props = defineProps<
 		size?: 'small' | 'medium' | 'large'
 		buttons?: {
 			label?: string
-			secondary?: boolean
-			tertiary?: boolean
+			type?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'
 			disabled?: boolean
 			icon?: string
 			iconOnly?: boolean
