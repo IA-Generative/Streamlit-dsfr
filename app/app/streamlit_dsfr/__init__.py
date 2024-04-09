@@ -282,14 +282,10 @@ def buttons_group(
 	https://docs.streamlit.io/library/api-reference/widgets/st.button
 	"""
 
-	buttons = []
-
 	if isinstance(labels, str):
 		labels = [labels]
-	for label in labels:
-		buttons.append({
-			'label': label,
-		})
+
+	buttons = [ { 'label': label } for label in labels ]
 
 	if type is None:
 		if tertiary is True:
