@@ -216,6 +216,31 @@ with col_right:
 	with st.echo():
 		dsfr_val = stdsfr.buttons_group(
 			[
+				'Ceci est un bouton standard',
+				'Ceci est un bouton secondaire',
+				'Ceci est un bouton tertiaire',
+				'Ceci est un bouton de succès',
+				'Ceci est un bouton d\'avertissement',
+				'Ceci est un bouton de danger',
+			],
+			inline = True,
+			type = [
+				'primary',
+				'secondary',
+				'tertiary',
+				'success',
+				'warning',
+				'danger',
+			],
+		)
+		st.write('Value:', dsfr_val)
+
+col_left, col_right = st.columns(2)
+
+with col_right:
+	with st.echo():
+		dsfr_val = stdsfr.buttons_group(
+			[
 				'Ceci est un bouton avec icône',
 				'Ceci est un autre bouton avec icône',
 			],
