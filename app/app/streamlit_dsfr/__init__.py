@@ -141,7 +141,7 @@ def breadcrumb(
 
 dsfr_breadcrumb = breadcrumb
 
-ButtonStyle = Optional[Literal['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger']]
+ButtonTypes = Optional[Literal['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger']]
 
 def button(
 	label: str, # Standard
@@ -152,10 +152,9 @@ def button(
 	# args: Optional[tuple] = None, # Standard
 	# kwargs: Optional[dict] = None, # Standard
 	*,
-	type: Optional[str] = None, # Standard
+	type: ButtonTypes = None, # Standard
 	disabled: Optional[bool] = None, # Standard
 	# use_container_width: Optional[bool] = None, # Standard
-	style: ButtonStyle = None,
 	secondary: Optional[bool] = None,
 	tertiary: Optional[bool] = None,
 	icon: Optional[str] = None,
@@ -178,16 +177,14 @@ def button(
 	if disabled is not None:
 		kwargs['disabled'] = disabled
 
-	if style is None:
-		if type is not None:
-			style = type
-		elif secondary is True:
-			style = 'secondary'
+	if type is None:
+		if secondary is True:
+			type = 'secondary'
 		elif tertiary is True:
-			style = 'tertiary'
+			type = 'tertiary'
 
-	if style is not None:
-		kwargs['style'] = style
+	if type is not None:
+		kwargs['type'] = type
 
 	if icon is not None:
 		kwargs['icon'] = icon
@@ -208,8 +205,7 @@ def link_button(
 	*,
 	key: Optional[Union[str, int]] = None,
 	help: Optional[str] = None, # Standard
-	type: Optional[str] = None, # 'primary' | 'secondary'
-	style: ButtonStyle = None,
+	type: ButtonTypes = None,
 	disabled: Optional[bool] = None, # Standard
 	use_container_width: Optional[bool] = None, # Standard
 ):
@@ -224,7 +220,6 @@ def link_button(
 		key = key,
 		help = help,
 		type = type,
-		style = style,
 		disabled = disabled,
 		use_container_width = use_container_width,
 		link = url,
@@ -238,8 +233,7 @@ def copy_button(
 	*,
 	key: Optional[Union[str, int]] = None,
 	help: Optional[str] = None,
-	type: Optional[str] = None, # 'primary' | 'secondary'
-	style: ButtonStyle = None,
+	type: ButtonTypes = None,
 	disabled: Optional[bool] = None,
 	use_container_width: Optional[bool] = None,
 ):
@@ -251,7 +245,6 @@ def copy_button(
 		key = key,
 		help = help,
 		type = type,
-		style = style,
 		disabled = disabled,
 		use_container_width = use_container_width,
 		copy = content,
@@ -267,8 +260,7 @@ def buttons_group(
 	*,
 	disabled: Union[Optional[bool], list[Optional[bool]]] = None,
 	# Buttons
-	type: Union[Optional[str], list[Optional[str]]] = None,
-	style: Union[ButtonStyle, list[ButtonStyle]] = None,
+	type: Union[ButtonTypes, list[ButtonTypes]] = None,
 	secondary: Union[Optional[bool], list[Optional[bool]]] = None,
 	tertiary: Union[Optional[bool], list[Optional[bool]]] = None,
 	icon: Union[Optional[str], list[Optional[str]]] = None,
@@ -299,27 +291,25 @@ def buttons_group(
 			'label': label,
 		})
 
-	if style is None:
-		if type is not None:
-			style = type
-		elif tertiary is True:
-			style = 'tertiary'
+	if type is None:
+		if tertiary is True:
+			type = 'tertiary'
 		elif secondary is True:
-			style = 'secondary'
+			type = 'secondary'
 		else:
-			style = [ None for _ in buttons ]
+			type = [ None for _ in buttons ]
 			if isinstance(secondary, list):
 				for i, each in enumerate(secondary):
 					if each is True:
-						style[i] = 'secondary'
+						type[i] = 'secondary'
 			if isinstance(tertiary, list):
 				for i, each in enumerate(tertiary):
 					if each is True:
-						style[i] = 'tertiary'
+						type[i] = 'tertiary'
 
-	if style is not None:
-		if not isinstance(style, list):
-			style = [ style for _ in buttons ]
+	if type is not None:
+		if not isinstance(type, list):
+			type = [ type for _ in buttons ]
 
 	if disabled is not None:
 		if isinstance(disabled, list):

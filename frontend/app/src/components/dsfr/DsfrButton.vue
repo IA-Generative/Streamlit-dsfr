@@ -5,7 +5,7 @@ import '~/assets/iconify-icon.min.js'
 
 const props = defineProps<{
 	label?: string
-	style?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'
+	type?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'
 	disabled?: boolean
 	icon?: string
 	iconOnly?: boolean
@@ -45,22 +45,25 @@ function iconToIconify(icon: string | undefined): string | undefined
 	{
 		return icon
 	}
+	console.log('DsfrButton', props)
 
 	// Replace first '-' with ':'
 	// E.g. convert 'ri-search-line' to 'ri:search-line'
 	return icon.replace('-', ':')
 }
+
+console.log('DsfrButton', props)
 </script>
 
 <template>
 	<div
-		:class="[ 'dsfr-component', `dsfr-button-${props.style || 'primary'}` ]"
+		:class="[ 'dsfr-component', `dsfr-button-${props.type || 'primary'}` ]"
 		:data-icon-only="props.iconOnly ? '' : undefined"
 	>
 		<DsfrButton
 			v-bind="(props as any)"
-			:secondary="props.style === 'secondary'"
-			:tertiary="props.style === 'tertiary'"
+			:secondary="props.type === 'secondary'"
+			:tertiary="props.type === 'tertiary'"
 			:label="undefined"
 			:icon="undefined"
 			:iconOnly="undefined"
