@@ -1,5 +1,5 @@
 import os
-from typing import Optional, Union, Iterable, Callable
+from typing import Optional, Union, Iterable, Callable, Literal
 import json
 import base64
 import hashlib
@@ -141,6 +141,8 @@ def breadcrumb(
 
 dsfr_breadcrumb = breadcrumb
 
+ButtonStyle = Optional[Literal['primary', 'secondary', 'tertiary']]
+
 def button(
 	label: str, # Standard
 	key: Optional[Union[str, int]] = None, # Standard
@@ -153,6 +155,7 @@ def button(
 	type: Optional[str] = None, # Standard
 	disabled: Optional[bool] = None, # Standard
 	# use_container_width: Optional[bool] = None, # Standard
+	style: ButtonStyle = None,
 	secondary: Optional[bool] = None,
 	tertiary: Optional[bool] = None,
 	icon: Optional[str] = None,
@@ -175,16 +178,16 @@ def button(
 	if disabled is not None:
 		kwargs['disabled'] = disabled
 
-	if type is not None:
-		if type == 'secondary':
-			kwargs['secondary'] = True
-		elif type == 'tertiary':
-			kwargs['tertiary'] = True
-	else:
-		if secondary is not None:
-			kwargs['secondary'] = secondary
-		if tertiary is not None:
-			kwargs['tertiary'] = tertiary
+	if style is None:
+		if type is not None:
+			style = type
+		elif secondary is True:
+			style = 'secondary'
+		elif tertiary is True:
+			style = 'tertiary'
+
+	if style is not None:
+		kwargs['style'] = style
 
 	if icon is not None:
 		kwargs['icon'] = icon
@@ -205,7 +208,8 @@ def link_button(
 	*,
 	key: Optional[Union[str, int]] = None,
 	help: Optional[str] = None, # Standard
-	type: Optional[str] = None, # Standard # 'primary' | 'secondary'
+	type: Optional[str] = None, # 'primary' | 'secondary'
+	style: ButtonStyle = None,
 	disabled: Optional[bool] = None, # Standard
 	use_container_width: Optional[bool] = None, # Standard
 ):
@@ -220,6 +224,7 @@ def link_button(
 		key = key,
 		help = help,
 		type = type,
+		style = style,
 		disabled = disabled,
 		use_container_width = use_container_width,
 		link = url,
@@ -234,6 +239,7 @@ def copy_button(
 	key: Optional[Union[str, int]] = None,
 	help: Optional[str] = None,
 	type: Optional[str] = None, # 'primary' | 'secondary'
+	style: ButtonStyle = None,
 	disabled: Optional[bool] = None,
 	use_container_width: Optional[bool] = None,
 ):
@@ -245,6 +251,7 @@ def copy_button(
 		key = key,
 		help = help,
 		type = type,
+		style = style,
 		disabled = disabled,
 		use_container_width = use_container_width,
 		copy = content,
@@ -261,6 +268,7 @@ def buttons_group(
 	disabled: Union[Optional[bool], list[Optional[bool]]] = None,
 	# Buttons
 	type: Union[Optional[str], list[Optional[str]]] = None,
+	style: Union[ButtonStyle, list[ButtonStyle]] = None,
 	secondary: Union[Optional[bool], list[Optional[bool]]] = None,
 	tertiary: Union[Optional[bool], list[Optional[bool]]] = None,
 	icon: Union[Optional[str], list[Optional[str]]] = None,
@@ -291,36 +299,27 @@ def buttons_group(
 			'label': label,
 		})
 
-	if type is not None:
-		if isinstance(type, list):
-			for i, each in enumerate(type):
-				if each == 'secondary':
-					kwargs['secondary'] = True
-				elif each == 'tertiary':
-					kwargs['tertiary'] = True
+	if style is None:
+		if type is not None:
+			style = type
+		elif tertiary is True:
+			style = 'tertiary'
+		elif secondary is True:
+			style = 'secondary'
 		else:
-			for button in buttons:
-				if type == 'secondary':
-					kwargs['secondary'] = True
-				elif type == 'tertiary':
-					kwargs['tertiary'] = True
-	else:
-		if secondary is not None:
+			style = [ None for _ in buttons ]
 			if isinstance(secondary, list):
 				for i, each in enumerate(secondary):
-					if each is not None:
-						buttons[i]['secondary'] = each
-			else:
-				for button in buttons:
-					button['secondary'] = secondary
-		if tertiary is not None:
+					if each is True:
+						style[i] = 'secondary'
 			if isinstance(tertiary, list):
 				for i, each in enumerate(tertiary):
-					if each is not None:
-						buttons[i]['tertiary'] = each
-			else:
-				for button in buttons:
-					button['tertiary'] = tertiary
+					if each is True:
+						style[i] = 'tertiary'
+
+	if style is not None:
+		if not isinstance(style, list):
+			style = [ style for _ in buttons ]
 
 	if disabled is not None:
 		if isinstance(disabled, list):
