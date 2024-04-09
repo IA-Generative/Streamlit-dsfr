@@ -45,14 +45,12 @@ function iconToIconify(icon: string | undefined): string | undefined
 	{
 		return icon
 	}
-	console.log('DsfrButton', props)
 
 	// Replace first '-' with ':'
 	// E.g. convert 'ri-search-line' to 'ri:search-line'
 	return icon.replace('-', ':')
 }
 
-console.log('DsfrButton', props)
 </script>
 
 <template>
