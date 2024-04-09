@@ -5,6 +5,7 @@ import '~/assets/iconify-icon.min.js'
 
 const props = defineProps<{
 	label?: string
+	style?: 'primary' | 'secondary' | 'tertiary'
 	secondary?: boolean
 	tertiary?: boolean
 	disabled?: boolean
@@ -54,9 +55,14 @@ function iconToIconify(icon: string | undefined): string | undefined
 </script>
 
 <template>
-	<div class="dsfr-component" :data-icon-only="props.iconOnly ? '' : undefined">
+	<div
+		:class="[ 'dsfr-component', `dsfr-button-${props.style || 'primary'}` ]"
+		:data-icon-only="props.iconOnly ? '' : undefined"
+	>
 		<DsfrButton
 			v-bind="(props as any)"
+			:secondary="props.secondary || props.style === 'secondary'"
+			:tertiary="props.tertiary || props.style === 'tertiary'"
 			:label="undefined"
 			:icon="undefined"
 			:iconOnly="undefined"
