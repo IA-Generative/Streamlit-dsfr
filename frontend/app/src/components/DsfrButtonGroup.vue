@@ -34,6 +34,9 @@ const props = defineProps<
 
 const clicked = ref<boolean[]>(Array(props.args.buttons?.length ?? 0).fill(false))
 
+let toggleOffTimeout: number | undefined = undefined
+let lockTimeout: number | undefined = undefined
+
 function onRenderEvent(_event: Event): void
 {
 	if (clicked.value.some(value => value))
@@ -66,10 +69,29 @@ async function onClickIndex(index: number): Promise<void>
 	clicked.value[index] = true
 	Streamlit.setComponentValue([...clicked.value])
 
-	await new Promise(resolve => setTimeout(resolve, 50))
+	if (toggleOffTimeout)
+	{
+		clearTimeout(toggleOffTimeout)
+	}
 
-	clicked.value[index] = false
-	Streamlit.setComponentValue([...clicked.value])
+	if (lockTimeout)
+	{
+		clearTimeout(lockTimeout)
+	}
+
+	lockTimeout = -1
+	toggleOffTimeout = setTimeout(() =>
+		{
+			clicked.value = false
+			Streamlit.setComponentValue(clicked.value)
+
+			lockTimeout = setTimeout(() =>
+				{
+					lockTimeout = undefined
+				}, 50)
+
+			toggleOffTimeout = undefined
+		}, 50)
 }
 </script>
 
