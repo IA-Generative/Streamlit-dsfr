@@ -82,8 +82,8 @@ async function onClickIndex(index: number): Promise<void>
 	lockTimeout = -1
 	toggleOffTimeout = setTimeout(() =>
 		{
-			clicked.value = false
-			Streamlit.setComponentValue(clicked.value)
+			clicked.value = Array(props.args.buttons?.length ?? 0).fill(false)
+			Streamlit.setComponentValue([...clicked.value])
 
 			lockTimeout = setTimeout(() =>
 				{
