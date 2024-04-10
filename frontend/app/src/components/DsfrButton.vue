@@ -28,7 +28,6 @@ const props = defineProps<
 >()
 
 const clicked = ref<boolean>(false)
-const disabled = computed(() => clicked.value || props.disabled || props.args.disabled)
 
 let toggleOffTimeout: number | undefined = undefined
 let lockTimeout: number | undefined = undefined
@@ -98,7 +97,7 @@ async function onClick()
 	<div class="component" :style="style">
 		<DsfrButton
 			v-bind="props.args"
-			:disabled="disabled"
+			:disabled="clicked || props.disabled || props.args.disabled"
 			@click="onClick"
 		/>
 	</div>
