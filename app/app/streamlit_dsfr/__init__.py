@@ -6,8 +6,6 @@ import hashlib
 from io import BytesIO
 
 import streamlit.components.v1 as components
-from streamlit.runtime.uploaded_file_manager import UploadedFile, UploadedFileRec
-from streamlit.proto.Common_pb2 import FileURLs as FileURLsProto
 
 # Release flag constant. Set to True when releasing the component.
 _RELEASE = False
@@ -473,11 +471,18 @@ def file_uploader(
 	**kwargs,
 ):
 	"""
-	Streamlit DSFR Checkbox component
+	Streamlit DSFR File Uploader component
 
 	Streamlit standard component equivalent:
-	https://docs.streamlit.io/library/api-reference/widgets/st.checkbox
+	https://docs.streamlit.io/library/api-reference/widgets/st.file_uploader
 	"""
+
+	try:
+		from streamlit.runtime.uploaded_file_manager import UploadedFile, UploadedFileRec
+		from streamlit.proto.Common_pb2 import FileURLs as FileURLsProto
+	except ImportError:
+		raise ImportError('File uploader requires Streamlit 1.26 or later.')
+
 	kwargs['label'] = label
 
 	if help is not None:
