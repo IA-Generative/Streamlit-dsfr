@@ -471,10 +471,10 @@ def file_uploader(
 	**kwargs,
 ):
 	"""
-	Streamlit DSFR Checkbox component
+	Streamlit DSFR File Uploader component
 
 	Streamlit standard component equivalent:
-	https://docs.streamlit.io/library/api-reference/widgets/st.checkbox
+	https://docs.streamlit.io/library/api-reference/widgets/st.file_uploader
 	"""
 
 	try:
