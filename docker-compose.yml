@@ -13,6 +13,7 @@ services:
       target: app_python_prod
       args:
         PORT: ${PORT:-80}
+        STREAMLIT_VERSION: ${STREAMLIT_VERSION:-}
     # Deploy
     environment:
       STREAMLIT_ARGS: ${STREAMLIT_ARGS:-}

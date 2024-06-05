@@ -212,6 +212,15 @@ RUN pip install --no-cache-dir /tmp/dist/*.whl && \
 	# Clean up
 	rm -rf /tmp/dist
 
+# If specified, install a specific version of Streamlit
+ARG STREAMLIT_VERSION=
+RUN \
+	if [ -n "${STREAMLIT_VERSION}" ]; then \
+		pip install --no-cache-dir --upgrade \
+			"streamlit==${STREAMLIT_VERSION}" \
+			; \
+	fi
+
 # Create user 'user' and group 'app'
 RUN groupadd -r app && \
 	useradd -lr -G app -d /app user && \
